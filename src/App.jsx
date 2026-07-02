@@ -367,6 +367,13 @@ export default function App() {
       {/* Global Footer */}
       <Footer setCurrentTab={setCurrentTab} />
 
+      {/* Floating Call Action Widget */}
+      <a href="tel:+15557626887" className="floating-call-btn" title="Call Leela Office Now">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2a15.045 15.045 0 0 1-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02A11.36 11.36 0 0 0 8.5 3.99c0-.55-.45-1-1-1H4.01c-.55 0-1 .45-1 1C3 13.92 13.08 24 23 24c.55 0 1-.45 1-1v-3.59c0-.55-.45-1-1-1a11.36 11.36 0 0 0-2.99-.44c-.11-.01-.22-.01-.33-.01z"/>
+        </svg>
+      </a>
+
       {/* Toast Overlay Container */}
       <div className="toast-container">
         {toasts.map(toast => (

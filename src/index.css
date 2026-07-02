@@ -1,17 +1,17 @@
 /* Custom Google Fonts are imported via index.html */
 
 :root {
-  /* Color Palette - Slate Blue & Teal (Trustworthy & Professional) */
-  --primary: #1e293b;
-  --primary-dark: #0f172a;
-  --primary-light: #334155;
+  /* Color Palette - Forest Green & Mint (Stitch Design Specification) */
+  --primary: #1e5649;
+  --primary-dark: #11322b;
+  --primary-light: #2d7a69;
   
-  --teal: #0d9488;
-  --teal-dark: #0f766e;
-  --teal-light: #14b8a6;
+  --teal: #86d8c2;
+  --teal-dark: #1a6855;
+  --teal-light: #abebda;
   --teal-soft: #f0fdfa;
   
-  --accent: #f59e0b;
+  --accent: #fbbf24;
   --accent-dark: #d97706;
   --accent-soft: #fef3c7;
   
@@ -33,7 +33,7 @@
   --text-white: #ffffff;
   
   --border-color: #e2e8f0;
-  --border-focus: #0d9488;
+  --border-focus: #1e5649;
   
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -320,7 +320,7 @@ button {
 .toast-container {
   position: fixed;
   bottom: 2rem;
-  right: 2rem;
+  right: 6.5rem; /* Shifted left to clear space for the floating phone dialer */
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -440,4 +440,39 @@ button {
 
 .custom-table tr:hover td {
   background-color: var(--bg-main);
+}
+
+/* Custom layout styles for Stitch design alignment */
+.dashed-yellow-divider {
+  border: none;
+  border-top: 5px dashed var(--accent);
+  margin: 0;
+  width: 100%;
+}
+
+.floating-call-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background-color: #be123c; /* Warm Red matching the call icon background */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  z-index: 10000;
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.floating-call-btn:hover {
+  transform: scale(1.1);
+  background-color: #9f1239;
+}
+
+.floating-call-btn svg {
+  width: 1.5rem;
+  height: 1.5rem;
 }

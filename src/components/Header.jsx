@@ -2,11 +2,10 @@ import React from 'react';
 
 export default function Header({ currentTab, setCurrentTab, isAdmin, setIsAdmin }) {
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'packages', label: 'Packages' },
-    { id: 'instructors', label: 'Our Instructors' },
-    { id: 'quiz', label: 'Theory Test' },
-    { id: 'contact', label: 'Contact & Map' },
+    { id: 'home', label: 'About' },
+    { id: 'packages', label: 'Courses' },
+    { id: 'quiz', label: 'Road Symbols' },
+    { id: 'contact', label: 'Contact' },
   ];
 
   return (
@@ -14,12 +13,7 @@ export default function Header({ currentTab, setCurrentTab, isAdmin, setIsAdmin 
       <div className="container header-inner">
         {/* Brand Logo */}
         <div className="logo" onClick={() => setCurrentTab('home')} style={{ cursor: 'pointer' }}>
-          <svg className="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <circle cx="12" cy="12" r="10" />
-            <circle cx="12" cy="12" r="3" />
-            <path d="M12 2v7M12 15v7M2 12h7M15 12h7" />
-          </svg>
-          <span className="logo-text">LEELA <span className="logo-subtext">Driving School</span></span>
+          <span className="logo-text">LEELA</span>
         </div>
 
         {/* Desktop Navigation */}
@@ -58,14 +52,20 @@ export default function Header({ currentTab, setCurrentTab, isAdmin, setIsAdmin 
           </div>
 
           <button 
-            className={`btn btn-sm ${isAdmin ? 'btn-secondary' : 'btn-primary'} portal-btn`}
+            className="btn btn-sm portal-btn"
+            style={{
+              backgroundColor: 'var(--teal)',
+              color: 'var(--primary-dark)',
+              borderRadius: 'var(--radius-full)',
+              border: 'none',
+              padding: '0.5rem 1.25rem',
+              fontWeight: '700',
+              fontFamily: 'var(--font-heading)',
+              fontSize: '0.85rem'
+            }}
             onClick={() => setCurrentTab(isAdmin ? 'admin-portal' : 'student-portal')}
           >
-            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
-            {isAdmin ? 'Admin Panel' : 'My Dashboard'}
+            {isAdmin ? 'Admin Panel' : 'Enrol Now'}
           </button>
         </div>
       </div>
@@ -94,23 +94,15 @@ export default function Header({ currentTab, setCurrentTab, isAdmin, setIsAdmin 
         .logo-icon {
           width: 2.2rem;
           height: 2.2rem;
-          color: var(--teal);
+          color: var(--primary);
         }
         .logo-text {
           font-family: var(--font-heading);
           font-weight: 800;
-          font-size: 1.3rem;
-          letter-spacing: 0.05em;
-          color: var(--primary-dark);
+          font-size: 1.8rem;
+          letter-spacing: 0.02em;
+          color: var(--primary);
           line-height: 1;
-        }
-        .logo-subtext {
-          display: block;
-          font-size: 0.75rem;
-          font-weight: 500;
-          color: var(--text-light);
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
         }
         .nav-menu {
           display: flex;
