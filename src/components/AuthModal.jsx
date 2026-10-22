@@ -31,7 +31,19 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
   const handleSubmit = (e) => {
     e.preventDefault();
     const actionText = mode === 'signin' ? 'Welcome back to LEELA!' : 'Account created! Welcome to LEELA Driving School.';
-    onSuccess(actionText);
+    const user = {
+      name: formData.name || (formData.email ? formData.email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Alex Morgan'),
+      email: formData.email || 'alex@example.com',
+      phone: formData.phone || '+44 7123 456789',
+      transmission: transmission || 'manual',
+      licenceNumber: 'LEE-84920',
+      lessonsCompleted: 6,
+      totalLessons: 20,
+      instructor: 'Rajesh K. (DVSA Grade A)',
+      nextLesson: 'Saturday at 10:30 AM (2 hours)',
+      joinedDate: 'October 2026',
+    };
+    onSuccess(actionText, user);
     onClose();
   };
 

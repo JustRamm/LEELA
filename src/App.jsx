@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import Footer from './components/Footer';
 import AuthModal from './components/AuthModal';
 import BookingModal from './components/BookingModal';
+import ProfileModal from './components/ProfileModal';
 
 // Each zone advances the driving stage.
 // The hero shows the correct sky-slide and cockpit for each stage.
@@ -21,7 +22,18 @@ export default function App() {
   const [authModalMode, setAuthModalMode] = useState('signin');
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [bookingPackage, setBookingPackage] = useState('Complete Pass (20h)');
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
+
+  // Initialize or persist current logged-in user
+  const [currentUser, setCurrentUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('leela_current_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
 
   // Auto-clear toast
   useEffect(() => {
@@ -48,7 +60,38 @@ export default function App() {
 
   const openSignIn  = () => { setAuthModalMode('signin');  setAuthModalOpen(true); };
   const openSignUp  = () => { setAuthModalMode('signup');  setAuthModalOpen(true); };
+  const openProfile = () => { setProfileModalOpen(true); };
   const showToast   = (msg) => setToastMessage(msg);
+
+  // Authentication success handler
+  const handleAuthSuccess = (msg, user) => {
+    if (user) {
+      setCurrentUser(user);
+      try {
+        localStorage.setItem('leela_current_user', JSON.stringify(user));
+      } catch (e) {}
+    }
+    showToast(msg);
+  };
+
+  // Sign out handler
+  const handleSignOut = () => {
+    setCurrentUser(null);
+    try {
+      localStorage.removeItem('leela_current_user');
+    } catch (e) {}
+    setProfileModalOpen(false);
+    showToast('Signed out successfully.');
+  };
+
+  // Profile update handler
+  const handleUpdateUser = (updatedUser) => {
+    setCurrentUser(updatedUser);
+    try {
+      localStorage.setItem('leela_current_user', JSON.stringify(updatedUser));
+    } catch (e) {}
+    showToast('Profile updated successfully!');
+  };
 
   const selectStage = (stage) => {
     window.scrollTo({
@@ -68,6 +111,8 @@ export default function App() {
           onOpenSignUp={openSignUp}
           onShowToast={showToast}
           onSelectStage={selectStage}
+          currentUser={currentUser}
+          onOpenProfile={openProfile}
         />
       </div>
 
@@ -86,13 +131,21 @@ export default function App() {
         isOpen={authModalOpen}
         initialMode={authModalMode}
         onClose={() => setAuthModalOpen(false)}
-        onSuccess={showToast}
+        onSuccess={handleAuthSuccess}
       />
       <BookingModal
         isOpen={bookingModalOpen}
         initialPackage={bookingPackage}
         onClose={() => setBookingModalOpen(false)}
         onSuccess={showToast}
+      />
+      <ProfileModal
+        isOpen={profileModalOpen}
+        user={currentUser}
+        onClose={() => setProfileModalOpen(false)}
+        onSignOut={handleSignOut}
+        onUpdateUser={handleUpdateUser}
+        onOpenBooking={() => setBookingModalOpen(true)}
       />
 
       {/* Toast */}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/Navbar.css';
 
-export default function Navbar({ onOpenSignIn, onOpenSignUp }) {
+export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpenProfile }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -21,22 +21,41 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp }) {
           <a href="#scene-contact" className="nav-item">Contact</a>
         </div>
 
-        {/* Header Action Buttons */}
+        {/* Header Action Buttons / Profile Icon */}
         <div className="nav-actions">
-          <button 
-            type="button" 
-            className="btn-nav-signup" 
-            onClick={onOpenSignUp}
-          >
-            Sign up
-          </button>
-          <button 
-            type="button" 
-            className="btn-nav-signin" 
-            onClick={onOpenSignIn}
-          >
-            Sign in
-          </button>
+          {currentUser ? (
+            <button
+              type="button"
+              className="btn-nav-profile"
+              onClick={onOpenProfile}
+              aria-label="View Profile"
+              title={`${currentUser.name} — My Profile`}
+            >
+              <span className="profile-icon-avatar">
+                {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : '👤'}
+              </span>
+              <span className="profile-icon-label">
+                {currentUser.name ? currentUser.name.split(' ')[0] : 'Profile'}
+              </span>
+            </button>
+          ) : (
+            <>
+              <button 
+                type="button" 
+                className="btn-nav-signup" 
+                onClick={onOpenSignUp}
+              >
+                Sign up
+              </button>
+              <button 
+                type="button" 
+                className="btn-nav-signin" 
+                onClick={onOpenSignIn}
+              >
+                Sign in
+              </button>
+            </>
+          )}
 
           {/* Mobile Menu Hamburger */}
           <button 
@@ -60,10 +79,26 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp }) {
             <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); setMobileOpen(false); }}>Gallery</a>
             <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); setMobileOpen(false); }}>Demo Test</a>
             <a href="#scene-contact" className="nav-item" onClick={() => setMobileOpen(false)}>Contact</a>
-            <div className="mobile-drawer-actions">
-              <button type="button" className="btn-nav-signup" onClick={() => { setMobileOpen(false); onOpenSignUp(); }}>Sign up</button>
-              <button type="button" className="btn-nav-signin" onClick={() => { setMobileOpen(false); onOpenSignIn(); }}>Sign in</button>
-            </div>
+            
+            {currentUser ? (
+              <div className="mobile-drawer-profile-box">
+                <button 
+                  type="button" 
+                  className="btn-mobile-profile" 
+                  onClick={() => { setMobileOpen(false); onOpenProfile(); }}
+                >
+                  <span className="profile-icon-avatar">
+                    {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : '👤'}
+                  </span>
+                  <span>My Profile ({currentUser.name ? currentUser.name.split(' ')[0] : 'Account'})</span>
+                </button>
+              </div>
+            ) : (
+              <div className="mobile-drawer-actions">
+                <button type="button" className="btn-nav-signup" onClick={() => { setMobileOpen(false); onOpenSignUp(); }}>Sign up</button>
+                <button type="button" className="btn-nav-signin" onClick={() => { setMobileOpen(false); onOpenSignIn(); }}>Sign in</button>
+              </div>
+            )}
           </div>
         )}
       </nav>

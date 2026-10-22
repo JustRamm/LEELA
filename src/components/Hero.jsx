@@ -211,7 +211,15 @@ function SubtleSceneryBackdrop() {
 }
 
 // ─── Main Hero ────────────────────────────────────────────────────────────────
-export default function Hero({ drivingStage, onOpenSignIn, onOpenSignUp, onShowToast, onSelectStage }) {
+export default function Hero({ 
+  drivingStage, 
+  onOpenSignIn, 
+  onOpenSignUp, 
+  onShowToast, 
+  onSelectStage,
+  currentUser,
+  onOpenProfile
+}) {
   const meta = STAGES.find((s) => s.stage === drivingStage) || STAGES[0];
 
   return (
@@ -221,7 +229,12 @@ export default function Hero({ drivingStage, onOpenSignIn, onOpenSignUp, onShowT
       <SubtleSceneryBackdrop />
 
       {/* ── Navbar ── */}
-      <Navbar onOpenSignIn={onOpenSignIn} onOpenSignUp={onOpenSignUp} />
+      <Navbar 
+        onOpenSignIn={onOpenSignIn} 
+        onOpenSignUp={onOpenSignUp} 
+        currentUser={currentUser} 
+        onOpenProfile={onOpenProfile} 
+      />
 
       {/* ── Yellow Sky — content lives here, slides change with scroll ── */}
       <div className="hero-sky-zone" aria-live="polite">
@@ -236,7 +249,11 @@ export default function Hero({ drivingStage, onOpenSignIn, onOpenSignUp, onShowT
             </p>
             <div className="sky-cta-row">
               <button className="sky-btn-primary" onClick={onOpenSignUp}>Book a Lesson</button>
-              <button className="sky-btn-ghost" onClick={onOpenSignIn}>Sign In</button>
+              {currentUser ? (
+                <button className="sky-btn-ghost" onClick={onOpenProfile}>My Profile</button>
+              ) : (
+                <button className="sky-btn-ghost" onClick={onOpenSignIn}>Sign In</button>
+              )}
             </div>
           </div>
         </div>
