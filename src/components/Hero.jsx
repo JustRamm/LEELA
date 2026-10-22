@@ -247,6 +247,7 @@ export default function Hero({
   drivingStage, 
   onOpenSignIn, 
   onOpenSignUp, 
+  onOpenBooking,
   onShowToast, 
   onSelectStage,
   currentUser,
@@ -280,10 +281,13 @@ export default function Hero({
               Dual-control vehicles &amp; 98.4% first-time pass guarantee.
             </p>
             <div className="sky-cta-row">
-              <button className="sky-btn-primary" onClick={onOpenSignUp}>Book a Lesson</button>
-              {currentUser ? (
-                <button className="sky-btn-ghost" onClick={onOpenProfile}>My Profile</button>
-              ) : (
+              <button 
+                className="sky-btn-primary" 
+                onClick={currentUser ? onOpenBooking : onOpenSignUp}
+              >
+                Book a Lesson
+              </button>
+              {!currentUser && (
                 <button className="sky-btn-ghost" onClick={onOpenSignIn}>Sign In</button>
               )}
             </div>
