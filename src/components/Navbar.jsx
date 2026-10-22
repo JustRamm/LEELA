@@ -16,6 +16,8 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp }) {
         <div className="nav-menu">
           <a href="#scene-how-it-works" className="nav-item">How it works</a>
           <a href="#scene-why-leela" className="nav-item">Why LEELA</a>
+          <a href="#" className="nav-item" onClick={(e) => e.preventDefault()}>Gallery</a>
+          <a href="#" className="nav-item" onClick={(e) => e.preventDefault()}>Demo Test</a>
           <a href="#scene-contact" className="nav-item">Contact</a>
         </div>
 
@@ -49,20 +51,22 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp }) {
             <span></span>
           </button>
         </div>
-      </nav>
 
-      {/* Mobile Drawer */}
-      {mobileOpen && (
-        <div className="mobile-drawer">
-          <a href="#scene-how-it-works" className="nav-item" onClick={() => setMobileOpen(false)}>How it works</a>
-          <a href="#scene-why-leela" className="nav-item" onClick={() => setMobileOpen(false)}>Why LEELA</a>
-          <a href="#scene-contact" className="nav-item" onClick={() => setMobileOpen(false)}>Contact</a>
-          <div className="mobile-drawer-actions">
-            <button type="button" className="btn-nav-signup" onClick={() => { setMobileOpen(false); onOpenSignUp(); }}>Sign up</button>
-            <button type="button" className="btn-nav-signin" onClick={() => { setMobileOpen(false); onOpenSignIn(); }}>Sign in</button>
+        {/* Mobile Drawer */}
+        {mobileOpen && (
+          <div className="mobile-drawer">
+            <a href="#scene-how-it-works" className="nav-item" onClick={() => setMobileOpen(false)}>How it works</a>
+            <a href="#scene-why-leela" className="nav-item" onClick={() => setMobileOpen(false)}>Why LEELA</a>
+            <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); setMobileOpen(false); }}>Gallery</a>
+            <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); setMobileOpen(false); }}>Demo Test</a>
+            <a href="#scene-contact" className="nav-item" onClick={() => setMobileOpen(false)}>Contact</a>
+            <div className="mobile-drawer-actions">
+              <button type="button" className="btn-nav-signup" onClick={() => { setMobileOpen(false); onOpenSignUp(); }}>Sign up</button>
+              <button type="button" className="btn-nav-signin" onClick={() => { setMobileOpen(false); onOpenSignIn(); }}>Sign in</button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </nav>
     </>
   );
 }

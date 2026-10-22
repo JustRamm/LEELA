@@ -33,7 +33,7 @@
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: clamp(16px, 2.2vw, 32px);
 }
 
 .nav-item {
@@ -129,10 +129,18 @@
   .mobile-drawer {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 16px 20px;
-    background: rgba(255, 222, 23, 0.95);
-    border-top: 1px solid rgba(110, 79, 8, 0.15);
+    gap: 13px;
+    padding: 18px 24px 22px 24px;
+    background: #FEDC2A;
+    border-top: 1.5px solid rgba(110, 79, 8, 0.15);
+    border-bottom: 2px solid rgba(110, 79, 8, 0.22);
+    box-shadow: 0 16px 36px rgba(32, 26, 66, 0.22);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
   }
 
   .mobile-drawer-actions {
