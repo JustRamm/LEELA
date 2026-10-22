@@ -2,17 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { CarIcon, CloseIcon, ArrowRightIcon } from './Icons';
 import '../styles/BookingModal.css';
 
-export default function BookingModal({ isOpen, initialPackage, onClose, onSuccess }) {
+export default function BookingModal({ isOpen, initialPackage, onClose, onSuccess, currentUser }) {
   const [selectedPackage, setSelectedPackage] = useState(initialPackage || 'Complete Pass Guarantee');
   const [transmission, setTransmission] = useState('Manual');
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
+    name: currentUser?.name || '',
+    email: currentUser?.email || '',
+    phone: currentUser?.phone || '',
     date: '',
     timeSlot: 'Morning (09:00 - 11:00)',
     notes: '',
   });
+
+  useEffect(() => {
+    if (currentUser) {
+      setFormData((prev) => ({
+        ...prev,
+        name: currentUser.name || prev.name,
+        email: currentUser.email || prev.email,
+        phone: currentUser.phone || prev.phone,
+      }));
+    }
+  }, [currentUser, isOpen]);
 
   useEffect(() => {
     if (initialPackage) {

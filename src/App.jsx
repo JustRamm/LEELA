@@ -144,6 +144,7 @@ export default function App() {
         initialPackage={bookingPackage}
         onClose={() => setBookingModalOpen(false)}
         onSuccess={showToast}
+        currentUser={currentUser}
       />
       <ProfileModal
         isOpen={profileModalOpen}

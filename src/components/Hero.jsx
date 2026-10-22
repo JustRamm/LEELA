@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import { 
   GraduationCapIcon, 
@@ -10,19 +10,32 @@ import {
 import '../styles/Hero.css';
 
 // ─── Inline contact form (lives in the yellow sky area on stage 4) ───────────
-function ContactSlide({ onShowToast }) {
-  const [form, setForm] = useState({ name: '', email: '' });
+function ContactSlide({ onShowToast, currentUser }) {
+  const [form, setForm] = useState({ 
+    name: currentUser?.name || '', 
+    email: currentUser?.email || '' 
+  });
+
+  useEffect(() => {
+    if (currentUser) {
+      setForm({
+        name: currentUser.name || '',
+        email: currentUser.email || '',
+      });
+    }
+  }, [currentUser]);
+
   const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const nameStr = form.name.trim() || 'Learner';
-    const emailStr = form.email.trim();
+    const nameStr = form.name.trim() || currentUser?.name || 'Learner';
+    const emailStr = form.email.trim() || currentUser?.email || '';
 
     // Pre-drafted WhatsApp message
     const message = `Hi LEELA Driving School,\n\nI would like to request my first driving lesson.\n\nName: ${nameStr}${emailStr ? `\nEmail: ${emailStr}` : ''}\n\nPlease let me know your available slots and lesson packages. Thank you!`;
 
-    const waUrl = `https://wa.me/918129005452?text=${encodeURIComponent(message)}`;
+    const waUrl = `https://wa.me/918129005453?text=${encodeURIComponent(message)}`;
 
     if (onShowToast) {
       onShowToast(`Routing to WhatsApp for ${nameStr}...`);
@@ -329,7 +342,7 @@ export default function Hero({
 
         {/* ── SLIDE 4: Contact ── */}
         <div className={`sky-slide ${drivingStage === 4 ? 'active' : ''}`}>
-          <ContactSlide onShowToast={onShowToast} />
+          <ContactSlide onShowToast={onShowToast} currentUser={currentUser} />
         </div>
 
       </div>{/* /hero-sky-zone */}
