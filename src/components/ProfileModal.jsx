@@ -10,6 +10,7 @@ import {
   MapPinIcon,
   NavigationIcon
 } from './Icons';
+import { playButtonTap, playSuccessChime } from '../utils/audio';
 import '../styles/ProfileModal.css';
 
 export default function ProfileModal({ 
@@ -57,6 +58,7 @@ export default function ProfileModal({
 
   const handleSaveEdit = (e) => {
     e.preventDefault();
+    playSuccessChime();
     onUpdateUser({
       ...user,
       name: editData.name,
@@ -75,7 +77,13 @@ export default function ProfileModal({
   return (
     <div className="profile-modal-overlay" role="dialog" aria-modal="true">
       {/* Scenic Backdrop Matching Sign In / Sign Up */}
-      <div className="profile-scenic-backdrop" onClick={onClose}>
+      <div 
+        className="profile-scenic-backdrop" 
+        onClick={() => {
+          playButtonTap();
+          onClose();
+        }}
+      >
         <img
           src="/illustrations/auth/auth-bg-paddy-fields.svg"
           alt="Terraced Paddy Fields Backdrop"
@@ -91,7 +99,10 @@ export default function ProfileModal({
           <button
             type="button"
             className="btn-profile-back"
-            onClick={onClose}
+            onClick={() => {
+              playButtonTap();
+              onClose();
+            }}
             aria-label="Back to site"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -102,7 +113,10 @@ export default function ProfileModal({
           <button
             type="button"
             className="btn-profile-close"
-            onClick={onClose}
+            onClick={() => {
+              playButtonTap();
+              onClose();
+            }}
             aria-label="Close"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -215,7 +229,16 @@ export default function ProfileModal({
 
             <div className="profile-edit-buttons">
               <button type="submit" className="btn-profile-save">Save Profile &amp; Preferences</button>
-              <button type="button" className="btn-profile-cancel" onClick={() => setIsEditing(false)}>Cancel</button>
+              <button 
+                type="button" 
+                className="btn-profile-cancel" 
+                onClick={() => {
+                  playButtonTap();
+                  setIsEditing(false);
+                }}
+              >
+                Cancel
+              </button>
             </div>
           </form>
         ) : (
@@ -235,7 +258,10 @@ export default function ProfileModal({
                 <button 
                   type="button" 
                   className="btn-location-edit-mini"
-                  onClick={() => setIsEditing(true)}
+                  onClick={() => {
+                    playButtonTap();
+                    setIsEditing(true);
+                  }}
                 >
                   Edit Locations
                 </button>
@@ -291,6 +317,7 @@ export default function ProfileModal({
                 type="button" 
                 className="btn-lesson-manage"
                 onClick={() => {
+                  playButtonTap();
                   onClose();
                   onOpenBooking();
                 }}
@@ -332,6 +359,7 @@ export default function ProfileModal({
                 type="button" 
                 className="btn-profile-book"
                 onClick={() => {
+                  playButtonTap();
                   onClose();
                   onOpenBooking();
                 }}
@@ -343,7 +371,10 @@ export default function ProfileModal({
               <button 
                 type="button" 
                 className="btn-profile-edit"
-                onClick={() => setIsEditing(true)}
+                onClick={() => {
+                  playButtonTap();
+                  setIsEditing(true);
+                }}
                 style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
               >
                 <EditIcon size={14} color="#475569" />
@@ -352,7 +383,10 @@ export default function ProfileModal({
               <button 
                 type="button" 
                 className="btn-profile-signout"
-                onClick={onSignOut}
+                onClick={() => {
+                  playButtonTap();
+                  onSignOut();
+                }}
               >
                 Sign Out
               </button>

@@ -1,34 +1,55 @@
 import React, { useState } from 'react';
-import { UserIcon } from './Icons';
+import { UserIcon, Volume2Icon, VolumeXIcon } from './Icons';
+import { playButtonTap, toggleSound, isSoundEnabled } from '../utils/audio';
 import '../styles/Navbar.css';
 
 export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpenProfile }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [soundOn, setSoundOn] = useState(isSoundEnabled());
+
+  const handleNavClick = (cb) => {
+    playButtonTap();
+    if (cb) cb();
+  };
 
   return (
     <>
       <nav className="hero-navbar" aria-label="Main Navigation">
         {/* Brand Logo / Wordmark */}
-        <a href="#scene-home" className="brand-wordmark" aria-label="LEELA Home">
+        <a href="#scene-home" className="brand-wordmark" aria-label="LEELA Home" onClick={() => playButtonTap()}>
           <img src="/brand/logo.svg" alt="LEELA" className="brand-logo-img" />
         </a>
 
         {/* Center Nav Links */}
         <div className="nav-menu">
-          <a href="#scene-how-it-works" className="nav-item">How it works</a>
-          <a href="#scene-why-leela" className="nav-item">Why LEELA</a>
-          <a href="#" className="nav-item" onClick={(e) => e.preventDefault()}>Gallery</a>
-          <a href="#" className="nav-item" onClick={(e) => e.preventDefault()}>Demo Test</a>
-          <a href="#scene-contact" className="nav-item">Contact</a>
+          <a href="#scene-how-it-works" className="nav-item" onClick={() => playButtonTap()}>How it works</a>
+          <a href="#scene-why-leela" className="nav-item" onClick={() => playButtonTap()}>Why LEELA</a>
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); playButtonTap(); }}>Gallery</a>
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); playButtonTap(); }}>Demo Test</a>
+          <a href="#scene-contact" className="nav-item" onClick={() => playButtonTap()}>Contact</a>
         </div>
 
         {/* Header Action Buttons / Profile Icon */}
         <div className="nav-actions">
+          {/* Tactile Sound FX Toggle */}
+          <button
+            type="button"
+            className="btn-nav-sound"
+            onClick={() => {
+              const next = toggleSound();
+              setSoundOn(next);
+            }}
+            aria-label={soundOn ? 'Mute sounds' : 'Enable sounds'}
+            title={soundOn ? 'Sound FX On (Click to Mute)' : 'Sound FX Off (Click to Enable)'}
+          >
+            {soundOn ? <Volume2Icon size={16} /> : <VolumeXIcon size={16} />}
+          </button>
+
           {currentUser ? (
             <button
               type="button"
               className="btn-nav-profile"
-              onClick={onOpenProfile}
+              onClick={() => handleNavClick(onOpenProfile)}
               aria-label="View Profile"
               title={`${currentUser.name} — My Profile`}
             >
@@ -44,14 +65,14 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpen
               <button 
                 type="button" 
                 className="btn-nav-signup" 
-                onClick={onOpenSignUp}
+                onClick={() => handleNavClick(onOpenSignUp)}
               >
                 Sign up
               </button>
               <button 
                 type="button" 
                 className="btn-nav-signin" 
-                onClick={onOpenSignIn}
+                onClick={() => handleNavClick(onOpenSignIn)}
               >
                 Sign in
               </button>

@@ -7,6 +7,7 @@ import {
   CheckBadgeIcon, 
   ChevronDownIcon 
 } from './Icons';
+import { playButtonTap, playSuccessChime, playStageTransition } from '../utils/audio';
 import '../styles/Hero.css';
 
 // ─── Inline contact form (lives in the yellow sky area on stage 4) ───────────
@@ -29,6 +30,7 @@ function ContactSlide({ onShowToast, currentUser }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    playSuccessChime();
     const nameStr = form.name.trim() || currentUser?.name || 'Learner';
     const emailStr = form.email.trim() || currentUser?.email || '';
 
@@ -283,12 +285,27 @@ export default function Hero({
             <div className="sky-cta-row">
               <button 
                 className="sky-btn-primary" 
-                onClick={currentUser ? onOpenBooking : onOpenSignUp}
+                onClick={() => {
+                  playButtonTap();
+                  if (currentUser) {
+                    onOpenBooking();
+                  } else {
+                    onOpenSignUp();
+                  }
+                }}
               >
                 Book a Lesson
               </button>
               {!currentUser && (
-                <button className="sky-btn-ghost" onClick={onOpenSignIn}>Sign In</button>
+                <button 
+                  className="sky-btn-ghost" 
+                  onClick={() => {
+                    playButtonTap();
+                    onOpenSignIn();
+                  }}
+                >
+                  Sign In
+                </button>
               )}
             </div>
           </div>
@@ -368,7 +385,10 @@ export default function Hero({
               key={s.stage}
               className={`stage-dot ${s.stage === drivingStage ? 'active' : ''} ${s.stage < drivingStage ? 'done' : ''}`}
               title={s.label}
-              onClick={() => onSelectStage && onSelectStage(s.stage)}
+              onClick={() => {
+                playStageTransition();
+                onSelectStage && onSelectStage(s.stage);
+              }}
             />
           ))}
         </div>
@@ -378,7 +398,10 @@ export default function Hero({
           <div 
             className="hero-scroll-hint" 
             aria-hidden="true"
-            onClick={() => onSelectStage && onSelectStage(2)}
+            onClick={() => {
+              playStageTransition();
+              onSelectStage && onSelectStage(2);
+            }}
             style={{ cursor: 'pointer' }}
           >
             <span>Scroll to continue</span>

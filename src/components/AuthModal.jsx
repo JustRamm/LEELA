@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AlertTriangleIcon, EyeIcon, EyeOffIcon } from './Icons';
+import { playButtonTap, playSuccessChime } from '../utils/audio';
 import '../styles/AuthModal.css';
 
 export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onSuccess }) {
@@ -49,6 +50,7 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
     }
 
     setPasswordError('');
+    playSuccessChime();
     const actionText = mode === 'signin' ? 'Welcome back to LEELA!' : 'Account created! Welcome to LEELA Driving School.';
     const user = {
       name: formData.name || (formData.email ? formData.email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Alex Morgan'),
@@ -72,7 +74,13 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
   return (
     <div className="auth-modal-overlay" role="dialog" aria-modal="true">
       {/* Scenic Backdrop: Terraced Paddy Fields */}
-      <div className="auth-scenic-backdrop" onClick={onClose}>
+      <div 
+        className="auth-scenic-backdrop" 
+        onClick={() => {
+          playButtonTap();
+          onClose();
+        }}
+      >
         <img
           src="/illustrations/auth/auth-bg-paddy-fields.svg"
           alt="Terraced Paddy Fields Backdrop"
@@ -87,7 +95,10 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
           <button
             type="button"
             className="btn-auth-back-arrow"
-            onClick={onClose}
+            onClick={() => {
+              playButtonTap();
+              onClose();
+            }}
             aria-label="Close"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -98,7 +109,10 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
           <button
             type="button"
             className="btn-auth-menu-dots"
-            onClick={onClose}
+            onClick={() => {
+              playButtonTap();
+              onClose();
+            }}
             aria-label="Close"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -180,7 +194,10 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
               <button
                 type="button"
                 className="btn-eye-toggle"
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={() => {
+                  playButtonTap();
+                  setShowPassword(!showPassword);
+                }}
                 aria-label="Toggle password visibility"
               >
                 {showPassword ? <EyeOffIcon size={16} color="#64748B" /> : <EyeIcon size={16} color="#64748B" />}
@@ -206,7 +223,10 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
                 <button
                   type="button"
                   className="btn-eye-toggle"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  onClick={() => {
+                    playButtonTap();
+                    setShowConfirmPassword(!showConfirmPassword);
+                  }}
                   aria-label="Toggle confirm password visibility"
                 >
                   {showConfirmPassword ? <EyeOffIcon size={16} color="#64748B" /> : <EyeIcon size={16} color="#64748B" />}
@@ -226,6 +246,7 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
             type="button"
             className="btn-auth-toggle-mode"
             onClick={() => {
+              playButtonTap();
               setMode(mode === 'signin' ? 'signup' : 'signin');
               setPasswordError('');
             }}

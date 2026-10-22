@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CarIcon, CloseIcon, ArrowRightIcon } from './Icons';
+import { playButtonTap, playSuccessChime } from '../utils/audio';
 import '../styles/BookingModal.css';
 
 export default function BookingModal({ isOpen, initialPackage, onClose, onSuccess, currentUser }) {
@@ -45,12 +46,21 @@ export default function BookingModal({ isOpen, initialPackage, onClose, onSucces
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    playSuccessChime();
     onSuccess(`Lesson booked successfully for ${formData.name}! Instructor confirmation sent to ${formData.email}.`);
     onClose();
   };
 
   return (
-    <div className="booking-modal-overlay" role="dialog" aria-modal="true" onClick={onClose}>
+    <div 
+      className="booking-modal-overlay" 
+      role="dialog" 
+      aria-modal="true" 
+      onClick={() => {
+        playButtonTap();
+        onClose();
+      }}
+    >
       <div className="booking-modal-card" onClick={(e) => e.stopPropagation()}>
         <div className="booking-modal-header">
           <div>
@@ -60,7 +70,10 @@ export default function BookingModal({ isOpen, initialPackage, onClose, onSucces
           <button
             type="button"
             className="btn-booking-close"
-            onClick={onClose}
+            onClick={() => {
+              playButtonTap();
+              onClose();
+            }}
             aria-label="Close"
           >
             <CloseIcon size={14} />
