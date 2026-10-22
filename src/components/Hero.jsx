@@ -91,9 +91,13 @@ const STAGES = [
 ];
 
 // ─── Subtle Scenery Landscape Backdrop (Embedded Vector Pattern) ─────────────
-function SubtleSceneryBackdrop() {
+function SubtleSceneryBackdrop({ drivingStage = 1 }) {
   return (
-    <div className="hero-scenery-backdrop" aria-hidden="true">
+    <div 
+      className={`hero-scenery-backdrop stage-${drivingStage}`} 
+      data-stage={drivingStage} 
+      aria-hidden="true"
+    >
       <svg
         className="hero-scenery-svg"
         viewBox="0 0 1440 900"
@@ -135,7 +139,7 @@ function SubtleSceneryBackdrop() {
         </defs>
 
         {/* 1. Subtle Morning Sun Glow */}
-        <circle cx="720" cy="380" r="320" fill="url(#scenerySunGlow)" />
+        <circle className="scenery-sun" cx="720" cy="380" r="320" fill="url(#scenerySunGlow)" />
 
         {/* 2. Soft Floating Clouds in Sky */}
         <g fill="#FFFFFF" opacity="0.32" className="scenery-clouds">
@@ -145,20 +149,21 @@ function SubtleSceneryBackdrop() {
         </g>
 
         {/* 3. Subtle Distant Birds */}
-        <g stroke="#7D5800" strokeWidth="1.6" fill="none" strokeLinecap="round" opacity="0.35">
+        <g className="scenery-birds" stroke="#7D5800" strokeWidth="1.6" fill="none" strokeLinecap="round" opacity="0.35">
           <path d="M340 165 Q 348 158 356 165 Q 364 158 372 165" />
           <path d="M380 172 Q 386 167 392 172 Q 398 167 404 172" />
           <path d="M1020 155 Q 1028 148 1036 155 Q 1044 148 1052 155" />
         </g>
 
-        {/* 4. Distant Mountain & Hill Ridge (Layer 1) */}
+        {/* 4. Distant Mountain & Hill Ridge (Layer 1 — Parallax Horizon) */}
         <path
+          className="scenery-far-mountains"
           d="M0 450 Q 180 390 360 425 T 720 405 T 1080 430 T 1440 395 L 1440 650 L 0 650 Z"
           fill="url(#sceneryFarMountains)"
         />
 
         {/* Distant Hilltop Wind Turbines / Pines */}
-        <g stroke="#A67300" strokeWidth="1.4" opacity="0.4">
+        <g className="scenery-turbines" stroke="#A67300" strokeWidth="1.4" opacity="0.4">
           <line x1="260" y1="412" x2="260" y2="435" />
           <circle cx="260" cy="412" r="2" fill="#A67300" />
           <line x1="260" y1="412" x2="252" y2="402" />
@@ -175,14 +180,15 @@ function SubtleSceneryBackdrop() {
           <line x1="1180" y1="418" x2="1188" y2="413" />
         </g>
 
-        {/* 5. Midground Rolling Countryside Hills (Layer 2) */}
+        {/* 5. Midground Rolling Countryside Hills (Layer 2 — Mid Parallax) */}
         <path
+          className="scenery-mid-hills"
           d="M0 480 C 220 440 420 500 600 485 C 780 470 960 520 1200 475 C 1320 450 1390 460 1440 470 L 1440 750 L 0 750 Z"
           fill="url(#sceneryMidHills)"
         />
 
         {/* Subtle Tree Silhouettes on Mid Ridge */}
-        <g fill="#A86F00" opacity="0.32">
+        <g className="scenery-mid-trees" fill="#A86F00" opacity="0.32">
           <ellipse cx="140" cy="460" rx="36" ry="24" />
           <ellipse cx="170" cy="455" rx="28" ry="20" />
           <ellipse cx="205" cy="465" rx="32" ry="22" />
@@ -197,47 +203,65 @@ function SubtleSceneryBackdrop() {
 
         {/* 6. Foreground Landscape Contours (Flanking Road) */}
         <path
+          className="scenery-verge-left"
           d="M0 520 C 250 490 480 540 620 530 L 0 850 Z"
           fill="url(#sceneryForeground)"
         />
         <path
+          className="scenery-verge-right"
           d="M1440 515 C 1200 485 960 540 820 530 L 1440 850 Z"
           fill="url(#sceneryForeground)"
         />
 
         {/* Subtle Topographic Elevation Contour Lines */}
-        <g stroke="#E59900" strokeWidth="1.5" strokeOpacity="0.4" fill="none">
+        <g className="scenery-contour-lines" stroke="#E59900" strokeWidth="1.5" strokeOpacity="0.4" fill="none">
           <path d="M0 545 Q 260 515 560 550" />
           <path d="M0 575 Q 280 545 520 585" />
           <path d="M1440 540 Q 1180 510 880 550" />
           <path d="M1440 570 Q 1160 540 920 585" />
         </g>
 
-        {/* 7. Scenic Perspective Highway (Runs straight into horizon right through windshield) */}
-        <polygon points="695,490 745,490 1080,900 360,900" fill="url(#sceneryRoadSurface)" />
+        {/* 7. Scenic Perspective Highway Surface */}
+        <polygon className="scenery-road-surface" points="695,490 745,490 1080,900 360,900" fill="url(#sceneryRoadSurface)" />
 
-        {/* Subtle Road Edge Lines */}
-        <line x1="697" y1="490" x2="385" y2="900" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.35" />
-        <line x1="743" y1="490" x2="1055" y2="900" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.35" />
+        {/* Road Edge Lines */}
+        <g className="scenery-road-edges">
+          <line className="scenery-edge-left" x1="697" y1="490" x2="385" y2="900" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.35" />
+          <line className="scenery-edge-right" x1="743" y1="490" x2="1055" y2="900" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity="0.35" />
+        </g>
 
-        {/* Center Dashed Markings */}
-        <line x1="720" y1="495" x2="720" y2="515" stroke="#FFE638" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.65" />
-        <line x1="720" y1="530" x2="720" y2="558" stroke="#FFE638" strokeWidth="3.5" strokeLinecap="round" strokeOpacity="0.7" />
-        <line x1="720" y1="580" x2="720" y2="618" stroke="#FFE638" strokeWidth="5" strokeLinecap="round" strokeOpacity="0.75" />
-        <line x1="720" y1="645" x2="720" y2="695" stroke="#FFE638" strokeWidth="7" strokeLinecap="round" strokeOpacity="0.8" />
-        <line x1="720" y1="730" x2="720" y2="800" stroke="#FFE638" strokeWidth="9.5" strokeLinecap="round" strokeOpacity="0.85" />
-        <line x1="720" y1="840" x2="720" y2="900" stroke="#FFE638" strokeWidth="12" strokeLinecap="round" strokeOpacity="0.9" />
+        {/* ── Center Dashed Highway Markings Group (Streams with Perspective Motion) ── */}
+        <g className="scenery-centerlines-group">
+          <line className="road-dash road-dash-0" x1="720" y1="490" x2="720" y2="496" stroke="#FFE638" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.55" />
+          <line className="road-dash road-dash-1" x1="720" y1="500" x2="720" y2="520" stroke="#FFE638" strokeWidth="2.8" strokeLinecap="round" strokeOpacity="0.65" />
+          <line className="road-dash road-dash-2" x1="720" y1="535" x2="720" y2="565" stroke="#FFE638" strokeWidth="3.8" strokeLinecap="round" strokeOpacity="0.7" />
+          <line className="road-dash road-dash-3" x1="720" y1="585" x2="720" y2="625" stroke="#FFE638" strokeWidth="5.5" strokeLinecap="round" strokeOpacity="0.75" />
+          <line className="road-dash road-dash-4" x1="720" y1="652" x2="720" y2="706" stroke="#FFE638" strokeWidth="7.5" strokeLinecap="round" strokeOpacity="0.8" />
+          <line className="road-dash road-dash-5" x1="720" y1="738" x2="720" y2="810" stroke="#FFE638" strokeWidth="10" strokeLinecap="round" strokeOpacity="0.85" />
+          <line className="road-dash road-dash-6" x1="720" y1="848" x2="720" y2="915" stroke="#FFE638" strokeWidth="13" strokeLinecap="round" strokeOpacity="0.9" />
+        </g>
 
-        {/* Roadside Palm & Trees */}
-        <g fill="#945F00" opacity="0.35">
+        {/* ── Roadside Palm Silhouettes (Left Verge — Expands Outward in 3D) ── */}
+        <g className="scenery-roadside-left" fill="#945F00" opacity="0.36">
           <path d="M540 560 Q 550 535 565 520 L 567 520 Q 552 535 544 560 Z" stroke="#945F00" strokeWidth="3" />
           <ellipse cx="568" cy="518" rx="14" ry="7" transform="rotate(-20 568 518)" />
           <ellipse cx="568" cy="518" rx="14" ry="7" transform="rotate(30 568 518)" />
           <ellipse cx="568" cy="518" rx="12" ry="6" transform="rotate(80 568 518)" />
+          {/* Distant palm on curve */}
+          <path d="M625 522 Q 632 506 642 497 L 643 497 Q 633 506 627 522 Z" stroke="#945F00" strokeWidth="1.8" />
+          <ellipse cx="643" cy="496" rx="8" ry="4" transform="rotate(-25 643 496)" />
+          <ellipse cx="643" cy="496" rx="8" ry="4" transform="rotate(25 643 496)" />
+        </g>
 
+        {/* ── Roadside Grove Silhouettes (Right Verge — Expands Outward in 3D) ── */}
+        <g className="scenery-roadside-right" fill="#945F00" opacity="0.36">
           <circle cx="890" cy="540" r="22" />
           <circle cx="910" cy="550" r="18" />
           <rect x="898" y="555" width="8" height="25" rx="3" />
+          {/* Distant Verge Tree */}
+          <circle cx="795" cy="512" r="10" />
+          <circle cx="808" cy="518" r="8" />
+          <rect x="799" y="520" width="3.5" height="12" rx="1.5" />
         </g>
       </svg>
     </div>
@@ -258,10 +282,17 @@ export default function Hero({
   const meta = STAGES.find((s) => s.stage === drivingStage) || STAGES[0];
 
   return (
-    <section className="hero-main-card" aria-label="Driving journey hero">
+    <section className={`hero-main-card stage-${drivingStage}`} aria-label="Driving journey hero">
 
-      {/* ── Subtle Scenery Landscape Pattern in Background ── */}
-      <SubtleSceneryBackdrop />
+      {/* ── Day-to-Dusk Atmospheric Sky Layers (Smooth Optical Gradient Shift) ── */}
+      <div className="hero-sky-atmosphere" aria-hidden="true">
+        <div className="sky-layer sky-layer-morning" />
+        <div className="sky-layer sky-layer-midday" />
+        <div className="sky-layer sky-layer-dusk" />
+      </div>
+
+      {/* ── Subtle Scenery Landscape Pattern in Background with Road Parallax ── */}
+      <SubtleSceneryBackdrop drivingStage={drivingStage} />
 
       {/* ── Navbar ── */}
       <Navbar 

@@ -356,6 +356,7 @@
   font-size: 14px;
   font-weight: 900;
   color: #94A3B8;
+  -webkit-user-select: none;
   user-select: none;
 }
 

@@ -122,3 +122,31 @@ export function playSuccessChime() {
     osc.stop(now + idx * 0.08 + 0.38);
   });
 }
+
+/**
+ * Authentic automotive turn-signal blinker ticker (alternating tick/tock)
+ */
+export function playBlinkerTick(isTock = false) {
+  if (!soundEnabled) return;
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  const now = ctx.currentTime;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  osc.type = 'triangle';
+  const startFreq = isTock ? 900 : 1200;
+  const endFreq = isTock ? 280 : 380;
+  osc.frequency.setValueAtTime(startFreq, now);
+  osc.frequency.exponentialRampToValueAtTime(endFreq, now + 0.032);
+
+  gain.gain.setValueAtTime(0.065, now);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + 0.032);
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start(now);
+  osc.stop(now + 0.035);
+}
