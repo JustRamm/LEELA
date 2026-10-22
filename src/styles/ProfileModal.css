@@ -198,6 +198,14 @@
   padding: 3px 9px;
   border-radius: 6px;
   border: 1px solid #E2E8F0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.meta-tag-item.meta-tag-vehicle {
+  background: #FEF3C7;
+  border-color: #FDE68A;
+  color: #78350F;
 }
 
 /* ── Doorstep Pickup & Locations Card ── */
@@ -598,7 +606,8 @@
   color: #201A42;
 }
 
-.profile-form-group input {
+.profile-form-group input,
+.profile-form-group select {
   padding: 10px 12px;
   border-radius: 8px;
   border: 1.5px solid #E2E8F0;
@@ -608,9 +617,11 @@
   outline: none;
   transition: all 0.2s;
   font-family: inherit;
+  cursor: pointer;
 }
 
-.profile-form-group input:focus {
+.profile-form-group input:focus,
+.profile-form-group select:focus {
   border-color: #31276C;
   background: #FFFFFF;
   box-shadow: 0 0 0 3px rgba(49, 39, 108, 0.15);

@@ -57,6 +57,7 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
       address: '42 Lakeview Promenade, Central City',
       pickupPoint: 'Home Doorstep (Main Gate)',
       dropPoint: 'Same as Pickup (or Metro Station)',
+      vehicleType: '4 Wheeler (Car)',
       licenceNumber: 'LEE-84920',
       lessonsCompleted: 6,
       totalLessons: 20,

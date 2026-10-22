@@ -24,6 +24,7 @@ export default function ProfileModal({
   const [editData, setEditData] = useState({
     name: user?.name || 'Alex Morgan',
     phone: user?.phone || '+91 98765 43210',
+    vehicleType: user?.vehicleType || '4 Wheeler (Car)',
     address: user?.address || '42 Lakeview Promenade, Central City',
     pickupPoint: user?.pickupPoint || 'Home Doorstep (Main Gate)',
     dropPoint: user?.dropPoint || 'Same as Pickup (or Metro Station)',
@@ -34,6 +35,7 @@ export default function ProfileModal({
       setEditData({
         name: user.name || 'Alex Morgan',
         phone: user.phone || '+91 98765 43210',
+        vehicleType: user.vehicleType || '4 Wheeler (Car)',
         address: user.address || '42 Lakeview Promenade, Central City',
         pickupPoint: user.pickupPoint || 'Home Doorstep (Main Gate)',
         dropPoint: user.dropPoint || 'Same as Pickup (or Metro Station)',
@@ -59,6 +61,7 @@ export default function ProfileModal({
       ...user,
       name: editData.name,
       phone: editData.phone,
+      vehicleType: editData.vehicleType,
       address: editData.address,
       pickupPoint: editData.pickupPoint,
       dropPoint: editData.dropPoint,
@@ -125,6 +128,10 @@ export default function ProfileModal({
                 <IdCardIcon size={13} color="#475569" style={{ marginRight: 5, verticalAlign: -2 }} />
                 ID: {user.licenceNumber || 'LEE-84920'}
               </span>
+              <span className="meta-tag-item meta-tag-vehicle">
+                <CarIcon size={13} color="#78350F" style={{ marginRight: 5, verticalAlign: -2 }} />
+                Course: <strong>{user.vehicleType || '4 Wheeler (Car)'}</strong>
+              </span>
               {user.phone && (
                 <span className="meta-tag-item">
                   {user.phone}
@@ -156,6 +163,20 @@ export default function ProfileModal({
                   onChange={(e) => setEditData({ ...editData, phone: e.target.value })}
                 />
               </div>
+            </div>
+
+            <div className="profile-form-group">
+              <label htmlFor="profile-vehicle-type">Vehicle to Learn (Course Category)</label>
+              <select
+                id="profile-vehicle-type"
+                value={editData.vehicleType}
+                onChange={(e) => setEditData({ ...editData, vehicleType: e.target.value })}
+              >
+                <option value="4 Wheeler (Car)">4 Wheeler (Car / Sedan / SUV)</option>
+                <option value="2 Wheeler (Motorcycle / Scooter)">2 Wheeler (Motorcycle / Scooter / Bike)</option>
+                <option value="3 Wheeler (Auto Rickshaw)">3 Wheeler (Auto Rickshaw / Passenger)</option>
+                <option value="Heavy Vehicle (Truck / Commercial)">Heavy Vehicle (Commercial Truck / Bus)</option>
+              </select>
             </div>
 
             <div className="profile-form-group">
@@ -193,7 +214,7 @@ export default function ProfileModal({
             </div>
 
             <div className="profile-edit-buttons">
-              <button type="submit" className="btn-profile-save">Save Profile &amp; Locations</button>
+              <button type="submit" className="btn-profile-save">Save Profile &amp; Preferences</button>
               <button type="button" className="btn-profile-cancel" onClick={() => setIsEditing(false)}>Cancel</button>
             </div>
           </form>
