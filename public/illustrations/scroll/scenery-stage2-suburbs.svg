@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 190 1000 430" width="1000" height="430" fill="none">
+  <defs>
+    <linearGradient id="sc2Sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE852"/>
+      <stop offset="60%" stop-color="#FFD730"/>
+      <stop offset="100%" stop-color="#FCBD00"/>
+    </linearGradient>
+    <linearGradient id="sc2Road" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5E4E98"/>
+      <stop offset="100%" stop-color="#2D2157"/>
+    </linearGradient>
+    <linearGradient id="sc2House" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8F75E4"/>
+      <stop offset="100%" stop-color="#6448B8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky matches hero naturally -->
+
+  <!-- Distant Neighborhood Rooflines -->
+  <g fill="#EAA700" opacity="0.6">
+    <polygon points="80,240 120,200 160,240"/>
+    <polygon points="170,240 210,195 250,240"/>
+    <polygon points="750,240 790,195 830,240"/>
+    <polygon points="840,240 880,200 920,240"/>
+  </g>
+
+  <!-- Suburban Houses & Trees (Midground Left & Right) -->
+  <g fill="url(#sc2House)">
+    <!-- House Left 1 -->
+    <rect x="70" y="220" width="90" height="70" rx="4"/>
+    <polygon points="60,220 115,170 170,220" fill="#3D297A"/>
+    <rect x="95" y="240" width="20" height="20" rx="2" fill="#FFE033"/>
+    
+    <!-- House Left 2 (Closer) -->
+    <rect x="150" y="240" width="100" height="90" rx="4"/>
+    <polygon points="140,240 200,185 260,240" fill="#3D297A"/>
+    <rect x="180" y="260" width="25" height="25" rx="3" fill="#FFE033"/>
+
+    <!-- House Right 1 -->
+    <rect x="750" y="235" width="105" height="95" rx="4"/>
+    <polygon points="740,235 802,180 865,235" fill="#3D297A"/>
+    <rect x="790" y="255" width="25" height="25" rx="3" fill="#FFE033"/>
+
+    <!-- House Right 2 (Farther) -->
+    <rect x="850" y="220" width="85" height="70" rx="4"/>
+    <polygon points="840,220 892,175 945,220" fill="#3D297A"/>
+  </g>
+
+  <!-- Neighborhood Street Lamp & Tree -->
+  <ellipse cx="280" cy="245" rx="28" ry="40" fill="#F0B50A"/>
+  <ellipse cx="720" cy="245" rx="28" ry="40" fill="#F0B50A"/>
+
+  <!-- Speed Limit 20 Sign (Learner Zone) on Left Sidewalk -->
+  <g transform="translate(290, 260)">
+    <line x1="12" y1="24" x2="12" y2="80" stroke="#31276C" stroke-width="4"/>
+    <circle cx="12" cy="24" r="18" fill="#EF4444"/>
+    <circle cx="12" cy="24" r="14" fill="#FFFFFF"/>
+    <text x="12" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="900" fill="#111111" text-anchor="middle">20</text>
+  </g>
+
+  <!-- Curving Suburban Street with Mini-Roundabout Approach -->
+  <polygon points="480,240 520,240 860,620 140,620" fill="url(#sc2Road)"/>
+  
+  <!-- Mini Roundabout in the Road Ahead -->
+  <ellipse cx="500" cy="330" rx="36" ry="14" fill="#3D2E74"/>
+  <ellipse cx="500" cy="330" rx="20" ry="8" fill="#FFE033"/>
+  <path d="M485 330 C490 324 510 324 515 330" stroke="#31276C" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Zebra Crossing in Foreground -->
+  <g fill="#FFFFFF" opacity="0.85">
+    <polygon points="320,440 360,440 375,465 330,465"/>
+    <polygon points="380,440 420,440 435,465 390,465"/>
+    <polygon points="440,440 480,440 495,465 450,465"/>
+    <polygon points="500,440 540,440 555,465 510,465"/>
+    <polygon points="560,440 600,440 615,465 570,465"/>
+    <polygon points="620,440 660,440 675,465 630,465"/>
+  </g>
+</svg>

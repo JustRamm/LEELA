@@ -1,0 +1,162 @@
+/* CONTACT — glass panel version */
+.contact-section {
+  padding: 4px 0 8px 0;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.contact-tag {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #FEDC2A;
+  background: rgba(254, 220, 42, 0.18);
+  border: 1px solid rgba(254, 220, 42, 0.4);
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.contact-title {
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.contact-desc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Remove the split-card white bg — just stack the form */
+.contact-split-card {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Hide the calendar/schedule illustration — hero already has cockpit art */
+.contact-graphic-side {
+  display: none;
+}
+
+.contact-form-side {
+  width: 100%;
+}
+
+.contact-form-side h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.contact-form-side > p {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.68);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-grid-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.form-field-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-field-wrap label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.02em;
+}
+
+.form-field-wrap input,
+.form-field-wrap select {
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 13px;
+  color: #FFFFFF;
+  transition: all var(--transition-fast);
+}
+
+.form-field-wrap input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-field-wrap select option {
+  background: #201A42;
+  color: #FFFFFF;
+}
+
+.form-field-wrap input:focus,
+.form-field-wrap select:focus {
+  border-color: #FEDC2A;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 0 2px rgba(254, 220, 42, 0.25);
+  outline: none;
+}
+
+.btn-contact-submit {
+  margin-top: 6px;
+  padding: 12px 20px;
+  border-radius: var(--radius-pill);
+  background: #FEDC2A;
+  color: #201A42;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(254, 220, 42, 0.4);
+  transition: all var(--transition-fast);
+  width: 100%;
+}
+
+.btn-contact-submit:hover {
+  background: #FFE845;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(254, 220, 42, 0.55);
+}
+
+.whatsapp-direct {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  margin-top: 8px;
+}
+
+.whatsapp-direct a {
+  color: #34D399;
+  font-weight: 700;
+}
+
+@media (max-width: 540px) {
+  .form-grid-row {
+    grid-template-columns: 1fr;
+  }
+}

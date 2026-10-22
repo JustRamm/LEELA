@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900" fill="none">
+  <defs>
+    <!-- Sky Gradient: Lavender to Soft Warm Sunrise Gold -->
+    <linearGradient id="paddySky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8F72E8"/>
+      <stop offset="35%" stop-color="#B29BF4"/>
+      <stop offset="65%" stop-color="#E1CEF8"/>
+      <stop offset="85%" stop-color="#FCE6AB"/>
+      <stop offset="100%" stop-color="#FFD738"/>
+    </linearGradient>
+
+    <!-- Gentle Morning Mist & Glow -->
+    <linearGradient id="horizonGlow" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FFE642" stop-opacity="0.8"/>
+      <stop offset="40%" stop-color="#F8B800" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#F8B800" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Terrace Ridge Gradients (Distant to Near) -->
+    <!-- Far Ridges: Soft Violet Haze -->
+    <linearGradient id="farTerrace" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7B63C6"/>
+      <stop offset="100%" stop-color="#58439E"/>
+    </linearGradient>
+
+    <!-- Mid-Far Water Reflections -->
+    <linearGradient id="terraceWater1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#CBB7F7" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#8F77D9" stop-opacity="0.5"/>
+    </linearGradient>
+
+    <!-- Mid Ridges: Deep Violet Indigo -->
+    <linearGradient id="midTerrace" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4B3A8B"/>
+      <stop offset="100%" stop-color="#342867"/>
+    </linearGradient>
+
+    <!-- Near-Mid Terraces -->
+    <linearGradient id="nearMidTerrace" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2D215B"/>
+      <stop offset="100%" stop-color="#1F1642"/>
+    </linearGradient>
+
+    <!-- Foreground Terraces: Midnight Indigo -->
+    <linearGradient id="foregroundTerrace" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1B133B"/>
+      <stop offset="100%" stop-color="#100A25"/>
+    </linearGradient>
+
+    <!-- Country Road Gradient -->
+    <linearGradient id="countryRoad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#53448E"/>
+      <stop offset="100%" stop-color="#241B49"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 1. SKY BACKDROP -->
+  <rect width="1440" height="900" fill="url(#paddySky)"/>
+
+  <!-- Distant Golden Horizon Sun Glow -->
+  <ellipse cx="720" cy="420" rx="650" ry="240" fill="url(#horizonGlow)"/>
+
+  <!-- 2. FAR DISTANT MOUNTAIN / HORIZON FOOTHILLS (Subtle backdrop) -->
+  <path d="M0 430 Q 320 370 640 405 T 1440 380 L 1440 520 L 0 520 Z" fill="#8468CF" opacity="0.45"/>
+  <path d="M0 450 Q 420 395 860 425 T 1440 410 L 1440 540 L 0 540 Z" fill="#7155BD" opacity="0.55"/>
+
+  <!-- 3. LAYER 1: UPPER PADDY TERRACES & WATER BASINS (Far-Distance) -->
+  <!-- Water mirror in distant paddy -->
+  <path d="M120 480 C360 460 520 485 820 465 C1100 445 1320 475 1440 460 L1440 530 L0 530 L0 490 Z" fill="url(#terraceWater1)"/>
+  
+  <!-- Curved Paddy Bund 1 (Terrace Edge) -->
+  <path d="M0 485 C240 465 480 495 760 475 C1080 455 1280 490 1440 470 L 1440 560 L 0 560 Z" fill="url(#farTerrace)"/>
+  <!-- Ridge Highlights (Golden reflection of water edge) -->
+  <path d="M0 485 C240 465 480 495 760 475 C1080 455 1280 490 1440 470" stroke="#FFDE17" stroke-width="1.5" stroke-opacity="0.6" fill="none"/>
+
+  <!-- Distant Palm / Tree Silhouettes on field borders -->
+  <g fill="#43327E" opacity="0.7">
+    <!-- Tree cluster left -->
+    <ellipse cx="280" cy="470" rx="12" ry="18"/>
+    <ellipse cx="295" cy="466" rx="14" ry="22"/>
+    <ellipse cx="310" cy="472" rx="10" ry="15"/>
+    <line x1="295" y1="475" x2="295" y2="495" stroke="#43327E" stroke-width="3"/>
+
+    <!-- Tree cluster right -->
+    <ellipse cx="1180" cy="455" rx="15" ry="24"/>
+    <ellipse cx="1200" cy="450" rx="18" ry="26"/>
+    <ellipse cx="1220" cy="458" rx="12" ry="18"/>
+    <line x1="1200" y1="465" x2="1200" y2="488" stroke="#43327E" stroke-width="3.5"/>
+  </g>
+
+  <!-- 4. LAYER 2: MID-GROUND CURVING PADDY FIELDS & TERRACE RIDGES -->
+  <!-- Water Reflection Step 2 -->
+  <path d="M0 540 C340 515 680 560 1020 525 C1220 505 1380 535 1440 520 L 1440 620 L 0 620 Z" fill="url(#terraceWater1)" opacity="0.65"/>
+
+  <!-- Curved Terrace Ridge 2 -->
+  <path d="M0 545 C380 520 620 575 960 535 C1240 500 1360 550 1440 530 L 1440 650 L 0 650 Z" fill="url(#midTerrace)"/>
+  <!-- Glowing bund rim -->
+  <path d="M0 545 C380 520 620 575 960 535 C1240 500 1360 550 1440 530" stroke="#FFDE17" stroke-width="2" stroke-opacity="0.45" fill="none"/>
+
+  <!-- Small Field Caretaker Pavilion / Gazebo on Mid-Paddy Ridge -->
+  <g transform="translate(1080, 500)">
+    <!-- Gazebo Roof (Pyramid) -->
+    <polygon points="25,0 0,16 50,16" fill="#F5B800" opacity="0.9"/>
+    <!-- Posts -->
+    <line x1="8" y1="16" x2="8" y2="30" stroke="#342867" stroke-width="2.5"/>
+    <line x1="42" y1="16" x2="42" y2="30" stroke="#342867" stroke-width="2.5"/>
+    <rect x="4" y="28" width="42" height="4" rx="2" fill="#342867"/>
+  </g>
+
+  <!-- 5. LAYER 3: LOWER TERRACES WITH LUSH RICE FIELDS -->
+  <path d="M0 620 C280 585 580 650 900 600 C1180 560 1350 620 1440 595 L 1440 760 L 0 760 Z" fill="url(#nearMidTerrace)"/>
+  <!-- Bund edge rim -->
+  <path d="M0 620 C280 585 580 650 900 600 C1180 560 1350 620 1440 595" stroke="#FFDE17" stroke-width="2.5" stroke-opacity="0.4" fill="none"/>
+
+  <!-- 6. SCENIC COUNTRYSIDE DRIVING ROAD CUTTING THROUGH PADDY FIELDS -->
+  <!-- Road Surface (Perspective: from right bottom to mid-left horizon) -->
+  <path d="M880 900 C860 820 840 740 780 680 C710 610 600 580 540 520 C500 480 480 460 460 450 L 485 450 C505 460 525 480 570 520 C635 580 755 615 825 685 C895 750 920 825 950 900 Z" fill="url(#countryRoad)"/>
+
+  <!-- Road Dashed Centerline (Golden) -->
+  <path d="M915 900 C888 823 868 745 802 682 C732 612 617 580 555 520 C520 482 492 458 472 450" stroke="#FFE033" stroke-width="3" stroke-dasharray="16 14" stroke-linecap="round" fill="none" opacity="0.85"/>
+
+  <!-- 7. FOREGROUND TERRACE BASIN (Darkest Silhouette at Base) -->
+  <path d="M0 720 C360 670 700 760 1060 700 C1260 665 1380 720 1440 690 L 1440 900 L 0 900 Z" fill="url(#foregroundTerrace)"/>
+  <path d="M0 720 C360 670 700 760 1060 700 C1260 665 1380 720 1440 690" stroke="#9A82EA" stroke-width="2" stroke-opacity="0.3" fill="none"/>
+
+  <!-- Foreground Rice Stalk Grass Accents (Bottom Left & Right) -->
+  <g stroke="#352668" stroke-width="2.5" stroke-linecap="round">
+    <!-- Left Stalks -->
+    <path d="M40 900 Q 45 840 65 820"/>
+    <path d="M55 900 Q 65 830 90 810"/>
+    <path d="M70 900 Q 75 845 82 830"/>
+    <path d="M95 900 Q 115 850 140 835"/>
+    <path d="M120 900 Q 125 860 135 845"/>
+
+    <!-- Right Stalks -->
+    <path d="M1360 900 Q 1350 840 1330 815"/>
+    <path d="M1380 900 Q 1375 830 1350 805"/>
+    <path d="M1400 900 Q 1405 845 1395 825"/>
+    <path d="M1420 900 Q 1410 850 1385 830"/>
+  </g>
+
+  <!-- Golden Ripened Rice Grains on Stalk Tips -->
+  <circle cx="65" cy="820" r="3.5" fill="#FFE033"/>
+  <circle cx="90" cy="810" r="3.5" fill="#FFE033"/>
+  <circle cx="140" cy="835" r="3.5" fill="#FFE033"/>
+  <circle cx="1330" cy="815" r="3.5" fill="#FFE033"/>
+  <circle cx="1350" cy="805" r="3.5" fill="#FFE033"/>
+</svg>

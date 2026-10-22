@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none">
+  <!-- Elegant Deep Indigo Canvas -->
+  <rect width="32" height="32" rx="8" fill="#201A42"/>
+
+  <!-- Minimal Precision "L" Stroke -->
+  <path 
+    d="M11 8 V22 C11 23.6 12.4 25 14 25 H23" 
+    stroke="#FFFFFF" 
+    stroke-width="2.75" 
+    stroke-linecap="round" 
+    stroke-linejoin="round"
+  />
+
+  <!-- Subtle Golden Horizon Accent -->
+  <line 
+    x1="17" 
+    y1="25" 
+    x2="23" 
+    y2="25" 
+    stroke="#F5B800" 
+    stroke-width="2.75" 
+    stroke-linecap="round"
+  />
+</svg>

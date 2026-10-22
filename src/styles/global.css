@@ -1,0 +1,177 @@
+/* ==========================================================================
+   LEELA DRIVING SCHOOL — GLOBAL DESIGN SYSTEM
+   Full-screen cockpit stage with interactive sky-content scrolling
+   ========================================================================== */
+
+:root {
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Brand Colors */
+  --color-yellow-main: #FFDE17;
+  --color-yellow-hover: #F2D000;
+  --color-yellow-warm: #F5B800;
+
+  --color-purple-primary: #8B6CE6;
+  --color-purple-hover: #7552D8;
+  --color-purple-deep: #31276C;
+  --color-purple-dark: #201A42;
+
+  --color-text-main: #201A42;
+  --color-text-body: #64748B;
+  --color-text-brown: #785600;
+  --color-white: #FFFFFF;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 9999px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-main);
+  background-color: #201A42;
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.6;
+  background-color: #FEDC2A;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button, input, select {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  outline: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   LAYOUT ARCHITECTURE
+   Fixed Hero Layer (Stage & Content) + Invisible Scroll Rail
+   ========================================================================== */
+
+.leela-root {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ── Fixed Hero Layer ──
+   Stays pinned filling the entire viewport.
+   pointer-events: none allows mouse wheel and drag scrolling to pass through to the rail.
+   Interactive elements inside Hero have pointer-events: auto.
+*/
+.hero-fixed-layer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Allow interaction on all clickable items inside Hero */
+.hero-fixed-layer nav,
+.hero-fixed-layer a,
+.hero-fixed-layer button,
+.hero-fixed-layer input,
+.hero-fixed-layer select,
+.hero-fixed-layer .sky-slide.active,
+.hero-fixed-layer .hero-stage-dots,
+.hero-fixed-layer .toast-notification {
+  pointer-events: auto;
+}
+
+/* ── Scroll Rail ──
+   Creates the page scroll length (4 zones of 100vh each + footer).
+   As the user scrolls, drivingStage updates and triggers content/image transitions.
+*/
+.scroll-rail {
+  position: relative;
+  z-index: 20;
+  pointer-events: none;
+  width: 100%;
+}
+
+.scroll-zone {
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  scroll-margin-top: 0;
+}
+
+/* Minimal Footer at the end of the scroll rail */
+.scroll-footer-spacer {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
+  width: 100%;
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATION
+   ========================================================================== */
+
+.toast-notification {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-purple-dark);
+  color: #FFFFFF;
+  padding: 14px 22px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 12px 32px rgba(32, 26, 66, 0.4);
+  font-size: 14px;
+  font-weight: 600;
+  border: 1.5px solid rgba(255, 217, 61, 0.5);
+  animation: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+.toast-notification button {
+  background: transparent;
+  color: #FEDC2A;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: opacity 0.15s;
+}
+
+.toast-notification button:hover {
+  opacity: 0.8;
+}
+
+@keyframes fadeInUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}

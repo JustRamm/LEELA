@@ -1,354 +1,188 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Navbar from './Navbar';
+import '../styles/Hero.css';
 
-export default function Hero({ setCurrentTab, isAdmin }) {
-  const stats = [
-    { value: '98%', label: 'First-time Pass Rate' },
-    { value: '12+', label: 'Certified Instructors' },
-    { value: '15,000+', label: 'Successful Graduates' },
-    { value: '4.9★', label: 'Google Rating (600+)' },
-  ];
+// ─── Inline contact form (lives in the yellow sky area on stage 4) ───────────
+function ContactSlide({ onShowToast }) {
+  const [form, setForm] = useState({ name: '', phone: '', transmission: 'manual' });
+  const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (onShowToast) onShowToast(`Inquiry sent, ${form.name}! We'll WhatsApp you shortly. 👍`);
+    setForm({ name: '', phone: '', transmission: 'manual' });
+  };
 
   return (
-    <>
-      <section className="hero-section">
-        <div className="container hero-container">
-          {/* Left Column: Headings & Buttons */}
-          <div className="hero-content">
-            <div className="hero-badge">
-              <span className="badge badge-teal">Accredited Driving School</span>
-              <span className="badge badge-yellow">Kerala State Licensing Partner</span>
-            </div>
-            
-            <h1>
-              Drive with Confidence,<br />
-              Master the Roads with <span className="highlight-text">LEELA</span>
-            </h1>
-            
-            <div className="hero-subtitle-group">
-              <p className="hero-subtitle-en">
-                Experience world-class driving education tailored for Kerala's unique terrains.
-              </p>
-              <p className="hero-subtitle-ml">
-                കേരളത്തിലെ ഏറ്റവും മികച്ച ഡ്രൈവിംഗ് പരിശീലനം ഇപ്പോൾ നിങ്ങളുടെ കൈകളിൽ.
-              </p>
-            </div>
+    <div className="sky-slide-contact">
+      <span className="sky-tag">START DRIVING TODAY</span>
+      <h2 className="sky-heading">Ready to Get Behind the Wheel?</h2>
+      <p className="sky-sub">Schedule your first lesson — an instructor in your area will reply within 1 hour.</p>
 
-            <div className="hero-actions">
-              <button 
-                className="btn hero-btn-trial pulse-on-hover"
-                onClick={() => setCurrentTab(isAdmin ? 'admin-portal' : 'student-portal')}
-              >
-                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2.5" fill="none" className="btn-icon">
-                  <circle cx="12" cy="12" r="10"/>
-                  <circle cx="12" cy="12" r="3"/>
-                  <path d="M12 2v7M12 15v7M2 12h7M15 12h7"/>
-                </svg>
-                Book a Trial Lesson
-              </button>
-              
-              <button 
-                className="btn hero-btn-courses"
-                onClick={() => setCurrentTab('packages')}
-              >
-                View Courses
-              </button>
-            </div>
+      <form className="sky-contact-form" onSubmit={handleSubmit}>
+        <div className="sky-form-row">
+          <div className="sky-field">
+            <label>Your Name</label>
+            <input type="text" required placeholder="Alex Morgan"
+              value={form.name} onChange={(e) => set('name', e.target.value)} />
           </div>
+          <div className="sky-field">
+            <label>Phone / WhatsApp</label>
+            <input type="tel" required placeholder="+44 7123 456789"
+              value={form.phone} onChange={(e) => set('phone', e.target.value)} />
+          </div>
+          <div className="sky-field">
+            <label>Transmission</label>
+            <select value={form.transmission} onChange={(e) => set('transmission', e.target.value)}>
+              <option value="manual">Manual</option>
+              <option value="automatic">Automatic</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" className="sky-submit-btn">Request My First Lesson →</button>
+        <p className="sky-whatsapp">
+          Or message us directly on <a href="https://wa.me/" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </p>
+      </form>
+    </div>
+  );
+}
 
-          {/* Right Column: Custom Steering & Palm tree Emblem */}
-          <div className="hero-visual">
-            <div className="stitch-badge-container">
-              <div className="circle-logo-badge">
-                <svg className="stitch-logo-svg" viewBox="0 0 100 100">
-                  {/* Steering Wheel Outer */}
-                  <circle cx="50" cy="50" r="38" fill="none" stroke="var(--primary)" strokeWidth="6" />
-                  <circle cx="50" cy="50" r="12" fill="none" stroke="var(--primary)" strokeWidth="4" />
-                  {/* Steering Wheel Spokes */}
-                  <line x1="50" y1="12" x2="50" y2="38" stroke="var(--primary)" strokeWidth="5" />
-                  <line x1="12" y1="50" x2="38" y2="50" stroke="var(--primary)" strokeWidth="5" />
-                  <line x1="62" y1="50" x2="88" y2="50" stroke="var(--primary)" strokeWidth="5" />
-                  <line x1="50" y1="62" x2="50" y2="88" stroke="var(--primary)" strokeWidth="5" />
-                  
-                  {/* Palm Leaves growing out of the steering center */}
-                  <path d="M50,30 Q42,16 26,14 Q40,8 50,20 Q60,8 74,14 Q58,16 50,30" fill="#2d7a69" />
-                  <path d="M50,25 Q44,14 32,12 Q42,6 50,16 Q58,6 68,12 Q56,14 50,25" fill="var(--teal)" />
-                  {/* Coconuts details */}
-                  <circle cx="46" cy="20" r="2.5" fill="var(--accent)" />
-                  <circle cx="54" cy="20" r="2.5" fill="var(--accent)" />
-                </svg>
-              </div>
+// ─── Stage progress dots ──────────────────────────────────────────────────────
+const STAGES = [
+  { stage: 1, emoji: '🌲', label: 'Home'         },
+  { stage: 2, emoji: '🔄', label: 'How it works' },
+  { stage: 3, emoji: '🛡️', label: 'Why LEELA'   },
+  { stage: 4, emoji: '👍', label: 'Contact'      },
+];
+
+// ─── Main Hero ────────────────────────────────────────────────────────────────
+export default function Hero({ drivingStage, onOpenSignIn, onOpenSignUp, onShowToast, onSelectStage }) {
+  const meta = STAGES.find((s) => s.stage === drivingStage) || STAGES[0];
+
+  return (
+    <section className="hero-main-card" aria-label="Driving journey hero">
+
+      {/* ── Navbar ── */}
+      <Navbar onOpenSignIn={onOpenSignIn} onOpenSignUp={onOpenSignUp} />
+
+      {/* ── Yellow Sky — content lives here, slides change with scroll ── */}
+      <div className="hero-sky-zone" aria-live="polite">
+
+        {/* ── SLIDE 1: Home intro ── */}
+        <div className={`sky-slide ${drivingStage === 1 ? 'active' : drivingStage > 1 ? 'exit-up' : ''}`}>
+          <div className="sky-slide-home">
+            <span className="sky-tag">DVSA CERTIFIED DRIVING SCHOOL</span>
+            <h1 className="sky-heading sky-heading-xl">Driving with LEELA is easy</h1>
+            <p className="sky-sub">
+              Learn to drive with patience, confidence, and zero stress.
+              Dual-control vehicles &amp; 98.4% first-time pass guarantee.
+            </p>
+            <div className="sky-cta-row">
+              <button className="sky-btn-primary" onClick={onOpenSignUp}>Book a Lesson</button>
+              <button className="sky-btn-ghost" onClick={onOpenSignIn}>Sign In</button>
             </div>
-            
-            {/* Visual stats mini tag overlay */}
-            <div className="tag-overlay-box card">
-              <span className="tag-status-indicator">● Live Tracker</span>
-              <h4>LEELA Smart Cars</h4>
-              <p>Dual-Control Safety Fleet</p>
+            <div className="sky-stats-row">
+              <div className="sky-stat"><span className="sky-stat-num">98.4%</span><span className="sky-stat-label">Pass Rate</span></div>
+              <div className="sky-stat-div" />
+              <div className="sky-stat"><span className="sky-stat-num">2,400+</span><span className="sky-stat-label">Students Passed</span></div>
+              <div className="sky-stat-div" />
+              <div className="sky-stat"><span className="sky-stat-num">5★</span><span className="sky-stat-label">Google Rating</span></div>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Yellow Dotted Divider */}
-      <hr className="dashed-yellow-divider" />
-
-      {/* Stats Bar */}
-      <div className="hero-stats-bar">
-        <div className="container stats-bar-inner">
-          {stats.map((stat, i) => (
-            <div key={i} className="stat-card">
-              <span className="stat-value">{stat.value}</span>
-              <span className="stat-label">{stat.label}</span>
+        {/* ── SLIDE 2: How it works ── */}
+        <div className={`sky-slide ${drivingStage === 2 ? 'active' : drivingStage > 2 ? 'exit-up' : ''}`}>
+          <div className="sky-slide-steps">
+            <span className="sky-tag">STEP-BY-STEP CURRICULUM</span>
+            <h2 className="sky-heading">From First Turn to Full Licence</h2>
+            <div className="sky-steps-grid">
+              {[
+                { num: '01', title: 'Theory & Cockpit Setup',    desc: 'Controls, mirrors, clutch bite-point in a stress-free zone.' },
+                { num: '02', title: 'Maneuvers & Road Skills',   desc: 'Roundabouts, parallel parking, 3-point turns with patience.' },
+                { num: '03', title: 'Test Route Simulation',     desc: 'Practice real examiner routes until you drive independently.' },
+                { num: '04', title: 'Test Day & Celebration',    desc: "Use your instructor's car, pass first time, celebrate! 🎉"  },
+              ].map((step) => (
+                <div key={step.num} className="sky-step-card">
+                  <span className="sky-step-num">{step.num}</span>
+                  <div>
+                    <h3>{step.title}</h3>
+                    <p>{step.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
+          </div>
+        </div>
+
+        {/* ── SLIDE 3: Why LEELA ── */}
+        <div className={`sky-slide ${drivingStage === 3 ? 'active' : drivingStage > 3 ? 'exit-up' : ''}`}>
+          <div className="sky-slide-why">
+            <span className="sky-tag">SAFETY &amp; EXCELLENCE</span>
+            <h2 className="sky-heading">Why Students Love LEELA</h2>
+            <div className="sky-why-grid">
+              {[
+                { icon: '🎓', title: 'DVSA Certified Instructors',  desc: 'Fully background-checked, specially trained for nervous learners.' },
+                { icon: '🛡️', title: 'Dual-Control Safety Fleet',   desc: 'Instructor can brake at any time. 5-star Euro NCAP vehicles.'     },
+                { icon: '📅', title: 'Flexible Scheduling',         desc: 'Morning, evening &amp; weekend slots. Doorstep pickup included.'  },
+                { icon: '✅', title: '1st Pass Guarantee',           desc: 'Free re-test mock &amp; car if you don\'t pass on first attempt.' },
+              ].map((f) => (
+                <div key={f.title} className="sky-why-card">
+                  <span className="sky-why-icon">{f.icon}</span>
+                  <div>
+                    <h3>{f.title}</h3>
+                    <p dangerouslySetInnerHTML={{ __html: f.desc }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── SLIDE 4: Contact ── */}
+        <div className={`sky-slide ${drivingStage === 4 ? 'active' : ''}`}>
+          <ContactSlide onShowToast={onShowToast} />
+        </div>
+
+      </div>{/* /hero-sky-zone */}
+
+      {/* ── Car Cockpit — always at the bottom, image changes with stage ── */}
+      <div className="hero-windshield-stage">
+        {/* Driver & cockpit stage */}
+        <div className="stage-cockpit-wrap">
+          <img src="/illustrations/scroll/cockpit-stage1-start.svg"     alt="Driver starting lesson"        className={`stage-cockpit-img ${drivingStage === 1 ? 'active' : ''}`} />
+          <img src="/illustrations/scroll/cockpit-stage2-turning.svg"   alt="Driver turning"                className={`stage-cockpit-img ${drivingStage === 2 ? 'active' : ''}`} />
+          <img src="/illustrations/scroll/cockpit-stage3-cruising.svg"  alt="Driver cruising"               className={`stage-cockpit-img ${drivingStage === 3 ? 'active' : ''}`} />
+          <img src="/illustrations/scroll/cockpit-stage4-celebrate.svg" alt="Driver celebrating thumbs-up"  className={`stage-cockpit-img ${drivingStage === 4 ? 'active' : ''}`} />
+        </div>
+
+        {/* Progress dots — bottom centre of the windshield */}
+        <div className={`hero-stage-dots ${drivingStage === 4 ? 'with-footer' : ''}`} aria-label="Journey progress">
+          {STAGES.map((s) => (
+            <span
+              key={s.stage}
+              className={`stage-dot ${s.stage === drivingStage ? 'active' : ''} ${s.stage < drivingStage ? 'done' : ''}`}
+              title={s.label}
+              onClick={() => onSelectStage && onSelectStage(s.stage)}
+            />
           ))}
         </div>
+
+        {/* Scroll hint (stage 1 only) */}
+        {drivingStage === 1 && (
+          <div 
+            className="hero-scroll-hint" 
+            aria-hidden="true"
+            onClick={() => onSelectStage && onSelectStage(2)}
+            style={{ cursor: 'pointer' }}
+          >
+            <span>Scroll to continue</span>
+            <div className="scroll-arrow">↓</div>
+          </div>
+        )}
       </div>
 
-      <style>{`
-        .hero-section {
-          background: linear-gradient(rgba(17, 50, 43, 0.75), rgba(17, 50, 43, 0.85)), 
-                      url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80');
-          background-size: cover;
-          background-position: center;
-          position: relative;
-          padding: 6.5rem 0 4.5rem 0;
-          overflow: hidden;
-        }
-        
-        .hero-container {
-          display: grid;
-          grid-template-columns: 1.2fr 1fr;
-          gap: 4rem;
-          align-items: center;
-        }
-        
-        .hero-content {
-          text-align: left;
-        }
-        
-        .hero-badge {
-          display: flex;
-          gap: 0.5rem;
-          margin-bottom: 1.5rem;
-          flex-wrap: wrap;
-        }
-        
-        .hero-content h1 {
-          font-size: 3.2rem;
-          font-weight: 800;
-          letter-spacing: -0.02em;
-          color: var(--text-white);
-          line-height: 1.15;
-          margin-bottom: 1.5rem;
-        }
-        
-        .highlight-text {
-          color: var(--teal);
-        }
-        
-        .hero-subtitle-group {
-          margin-bottom: 2.2rem;
-          border-left: 3px solid var(--teal);
-          padding-left: 1.25rem;
-        }
-        
-        .hero-subtitle-en {
-          font-size: 1.15rem;
-          line-height: 1.6;
-          color: #e2e8f0;
-          margin: 0 0 0.5rem 0;
-        }
-        
-        .hero-subtitle-ml {
-          font-size: 1rem;
-          font-weight: 500;
-          color: #a5f3fc;
-          margin: 0;
-          line-height: 1.5;
-        }
-        
-        .hero-actions {
-          display: flex;
-          gap: 1.25rem;
-          flex-wrap: wrap;
-        }
-        
-        .hero-btn-trial {
-          background-color: var(--teal);
-          color: var(--primary-dark);
-          font-weight: 700;
-          border-radius: var(--radius-full);
-          padding: 0.85rem 1.8rem;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          box-shadow: var(--shadow-md);
-        }
-        
-        .hero-btn-trial:hover {
-          background-color: var(--teal-light);
-          box-shadow: var(--shadow-lg);
-        }
-        
-        .btn-icon {
-          flex-shrink: 0;
-        }
-        
-        .hero-btn-courses {
-          background-color: rgba(255, 255, 255, 0.05);
-          color: var(--text-white);
-          font-weight: 700;
-          border-radius: var(--radius-full);
-          border: 2px dashed var(--accent);
-          padding: 0.85rem 1.8rem;
-        }
-        
-        .hero-btn-courses:hover {
-          background-color: rgba(251, 191, 36, 0.1);
-          border-color: var(--text-white);
-        }
-
-        /* Right visual components */
-        .hero-visual {
-          position: relative;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 300px;
-        }
-        
-        .stitch-badge-container {
-          position: relative;
-          animation: floatAnimation 6s ease-in-out infinite;
-        }
-        
-        .circle-logo-badge {
-          width: 11rem;
-          height: 11rem;
-          border-radius: 50%;
-          background-color: var(--bg-card);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 1.5rem;
-          box-shadow: var(--shadow-xl);
-          border: 3px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .stitch-logo-svg {
-          width: 100%;
-          height: 100%;
-        }
-        
-        .tag-overlay-box {
-          position: absolute;
-          bottom: 2rem;
-          left: 1.5rem;
-          padding: 1rem 1.5rem;
-          background-color: var(--bg-card);
-          box-shadow: var(--shadow-lg);
-          border-left: 4px solid var(--primary);
-          text-align: left;
-          animation: slideInBox 1s ease-out;
-        }
-        
-        .tag-status-indicator {
-          font-size: 0.7rem;
-          font-weight: 700;
-          color: var(--success-dark);
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          display: block;
-          margin-bottom: 0.25rem;
-        }
-        
-        .tag-overlay-box h4 {
-          margin: 0;
-          font-size: 0.95rem;
-          font-weight: 800;
-          color: var(--primary-dark);
-        }
-        
-        .tag-overlay-box p {
-          margin: 0;
-          font-size: 0.75rem;
-          color: var(--text-light);
-        }
-
-        /* Stats Bar */
-        .hero-stats-bar {
-          background-color: var(--primary);
-          color: var(--text-white);
-          padding: 2rem 0;
-        }
-        
-        .stats-bar-inner {
-          display: flex;
-          justify-content: space-around;
-          flex-wrap: wrap;
-          gap: 2rem;
-        }
-        
-        .stat-card {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        
-        .stat-value {
-          font-family: var(--font-heading);
-          font-size: 2.2rem;
-          font-weight: 800;
-          color: var(--teal);
-          line-height: 1;
-        }
-        
-        .stat-label {
-          font-size: 0.85rem;
-          color: #94a3b8;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          font-weight: 600;
-        }
-
-        @keyframes floatAnimation {
-          0% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-10px) rotate(1.5deg); }
-          100% { transform: translateY(0px) rotate(0deg); }
-        }
-        
-        @keyframes slideInBox {
-          from { opacity: 0; transform: translateY(15px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 900px) {
-          .hero-container {
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            text-align: center;
-          }
-          .hero-content {
-            text-align: center;
-          }
-          .hero-content h1 {
-            font-size: 2.5rem;
-          }
-          .hero-badge {
-            justify-content: center;
-          }
-          .hero-subtitle-group {
-            border-left: none;
-            padding-left: 0;
-          }
-          .hero-actions {
-            justify-content: center;
-          }
-          .hero-visual {
-            height: 250px;
-          }
-        }
-      `}</style>
-    </>
+    </section>
   );
 }

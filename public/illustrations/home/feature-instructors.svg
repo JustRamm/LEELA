@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" fill="none">
+  <defs>
+    <linearGradient id="instYellow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE642"/>
+      <stop offset="100%" stop-color="#F7BA00"/>
+    </linearGradient>
+    <linearGradient id="instPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9C80F2"/>
+      <stop offset="100%" stop-color="#6E48D0"/>
+    </linearGradient>
+    <linearGradient id="badgeGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF275"/>
+      <stop offset="100%" stop-color="#EAA605"/>
+    </linearGradient>
+    <filter id="instShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#5B3FB8" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Background Decorative Disc & Waves -->
+  <circle cx="250" cy="200" r="160" fill="url(#instYellow)" opacity="0.95"/>
+  <path d="M120 280 C180 230 320 240 380 300 C410 330 380 360 250 360 C120 360 90 310 120 280 Z" fill="#F0AC00" opacity="0.4"/>
+
+  <!-- Instructor Character (Friendly male instructor) -->
+  <g transform="translate(140, 60)" filter="url(#instShadow)">
+    <!-- Body / Polo Shirt (Purple with Gold Collar) -->
+    <path d="M50 180 C30 200 10 240 0 290 L180 290 C170 240 150 200 130 180 Z" fill="url(#instPurple)"/>
+    <!-- Collar & Tie/Placket -->
+    <polygon points="75,180 90,210 65,185" fill="#FFE033"/>
+    <polygon points="105,180 90,210 115,185" fill="#FFE033"/>
+    <line x1="90" y1="210" x2="90" y2="250" stroke="#FFE033" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- Instructor ID Lanyard -->
+    <path d="M70 180 L 82 245" stroke="#FFE033" stroke-width="3"/>
+    <path d="M110 180 L 98 245" stroke="#FFE033" stroke-width="3"/>
+    <rect x="76" y="245" width="28" height="38" rx="4" fill="#FFFFFF"/>
+    <rect x="80" y="250" width="20" height="12" rx="2" fill="#8B6CE6"/>
+    <rect x="80" y="266" width="16" height="3" fill="#6B48D0"/>
+    <rect x="80" y="272" width="12" height="3" fill="#6B48D0"/>
+
+    <!-- Neck & Head -->
+    <rect x="75" y="145" width="30" height="38" rx="8" fill="#F8B896"/>
+    <path d="M60 95 C60 60 80 50 105 52 C125 54 135 75 130 105 C125 135 105 150 90 148 C70 146 60 125 60 95 Z" fill="#FFCBB0"/>
+
+    <!-- Hair -->
+    <path d="M58 85 C62 55 90 40 120 45 C132 48 135 65 132 75 C120 68 100 68 85 75 C75 80 65 95 62 105 C58 98 58 90 58 85 Z" fill="#3D231E"/>
+
+    <!-- Eyes (Warm & Smiling) -->
+    <path d="M80 98 Q 88 92 94 98" stroke="#3D231E" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M106 98 Q 114 92 120 98" stroke="#3D231E" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <!-- Glasses (Smart Professional) -->
+    <rect x="74" y="88" width="24" height="18" rx="6" stroke="#31276C" stroke-width="2.5" fill="none"/>
+    <rect x="102" y="88" width="24" height="18" rx="6" stroke="#31276C" stroke-width="2.5" fill="none"/>
+    <line x1="98" y1="96" x2="102" y2="96" stroke="#31276C" stroke-width="2.5"/>
+
+    <!-- Friendly Smile -->
+    <path d="M92 122 Q 100 132 108 122" stroke="#8A3D28" stroke-width="3" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- Digital Assessment Tablet (Left Floating Foreground) -->
+  <g transform="translate(60, 160)" filter="url(#instShadow)">
+    <rect width="130" height="170" rx="14" fill="#31276C"/>
+    <rect x="6" y="6" width="118" height="158" rx="10" fill="#FFFFFF"/>
+    
+    <!-- Header on Tablet -->
+    <rect x="16" y="20" width="60" height="8" rx="4" fill="#8B6CE6"/>
+    <circle cx="104" cy="24" r="6" fill="#FFDE17"/>
+
+    <!-- Check items (Lesson Milestones) -->
+    <g transform="translate(16, 42)">
+      <circle cx="8" cy="8" r="8" fill="#10B981"/>
+      <path d="M4 8 L7 11 L12 5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <rect x="22" y="5" width="70" height="6" rx="3" fill="#E2E8F0"/>
+
+      <circle cx="8" cy="30" r="8" fill="#10B981"/>
+      <path d="M4 30 L7 33 L12 27" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <rect x="22" y="27" width="55" height="6" rx="3" fill="#E2E8F0"/>
+
+      <circle cx="8" cy="52" r="8" fill="#10B981"/>
+      <path d="M4 52 L7 55 L12 49" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <rect x="22" y="49" width="65" height="6" rx="3" fill="#E2E8F0"/>
+    </g>
+
+    <!-- 5 Star Rating Rating on Tablet -->
+    <g transform="translate(24, 126)">
+      <polygon points="8,0 10,6 16,6 11,10 13,16 8,12 3,16 5,10 0,6 6,6" fill="#F59E0B"/>
+      <polygon points="26,0 28,6 34,6 29,10 31,16 26,12 21,16 23,10 18,6 24,6" fill="#F59E0B"/>
+      <polygon points="44,0 46,6 52,6 47,10 49,16 44,12 39,16 41,10 36,6 42,6" fill="#F59E0B"/>
+      <polygon points="62,0 64,6 70,6 65,10 67,16 62,12 57,16 59,10 54,6 60,6" fill="#F59E0B"/>
+      <polygon points="80,0 82,6 88,6 83,10 85,16 80,12 75,16 77,10 72,6 78,6" fill="#F59E0B"/>
+    </g>
+  </g>
+
+  <!-- 5-Star Certified Instructor Badge (Right Floating) -->
+  <g transform="translate(350, 140)" filter="url(#instShadow)">
+    <circle cx="45" cy="45" r="45" fill="url(#badgeGold)"/>
+    <circle cx="45" cy="45" r="38" fill="#FFFFFF"/>
+    
+    <!-- Graduation Cap / Certified Driving Crown -->
+    <polygon points="45,22 25,32 45,40 65,32" fill="#8B6CE6"/>
+    <polygon points="45,40 33,35 33,48 45,52 57,48 57,35" fill="#6E48D0"/>
+    
+    <text x="45" y="66" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="800" fill="#31276C" text-anchor="middle">CERTIFIED</text>
+  </g>
+</svg>

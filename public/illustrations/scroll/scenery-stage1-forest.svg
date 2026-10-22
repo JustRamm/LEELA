@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 190 1000 430" width="1000" height="430" fill="none">
+  <defs>
+    <linearGradient id="sc1Sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE633"/>
+      <stop offset="65%" stop-color="#FFD200"/>
+      <stop offset="100%" stop-color="#FCBD00"/>
+    </linearGradient>
+    <linearGradient id="sc1Road" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6B59AB"/>
+      <stop offset="100%" stop-color="#362967"/>
+    </linearGradient>
+    <linearGradient id="sc1TreeFar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE866" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#F7C81A"/>
+    </linearGradient>
+    <linearGradient id="sc1TreeNear" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F0B50A"/>
+      <stop offset="100%" stop-color="#D98E00"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Golden Morning Sky matches hero naturally -->
+
+
+  <!-- Rolling Hills -->
+  <path d="M0 240 Q 250 190 500 215 T 1000 200 L 1000 360 L 0 360 Z" fill="#F0BA08" opacity="0.65"/>
+  <path d="M0 260 Q 350 220 700 240 T 1000 230 L 1000 380 L 0 380 Z" fill="#E2A600" opacity="0.8"/>
+
+  <!-- Pine Forest Silhouettes (Left & Right) -->
+  <g fill="url(#sc1TreeFar)">
+    <polygon points="120,40 135,110 105,110"/>
+    <polygon points="120,80 145,160 95,160"/>
+    <polygon points="120,130 160,240 80,240"/>
+    <polygon points="120,200 175,340 65,340"/>
+
+    <polygon points="860,50 875,120 845,120"/>
+    <polygon points="860,95 885,175 835,175"/>
+    <polygon points="860,145 900,250 820,250"/>
+    <polygon points="860,215 918,350 802,350"/>
+  </g>
+
+  <g fill="url(#sc1TreeNear)">
+    <polygon points="65,90 82,150 48,150"/>
+    <polygon points="65,130 95,210 35,210"/>
+    <polygon points="65,180 110,290 20,290"/>
+    <polygon points="65,260 125,380 5,380"/>
+
+    <polygon points="925,80 942,145 908,145"/>
+    <polygon points="925,125 955,210 895,210"/>
+    <polygon points="925,180 970,290 880,290"/>
+    <polygon points="925,250 985,380 865,380"/>
+  </g>
+
+  <!-- Straight Highway Perspective Running into Horizon -->
+  <polygon points="485,250 515,250 820,620 180,620" fill="url(#sc1Road)"/>
+  
+  <!-- Dashed Highway Centerline Moving Ahead -->
+  <line x1="500" y1="260" x2="500" y2="280" stroke="#FFE033" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="500" y1="300" x2="500" y2="330" stroke="#FFE033" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="500" y1="355" x2="500" y2="395" stroke="#FFE033" stroke-width="5" stroke-linecap="round"/>
+  <line x1="500" y1="430" x2="500" y2="485" stroke="#FFE033" stroke-width="7" stroke-linecap="round"/>
+</svg>

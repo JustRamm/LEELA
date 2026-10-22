@@ -1,0 +1,558 @@
+/* ==========================================================================
+   HERO — FULL-SCREEN COCKPIT STAGE WITH SKY CONTENT
+   Clean vibrant yellow background, perfectly sized car cockpit at bottom,
+   content framed cleanly in the sky space. No background illustrations.
+   ========================================================================== */
+
+.hero-main-card {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #FFE638 0%, #FEDC2A 50%, #EFBE06 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   THE SKY CONTENT ZONE (Between Navbar and Car Roof)
+   Fills the upper portion of the screen cleanly without excessive empty space.
+   ========================================================================== */
+
+.hero-sky-zone {
+  position: relative;
+  width: 100%;
+  flex: 0 0 auto;
+  height: 38vh;
+  min-height: 260px;
+  max-height: 330px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+/* ── Sky Slide (Common Transition Base) ── */
+.sky-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 28px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(18px) scale(0.985);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sky-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.sky-slide.exit-up {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-18px) scale(0.985);
+}
+
+/* ── Typography & Tags ── */
+.sky-tag {
+  display: inline-block;
+  background: rgba(36, 53, 194, 0.12);
+  color: #2435C2;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 15px;
+  border-radius: 9999px;
+  margin-bottom: 8px;
+}
+
+.sky-heading {
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 900;
+  color: #2435C2;
+  line-height: 1.15;
+  letter-spacing: -0.026em;
+  margin-bottom: 8px;
+}
+
+.sky-heading-xl {
+  font-size: clamp(32px, 3.6vw, 48px);
+}
+
+.sky-sub {
+  font-size: clamp(13.5px, 1.2vw, 15.5px);
+  font-weight: 600;
+  color: #6C4E00;
+  line-height: 1.55;
+  max-width: 660px;
+  margin: 0 auto 15px auto;
+}
+
+/* ── SLIDE 1: HOME INTRO ── */
+.sky-slide-home {
+  max-width: 760px;
+  width: 100%;
+}
+
+.sky-cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 15px;
+}
+
+.sky-btn-primary {
+  background: #31276C;
+  color: #FFFFFF;
+  font-size: 14.5px;
+  font-weight: 800;
+  padding: 10px 26px;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(49, 39, 108, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sky-btn-primary:hover {
+  background: #201A42;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(49, 39, 108, 0.45);
+}
+
+.sky-btn-ghost {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #2435C2;
+  font-size: 14.5px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(36, 53, 194, 0.35);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sky-btn-ghost:hover {
+  background: #FFFFFF;
+  border-color: #2435C2;
+  transform: translateY(-2px);
+}
+
+.sky-stats-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 9999px;
+  padding: 6px 22px;
+  box-shadow: 0 4px 16px rgba(32, 26, 66, 0.08);
+}
+
+.sky-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.sky-stat-num {
+  font-size: 16px;
+  font-weight: 900;
+  color: #2435C2;
+}
+
+.sky-stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748B;
+}
+
+.sky-stat-div {
+  width: 1px;
+  height: 15px;
+  background: rgba(36, 53, 194, 0.22);
+}
+
+/* ── SLIDE 2: HOW IT WORKS (4 STEPS) ── */
+.sky-slide-steps {
+  max-width: 1100px;
+  width: 100%;
+}
+
+.sky-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.sky-step-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 13px 15px;
+  text-align: left;
+  box-shadow: 0 5px 16px rgba(32, 26, 66, 0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sky-step-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 22px rgba(32, 26, 66, 0.12);
+}
+
+.sky-step-num {
+  font-size: 13px;
+  font-weight: 900;
+  color: #31276C;
+  background: rgba(49, 39, 108, 0.12);
+  padding: 3px 7px;
+  border-radius: 7px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.sky-step-card h3 {
+  font-size: 13px;
+  font-weight: 800;
+  color: #201A42;
+  margin-bottom: 2px;
+  line-height: 1.25;
+}
+
+.sky-step-card p {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #554823;
+  line-height: 1.35;
+}
+
+/* ── SLIDE 3: WHY LEELA (4 FEATURES) ── */
+.sky-slide-why {
+  max-width: 1100px;
+  width: 100%;
+}
+
+.sky-why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.sky-why-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 13px 15px;
+  text-align: left;
+  box-shadow: 0 5px 16px rgba(32, 26, 66, 0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sky-why-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 22px rgba(32, 26, 66, 0.12);
+}
+
+.sky-why-icon {
+  font-size: 19px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.sky-why-card h3 {
+  font-size: 13px;
+  font-weight: 800;
+  color: #201A42;
+  margin-bottom: 2px;
+  line-height: 1.25;
+}
+
+.sky-why-card p {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #554823;
+  line-height: 1.35;
+}
+
+/* ── SLIDE 4: CONTACT / LESSON INQUIRY ── */
+.sky-slide-contact {
+  max-width: 800px;
+  width: 100%;
+}
+
+.sky-contact-form {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1.5px solid rgba(255, 255, 255, 0.98);
+  border-radius: 18px;
+  padding: 15px 22px;
+  box-shadow: 0 8px 26px rgba(32, 26, 66, 0.11);
+  margin-top: 5px;
+}
+
+.sky-form-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 13px;
+  margin-bottom: 11px;
+}
+
+.sky-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.sky-field label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #31276C;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sky-field input,
+.sky-field select {
+  width: 100%;
+  padding: 9px 13px;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(49, 39, 108, 0.2);
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #201A42;
+  outline: none;
+  transition: border-color 0.18s;
+}
+
+.sky-field input:focus,
+.sky-field select:focus {
+  border-color: #31276C;
+}
+
+.sky-submit-btn {
+  width: 100%;
+  background: #31276C;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(49, 39, 108, 0.3);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sky-submit-btn:hover {
+  background: #201A42;
+  transform: translateY(-1px);
+  box-shadow: 0 7px 20px rgba(49, 39, 108, 0.4);
+}
+
+.sky-whatsapp {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #64748B;
+  margin-top: 7px;
+}
+
+.sky-whatsapp a {
+  color: #128C7E;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   CAR COCKPIT STAGE (Balanced Size, Clean Yellow Backdrop)
+   ========================================================================== */
+
+.hero-windshield-stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 5;
+  margin-top: -10px;
+}
+
+/* ── Cockpit Layer ── */
+.stage-cockpit-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.stage-cockpit-img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  max-width: min(88vw, 1220px);
+  height: 98%;
+  max-height: 52vh;
+  object-fit: contain;
+  object-position: bottom center;
+  opacity: 0;
+  transition: opacity 0.45s ease-in-out, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stage-cockpit-img.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Stage Dots (Centered on dashboard) ── */
+.hero-stage-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(32, 26, 66, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 15px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+  pointer-events: auto;
+  transition: bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-stage-dots.with-footer {
+  bottom: 54px;
+}
+
+.stage-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.stage-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.stage-dot.done {
+  background: rgba(254, 220, 42, 0.6);
+}
+
+.stage-dot.active {
+  background: #FEDC2A;
+  width: 22px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(254, 220, 42, 0.8);
+}
+
+/* ── Scroll Hint (Stage 1 only) ── */
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 68px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: #31276C;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  animation: hintBounce 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.scroll-arrow {
+  font-size: 15px;
+  line-height: 1;
+}
+
+@keyframes hintBounce {
+  0%, 100% { transform: translate(-50%, 0);   opacity: 0.75; }
+  50%       { transform: translate(-50%, 6px); opacity: 1;    }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+  .sky-steps-grid,
+  .sky-why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hero-sky-zone {
+    height: 44vh;
+  }
+  .stage-cockpit-img {
+    max-width: 96vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-sky-zone {
+    height: 48vh;
+    padding-top: 4px;
+  }
+  .sky-stats-row {
+    flex-wrap: wrap;
+    gap: 8px 14px;
+  }
+  .sky-form-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
