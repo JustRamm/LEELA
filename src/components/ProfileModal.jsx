@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  GraduationCapIcon, 
   IdCardIcon, 
-  GearIcon, 
-  ZapIcon, 
   CarIcon, 
   CheckIcon, 
   RefreshCwIcon, 
   ClockIcon, 
   CalendarIcon, 
-  EditIcon 
+  EditIcon,
+  MapPinIcon,
+  NavigationIcon
 } from './Icons';
 import '../styles/ProfileModal.css';
 
@@ -24,16 +23,20 @@ export default function ProfileModal({
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState({
     name: user?.name || 'Alex Morgan',
-    phone: user?.phone || '+44 7123 456789',
-    transmission: user?.transmission || 'manual',
+    phone: user?.phone || '+91 98765 43210',
+    address: user?.address || '42 Lakeview Promenade, Central City',
+    pickupPoint: user?.pickupPoint || 'Home Doorstep (Main Gate)',
+    dropPoint: user?.dropPoint || 'Same as Pickup (or Metro Station)',
   });
 
   useEffect(() => {
     if (user) {
       setEditData({
         name: user.name || 'Alex Morgan',
-        phone: user.phone || '+44 7123 456789',
-        transmission: user.transmission || 'manual',
+        phone: user.phone || '+91 98765 43210',
+        address: user.address || '42 Lakeview Promenade, Central City',
+        pickupPoint: user.pickupPoint || 'Home Doorstep (Main Gate)',
+        dropPoint: user.dropPoint || 'Same as Pickup (or Metro Station)',
       });
     }
   }, [user]);
@@ -56,7 +59,9 @@ export default function ProfileModal({
       ...user,
       name: editData.name,
       phone: editData.phone,
-      transmission: editData.transmission,
+      address: editData.address,
+      pickupPoint: editData.pickupPoint,
+      dropPoint: editData.dropPoint,
     });
     setIsEditing(false);
   };
@@ -76,8 +81,8 @@ export default function ProfileModal({
         <div className="profile-frost-blur"></div>
       </div>
 
-      {/* Floating Glassmorphic Card */}
-      <div className="profile-floating-card" onClick={(e) => e.stopPropagation()}>
+      {/* Floating Glassmorphic Card — Extra Spacious Dashboard */}
+      <div className="profile-floating-card profile-card-large" onClick={(e) => e.stopPropagation()}>
         {/* Top Header Navigation */}
         <div className="profile-top-nav">
           <button
@@ -113,10 +118,6 @@ export default function ProfileModal({
           <div className="profile-user-info">
             <div className="profile-name-row">
               <h2>{user.name}</h2>
-              <span className="profile-status-pill">
-                <GraduationCapIcon size={13} color="#201A42" style={{ marginRight: 5, verticalAlign: -2 }} />
-                Active Learner
-              </span>
             </div>
             <p className="profile-email-text">{user.email}</p>
             <div className="profile-meta-tags">
@@ -124,10 +125,11 @@ export default function ProfileModal({
                 <IdCardIcon size={13} color="#475569" style={{ marginRight: 5, verticalAlign: -2 }} />
                 ID: {user.licenceNumber || 'LEE-84920'}
               </span>
-              <span className="meta-tag-item">
-                <GearIcon size={13} color="#475569" style={{ marginRight: 5, verticalAlign: -2 }} />
-                {user.transmission === 'automatic' ? 'Automatic' : 'Manual'}
-              </span>
+              {user.phone && (
+                <span className="meta-tag-item">
+                  {user.phone}
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -135,54 +137,114 @@ export default function ProfileModal({
         {/* Inline Edit Form or Normal View */}
         {isEditing ? (
           <form className="profile-edit-form" onSubmit={handleSaveEdit}>
+            <div className="profile-form-grid-two">
+              <div className="profile-form-group">
+                <label>Full Name</label>
+                <input
+                  type="text"
+                  required
+                  value={editData.name}
+                  onChange={(e) => setEditData({ ...editData, name: e.target.value })}
+                />
+              </div>
+              <div className="profile-form-group">
+                <label>Phone Number</label>
+                <input
+                  type="tel"
+                  required
+                  value={editData.phone}
+                  onChange={(e) => setEditData({ ...editData, phone: e.target.value })}
+                />
+              </div>
+            </div>
+
             <div className="profile-form-group">
-              <label>Full Name</label>
+              <label>Residential / Street Address</label>
               <input
                 type="text"
                 required
-                value={editData.name}
-                onChange={(e) => setEditData({ ...editData, name: e.target.value })}
+                placeholder="e.g. 42 Lakeview Promenade, Flat 4B"
+                value={editData.address}
+                onChange={(e) => setEditData({ ...editData, address: e.target.value })}
               />
             </div>
-            <div className="profile-form-group">
-              <label>Phone Number</label>
-              <input
-                type="tel"
-                required
-                value={editData.phone}
-                onChange={(e) => setEditData({ ...editData, phone: e.target.value })}
-              />
-            </div>
-            <div className="profile-form-group">
-              <label>Transmission Preference</label>
-              <div className="profile-trans-toggle">
-                <button
-                  type="button"
-                  className={`btn-trans-choice ${editData.transmission === 'manual' ? 'active' : ''}`}
-                  onClick={() => setEditData({ ...editData, transmission: 'manual' })}
-                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
-                >
-                  <GearIcon size={14} />
-                  <span>Manual</span>
-                </button>
-                <button
-                  type="button"
-                  className={`btn-trans-choice ${editData.transmission === 'automatic' ? 'active' : ''}`}
-                  onClick={() => setEditData({ ...editData, transmission: 'automatic' })}
-                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
-                >
-                  <ZapIcon size={14} />
-                  <span>Automatic</span>
-                </button>
+
+            <div className="profile-form-grid-two">
+              <div className="profile-form-group">
+                <label>Preferred Pickup Point</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Home Doorstep (Main Gate)"
+                  value={editData.pickupPoint}
+                  onChange={(e) => setEditData({ ...editData, pickupPoint: e.target.value })}
+                />
+              </div>
+              <div className="profile-form-group">
+                <label>Preferred Drop Point</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Same as Pickup, Office, Metro"
+                  value={editData.dropPoint}
+                  onChange={(e) => setEditData({ ...editData, dropPoint: e.target.value })}
+                />
               </div>
             </div>
+
             <div className="profile-edit-buttons">
-              <button type="submit" className="btn-profile-save">Save Changes</button>
+              <button type="submit" className="btn-profile-save">Save Profile &amp; Locations</button>
               <button type="button" className="btn-profile-cancel" onClick={() => setIsEditing(false)}>Cancel</button>
             </div>
           </form>
         ) : (
           <>
+            {/* Doorstep Pickup & Service Locations Card */}
+            <div className="profile-location-card">
+              <div className="location-card-header">
+                <div className="location-title-wrap">
+                  <div className="location-icon-badge">
+                    <MapPinIcon size={16} color="#201A42" />
+                  </div>
+                  <div>
+                    <h4>Doorstep Pickup &amp; Drop Locations</h4>
+                    <p className="location-subtext">Where your instructor meets and drops you for each session</p>
+                  </div>
+                </div>
+                <button 
+                  type="button" 
+                  className="btn-location-edit-mini"
+                  onClick={() => setIsEditing(true)}
+                >
+                  Edit Locations
+                </button>
+              </div>
+
+              <div className="location-grid-layout">
+                <div className="location-detail-box">
+                  <span className="location-detail-label">Home Address</span>
+                  <p className="location-detail-val">{user.address || '42 Lakeview Promenade, Central City'}</p>
+                </div>
+                <div className="location-route-row">
+                  <div className="location-point-box">
+                    <span className="location-chip pickup">Pickup Point</span>
+                    <p className="location-point-text">
+                      <MapPinIcon size={14} color="#059669" style={{ marginRight: 6, flexShrink: 0 }} />
+                      <span>{user.pickupPoint || 'Home Doorstep (Main Gate)'}</span>
+                    </p>
+                  </div>
+                  <div className="location-arrow-connector">→</div>
+                  <div className="location-point-box">
+                    <span className="location-chip drop">Drop Point</span>
+                    <p className="location-point-text">
+                      <NavigationIcon size={14} color="#2563EB" style={{ marginRight: 6, flexShrink: 0 }} />
+                      <span>{user.dropPoint || 'Same as Pickup (or Metro Station)'}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Driving Progress Section */}
             <div className="profile-progress-box">
               <div className="progress-header-row">
@@ -264,7 +326,7 @@ export default function ProfileModal({
                 style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
               >
                 <EditIcon size={14} color="#475569" />
-                <span>Edit Profile</span>
+                <span>Edit Profile &amp; Addresses</span>
               </button>
               <button 
                 type="button" 

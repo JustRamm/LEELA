@@ -53,8 +53,10 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
     const user = {
       name: formData.name || (formData.email ? formData.email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Alex Morgan'),
       email: formData.email || 'alex@example.com',
-      phone: formData.phone || '+44 7123 456789',
-      transmission: 'manual',
+      phone: formData.phone || '+91 98765 43210',
+      address: '42 Lakeview Promenade, Central City',
+      pickupPoint: 'Home Doorstep (Main Gate)',
+      dropPoint: 'Same as Pickup (or Metro Station)',
       licenceNumber: 'LEE-84920',
       lessonsCompleted: 6,
       totalLessons: 20,

@@ -42,14 +42,14 @@
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 500px;
+  max-width: 680px;
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-radius: var(--radius-xl, 24px);
   box-shadow: 0 30px 70px rgba(32, 26, 66, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.85);
-  padding: 28px 30px 24px 30px;
+  padding: 32px 34px 28px 34px;
   animation: profileSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   max-height: 90vh;
   overflow-y: auto;
@@ -198,6 +198,157 @@
   padding: 3px 9px;
   border-radius: 6px;
   border: 1px solid #E2E8F0;
+}
+
+/* ── Doorstep Pickup & Locations Card ── */
+.profile-location-card {
+  background: #F8FAFC;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.location-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.location-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.location-icon-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #FEF3C7;
+  border: 1px solid #FDE68A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.location-card-header h4 {
+  font-size: 13.5px;
+  font-weight: 850;
+  color: #201A42;
+  margin: 0 0 2px 0;
+}
+
+.location-subtext {
+  font-size: 11.5px;
+  color: #64748B;
+  margin: 0;
+}
+
+.btn-location-edit-mini {
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  color: #201A42;
+  font-size: 11px;
+  font-weight: 750;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-location-edit-mini:hover {
+  background: #201A42;
+  color: #FFFFFF;
+  border-color: #201A42;
+}
+
+.location-grid-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.location-detail-box {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 9px 12px;
+}
+
+.location-detail-label {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748B;
+  margin-bottom: 3px;
+}
+
+.location-detail-val {
+  font-size: 12.5px;
+  font-weight: 650;
+  color: #1E293B;
+  margin: 0;
+}
+
+.location-route-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.location-point-box {
+  flex: 1;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 9px 12px;
+}
+
+.location-chip {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.location-chip.pickup {
+  background: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+}
+
+.location-chip.drop {
+  background: #EFF6FF;
+  color: #1E40AF;
+  border: 1px solid #BFDBFE;
+}
+
+.location-point-text {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1E293B;
+  margin: 0;
+}
+
+.location-arrow-connector {
+  font-size: 14px;
+  font-weight: 900;
+  color: #94A3B8;
+  user-select: none;
 }
 
 /* ── Progress Box ── */
@@ -429,6 +580,12 @@
   text-align: left;
 }
 
+.profile-form-grid-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
 .profile-form-group {
   display: flex;
   flex-direction: column;
@@ -450,6 +607,7 @@
   color: #201A42;
   outline: none;
   transition: all 0.2s;
+  font-family: inherit;
 }
 
 .profile-form-group input:focus {
@@ -458,33 +616,10 @@
   box-shadow: 0 0 0 3px rgba(49, 39, 108, 0.15);
 }
 
-.profile-trans-toggle {
-  display: flex;
-  gap: 8px;
-}
-
-.btn-trans-choice {
-  flex: 1;
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1.5px solid #E2E8F0;
-  background: #F8FAFC;
-  font-size: 12.5px;
-  font-weight: 750;
-  color: #201A42;
-  cursor: pointer;
-}
-
-.btn-trans-choice.active {
-  background: #201A42;
-  color: #FFE638;
-  border-color: #201A42;
-}
-
 .profile-edit-buttons {
   display: flex;
   gap: 10px;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .btn-profile-save {
@@ -494,10 +629,16 @@
   border: none;
   font-size: 13.5px;
   font-weight: 800;
-  padding: 11px;
+  padding: 12px;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(32, 26, 66, 0.3);
+  transition: all 0.2s;
+}
+
+.btn-profile-save:hover {
+  background: #15102F;
+  transform: translateY(-1px);
 }
 
 .btn-profile-cancel {
@@ -506,14 +647,29 @@
   color: #64748B;
   font-size: 13.5px;
   font-weight: 700;
-  padding: 11px 18px;
+  padding: 12px 20px;
   border-radius: 10px;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
-@media (max-width: 480px) {
+.btn-profile-cancel:hover {
+  background: #F1F5F9;
+  color: #201A42;
+}
+
+@media (max-width: 620px) {
   .profile-floating-card {
-    padding: 22px 18px;
+    padding: 24px 20px 20px 20px;
+  }
+  .profile-form-grid-two,
+  .location-route-row {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+  .location-arrow-connector {
+    transform: rotate(90deg);
+    margin: -4px 0;
   }
   .profile-actions-row {
     flex-direction: column;
