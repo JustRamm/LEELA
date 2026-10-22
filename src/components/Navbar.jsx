@@ -23,9 +23,9 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpen
         {/* Center Nav Links */}
         <div className="nav-menu">
           <a href="#scene-how-it-works" className="nav-item" onClick={() => playButtonTap()}>How it works</a>
+          <a href="#scene-instructors" className="nav-item" onClick={() => playButtonTap()}>Instructors</a>
           <a href="#scene-why-leela" className="nav-item" onClick={() => playButtonTap()}>Why LEELA</a>
-          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); playButtonTap(); }}>Gallery</a>
-          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); playButtonTap(); }}>Demo Test</a>
+          <a href="#scene-gallery" className="nav-item" onClick={() => playButtonTap()}>Gallery</a>
           <a href="#scene-contact" className="nav-item" onClick={() => playButtonTap()}>Contact</a>
         </div>
 
@@ -97,9 +97,9 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpen
         {mobileOpen && (
           <div className="mobile-drawer">
             <a href="#scene-how-it-works" className="nav-item" onClick={() => setMobileOpen(false)}>How it works</a>
+            <a href="#scene-instructors" className="nav-item" onClick={() => setMobileOpen(false)}>Instructors</a>
             <a href="#scene-why-leela" className="nav-item" onClick={() => setMobileOpen(false)}>Why LEELA</a>
-            <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); setMobileOpen(false); }}>Gallery</a>
-            <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); setMobileOpen(false); }}>Demo Test</a>
+            <a href="#scene-gallery" className="nav-item" onClick={() => setMobileOpen(false)}>Gallery</a>
             <a href="#scene-contact" className="nav-item" onClick={() => setMobileOpen(false)}>Contact</a>
             
             {currentUser ? (

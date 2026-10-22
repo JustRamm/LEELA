@@ -49,7 +49,6 @@ function ContactSlide({ onShowToast, currentUser }) {
 
   return (
     <div className="sky-slide-contact">
-      <span className="sky-tag">START DRIVING TODAY</span>
       <h2 className="sky-heading">Ready to Get Behind the Wheel?</h2>
       <p className="sky-sub">Schedule your first lesson — an instructor in your area will reply within 1 hour.</p>
 
@@ -82,12 +81,26 @@ function ContactSlide({ onShowToast, currentUser }) {
   );
 }
 
-// ─── Stage progress dots ──────────────────────────────────────────────────────
+// ─── Gallery Images for Edge-to-Edge Automatic Horizontal Scroll (No Texts) ─
+const GALLERY_IMAGES = [
+  'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600&auto=format&fit=crop&q=80', // modern dual-control car fleet
+  'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&auto=format&fit=crop&q=80', // cockpit & mirror controls
+  'https://images.unsplash.com/photo-1502877338535-766e1452684a?w=600&auto=format&fit=crop&q=80', // open road driving session
+  'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=600&auto=format&fit=crop&q=80', // pass certificate celebration
+  'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&auto=format&fit=crop&q=80', // steering wheel road perspective
+  'https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&auto=format&fit=crop&q=80', // training hatchback
+  'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&auto=format&fit=crop&q=80', // open cruising road
+  'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=600&auto=format&fit=crop&q=80', // calm coaching on street
+];
+
+// ─── Stage progress dots (6 stages across the entire driving journey) ─────────
 const STAGES = [
   { stage: 1, label: 'Home'         },
   { stage: 2, label: 'How it works' },
-  { stage: 3, label: 'Why LEELA'   },
-  { stage: 4, label: 'Contact'      },
+  { stage: 3, label: 'Instructors'  },
+  { stage: 4, label: 'Why LEELA'    },
+  { stage: 5, label: 'Gallery'      },
+  { stage: 6, label: 'Contact'      },
 ];
 
 // ─── Subtle Scenery Landscape Backdrop (Embedded Vector Pattern) ─────────────
@@ -280,6 +293,18 @@ export default function Hero({
   onOpenProfile
 }) {
   const meta = STAGES.find((s) => s.stage === drivingStage) || STAGES[0];
+  const [headlight, setHeadlight] = useState({ x: 50, y: 55, active: false });
+
+  const handleWindshieldMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = Math.max(8, Math.min(92, ((e.clientX - rect.left) / rect.width) * 100));
+    const y = Math.max(10, Math.min(90, ((e.clientY - rect.top) / rect.height) * 100));
+    setHeadlight({ x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10, active: true });
+  };
+
+  const handleWindshieldMouseLeave = () => {
+    setHeadlight((prev) => ({ ...prev, active: false }));
+  };
 
   return (
     <section className={`hero-main-card stage-${drivingStage}`} aria-label="Driving journey hero">
@@ -288,6 +313,7 @@ export default function Hero({
       <div className="hero-sky-atmosphere" aria-hidden="true">
         <div className="sky-layer sky-layer-morning" />
         <div className="sky-layer sky-layer-midday" />
+        <div className="sky-layer sky-layer-golden" />
         <div className="sky-layer sky-layer-dusk" />
       </div>
 
@@ -345,7 +371,6 @@ export default function Hero({
         {/* ── SLIDE 2: How it works ── */}
         <div className={`sky-slide ${drivingStage === 2 ? 'active' : drivingStage > 2 ? 'exit-up' : ''}`}>
           <div className="sky-slide-steps">
-            <span className="sky-tag">STEP-BY-STEP CURRICULUM</span>
             <h2 className="sky-heading">From First Turn to Full Licence</h2>
             <div className="sky-steps-grid">
               {[
@@ -366,10 +391,43 @@ export default function Hero({
           </div>
         </div>
 
-        {/* ── SLIDE 3: Why LEELA ── */}
+        {/* ── SLIDE 3: Our Instructors ── */}
         <div className={`sky-slide ${drivingStage === 3 ? 'active' : drivingStage > 3 ? 'exit-up' : ''}`}>
+          <div className="sky-slide-instructors">
+            <h2 className="sky-heading">Meet Your Patient Driving Mentors</h2>
+            <div className="sky-instructors-grid">
+              {[
+                {
+                  name: 'Rajesh Kumar',
+                  img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=320&auto=format&fit=crop&q=80',
+                },
+                {
+                  name: 'Priya Sharma',
+                  img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=320&auto=format&fit=crop&q=80',
+                },
+                {
+                  name: 'Vikram Patel',
+                  img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=320&auto=format&fit=crop&q=80',
+                },
+                {
+                  name: 'Sneha Roy',
+                  img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=320&auto=format&fit=crop&q=80',
+                },
+              ].map((inst) => (
+                <div key={inst.name} className="sky-instructor-card">
+                  <div className="instructor-photo-wrap">
+                    <img src={inst.img} alt={inst.name} className="instructor-photo-img" />
+                  </div>
+                  <h3 className="instructor-name-text">{inst.name}</h3>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── SLIDE 4: Why LEELA ── */}
+        <div className={`sky-slide ${drivingStage === 4 ? 'active' : drivingStage > 4 ? 'exit-up' : ''}`}>
           <div className="sky-slide-why">
-            <span className="sky-tag">SAFETY &amp; EXCELLENCE</span>
             <h2 className="sky-heading">Why Students Love LEELA</h2>
             <div className="sky-why-grid">
               {[
@@ -380,7 +438,7 @@ export default function Hero({
               ].map((f) => (
                 <div key={f.title} className="sky-why-card">
                   <span className="sky-why-icon">
-                    <f.Icon size={18} color="#FFE638" />
+                    <f.Icon size={18} color="#D97706" />
                   </span>
                   <div>
                     <h3>{f.title}</h3>
@@ -392,25 +450,60 @@ export default function Hero({
           </div>
         </div>
 
-        {/* ── SLIDE 4: Contact ── */}
-        <div className={`sky-slide ${drivingStage === 4 ? 'active' : ''}`}>
+        {/* ── SLIDE 5: Gallery (Edge-to-Edge Automatic Horizontal Scroll, No Texts) ── */}
+        <div className={`sky-slide sky-slide-gallery-full ${drivingStage === 5 ? 'active' : drivingStage > 5 ? 'exit-up' : ''}`}>
+          <div className="sky-gallery-marquee-wrap">
+            <div className="sky-gallery-marquee-track">
+              {/* Loop duplicated twice for seamless infinite automatic scrolling */}
+              {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((imgSrc, idx) => (
+                <div key={idx} className="sky-gallery-item">
+                  <div className="gallery-card-image-wrap">
+                    <img src={imgSrc} alt="LEELA Driving School" className="gallery-slide-img" loading="lazy" />
+                    <div className="gallery-card-overlay" />
+                  </div>
+                  <div className="gallery-card-accent-bar" aria-hidden="true" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── SLIDE 6: Contact Us ── */}
+        <div className={`sky-slide ${drivingStage === 6 ? 'active' : ''}`}>
           <ContactSlide onShowToast={onShowToast} currentUser={currentUser} />
         </div>
 
       </div>{/* /hero-sky-zone */}
 
       {/* ── Car Cockpit — always at the bottom, image changes with stage ── */}
-      <div className="hero-windshield-stage">
-        {/* Driver & cockpit stage */}
+      <div 
+        className="hero-windshield-stage"
+        onMouseMove={handleWindshieldMouseMove}
+        onMouseLeave={handleWindshieldMouseLeave}
+      >
+
+        {/* ── Headlight Beam Glow (Tracks cursor scanning across windscreen & road) ── */}
+        <div 
+          className={`hero-headlight-beam ${headlight.active ? 'active' : ''}`}
+          style={{
+            '--headlight-x': `${headlight.x}%`,
+            '--headlight-y': `${headlight.y}%`,
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Driver & cockpit stage (6 distinct SVG illustrations in proper sequence) */}
         <div className="stage-cockpit-wrap">
-          <img src="/illustrations/scroll/cockpit-stage1-start.svg?v=lplate"     alt="Learner and Indian instructor starting lesson"       className={`stage-cockpit-img ${drivingStage === 1 ? 'active' : ''}`} />
-          <img src="/illustrations/scroll/cockpit-stage2-turning.svg?v=lplate"   alt="Instructor coaching learner through turns"            className={`stage-cockpit-img ${drivingStage === 2 ? 'active' : ''}`} />
-          <img src="/illustrations/scroll/cockpit-stage3-cruising.svg?v=lplate"  alt="Instructor giving thumbs up while cruising"           className={`stage-cockpit-img ${drivingStage === 3 ? 'active' : ''}`} />
-          <img src="/illustrations/scroll/cockpit-stage4-celebrate.svg?v=lplate" alt="Instructor and learner celebrating test passed"       className={`stage-cockpit-img ${drivingStage === 4 ? 'active' : ''}`} />
+          <img src="/illustrations/scroll/cockpit-stage1-start.svg?v=lplate"       alt="Learner and instructor starting lesson"                           className={`stage-cockpit-img ${drivingStage === 1 ? 'active' : ''}`} />
+          <img src="/illustrations/scroll/cockpit-stage2-turning.svg?v=lplate"     alt="Instructor coaching learner through turns"                        className={`stage-cockpit-img ${drivingStage === 2 ? 'active' : ''}`} />
+          <img src="/illustrations/scroll/cockpit-stage3-instructors.svg?v=lplate" alt="Instructor with DVSA assessment clipboard coaching learner"      className={`stage-cockpit-img ${drivingStage === 3 ? 'active' : ''}`} />
+          <img src="/illustrations/scroll/cockpit-stage4-cruising.svg?v=lplate"    alt="Instructor giving thumbs up while cruising"                       className={`stage-cockpit-img ${drivingStage === 4 ? 'active' : ''}`} />
+          <img src="/illustrations/scroll/cockpit-stage5-gallery.svg?v=lplate"     alt="Learner executing reverse bay parking maneuver with radar assist" className={`stage-cockpit-img ${drivingStage === 5 ? 'active' : ''}`} />
+          <img src="/illustrations/scroll/cockpit-stage6-celebrate.svg?v=lplate"   alt="Instructor and learner celebrating test passed"                   className={`stage-cockpit-img ${drivingStage === 6 ? 'active' : ''}`} />
         </div>
 
         {/* Progress dots — bottom centre of the windshield */}
-        <div className={`hero-stage-dots ${drivingStage === 4 ? 'with-footer' : ''}`} aria-label="Journey progress">
+        <div className={`hero-stage-dots ${drivingStage === 6 ? 'with-footer' : ''}`} aria-label="Journey progress">
           {STAGES.map((s) => (
             <span
               key={s.stage}

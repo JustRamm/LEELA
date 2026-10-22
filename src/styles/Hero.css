@@ -49,23 +49,31 @@
               linear-gradient(180deg, #FFE954 0%, #FEDC2A 48%, #E5A100 100%);
 }
 
-/* Stage 2 & 3: Clear Midday Driving Daylight */
+/* Stage 2, 3 & 4: Clear Midday Driving Daylight */
 .sky-layer-midday {
   background: radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 65%),
               linear-gradient(180deg, #FFF375 0%, #FFE638 52%, #DE9F00 100%);
 }
 
-/* Stage 4: Sunset Golden Hour Glow (Celebration) */
+/* Stage 5: Warm Golden Hour & Bay Maneuvers */
+.sky-layer-golden {
+  background: radial-gradient(circle at 50% 36%, rgba(255, 240, 180, 0.5) 0%, rgba(251, 146, 60, 0.22) 52%, transparent 78%),
+              linear-gradient(180deg, #FED766 0%, #F59E0B 42%, #EA580C 100%);
+}
+
+/* Stage 6: Sunset Twilight Glow (Test Passed Celebration) */
 .sky-layer-dusk {
   background: radial-gradient(circle at 50% 46%, rgba(255, 230, 160, 0.5) 0%, rgba(255, 170, 70, 0.15) 50%, transparent 75%),
               linear-gradient(180deg, #FFC44D 0%, #FFA834 38%, #F77728 72%, #E55C10 100%);
 }
 
-/* Active Atmospheric Gradients based on current Driving Stage */
+/* Active Atmospheric Gradients based on current Driving Stage (6 Stages) */
 .hero-main-card.stage-1 .sky-layer-morning { opacity: 1; }
 .hero-main-card.stage-2 .sky-layer-midday  { opacity: 1; }
 .hero-main-card.stage-3 .sky-layer-midday  { opacity: 1; }
-.hero-main-card.stage-4 .sky-layer-dusk    { opacity: 1; }
+.hero-main-card.stage-4 .sky-layer-midday  { opacity: 1; }
+.hero-main-card.stage-5 .sky-layer-golden  { opacity: 1; }
+.hero-main-card.stage-6 .sky-layer-dusk    { opacity: 1; }
 
 /* ==========================================================================
    SUBTLE SCENIC LANDSCAPE BACKDROP
@@ -201,7 +209,31 @@
   transform: translate(-3px, 1px);
 }
 
-/* ── STAGE 3: Full Highway Cruising (Active Continuous Perspective Motion) ── */
+/* ── STAGE 3: Guided Coaching Driving (Steady 35 km/h) ── */
+.hero-scenery-backdrop.stage-3 .scenery-centerlines-group {
+  transform: translateY(28px) scale(1.1);
+}
+.hero-scenery-backdrop.stage-3 .scenery-roadside-left {
+  transform: translate(-28px, 20px) scale(1.16);
+}
+.hero-scenery-backdrop.stage-3 .scenery-roadside-right {
+  transform: translate(32px, 18px) scale(1.15);
+}
+.hero-scenery-backdrop.stage-3 .scenery-verge-left {
+  transform: translateX(-12px) scale(1.015);
+}
+.hero-scenery-backdrop.stage-3 .scenery-verge-right {
+  transform: translateX(12px) scale(1.015);
+}
+.hero-scenery-backdrop.stage-3 .scenery-mid-hills,
+.hero-scenery-backdrop.stage-3 .scenery-mid-trees {
+  transform: translate(-16px, 6px);
+}
+.hero-scenery-backdrop.stage-3 .scenery-far-mountains {
+  transform: translate(-5px, 2px);
+}
+
+/* ── STAGE 4: Full Highway Cruising (Active Continuous Perspective Motion) ── */
 @keyframes roadDashCruiseMotion {
   0% {
     transform: translateY(0px) scale(1);
@@ -211,7 +243,7 @@
   }
 }
 
-.hero-scenery-backdrop.stage-3 .scenery-centerlines-group {
+.hero-scenery-backdrop.stage-4 .scenery-centerlines-group {
   animation: roadDashCruiseMotion 1.15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
@@ -224,26 +256,46 @@
   }
 }
 
-.hero-scenery-backdrop.stage-3 .scenery-roadside-left {
+.hero-scenery-backdrop.stage-4 .scenery-roadside-left {
   animation: palmSwayCruise 3.5s ease-in-out infinite;
 }
 
-.hero-scenery-backdrop.stage-3 .scenery-roadside-right {
+.hero-scenery-backdrop.stage-4 .scenery-roadside-right {
   transform: translate(52px, 30px) scale(1.24);
 }
 
-.hero-scenery-backdrop.stage-3 .scenery-verge-left {
+.hero-scenery-backdrop.stage-4 .scenery-verge-left {
   transform: translateX(-18px) scale(1.025);
 }
-.hero-scenery-backdrop.stage-3 .scenery-verge-right {
+.hero-scenery-backdrop.stage-4 .scenery-verge-right {
   transform: translateX(18px) scale(1.025);
 }
-.hero-scenery-backdrop.stage-3 .scenery-mid-hills,
-.hero-scenery-backdrop.stage-3 .scenery-mid-trees {
+.hero-scenery-backdrop.stage-4 .scenery-mid-hills,
+.hero-scenery-backdrop.stage-4 .scenery-mid-trees {
   transform: translate(-26px, 9px);
 }
-.hero-scenery-backdrop.stage-3 .scenery-far-mountains {
+.hero-scenery-backdrop.stage-4 .scenery-far-mountains {
   transform: translate(-8px, 3px);
+}
+
+/* ── STAGE 5: Reverse Bay Parking & Gallery Inspection (15 km/h Reverse Maneuver) ── */
+.hero-scenery-backdrop.stage-5 .scenery-centerlines-group {
+  transform: translateY(-8px) scale(0.96);
+  transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-scenery-backdrop.stage-5 .scenery-roadside-left {
+  transform: translate(-14px, 12px) scale(1.08) rotate(-0.5deg);
+}
+.hero-scenery-backdrop.stage-5 .scenery-roadside-right {
+  transform: translate(18px, 10px) scale(1.08) rotate(0.5deg);
+}
+.hero-scenery-backdrop.stage-5 .scenery-mid-hills,
+.hero-scenery-backdrop.stage-5 .scenery-mid-trees {
+  transform: translate(-8px, 3px);
+  filter: hue-rotate(-8deg) saturate(1.12);
+}
+.hero-scenery-backdrop.stage-5 .scenery-far-mountains {
+  transform: translate(-2px, 1px);
 }
 
 /* ── STAGE 1: Morning Sun & Scenery ── */
@@ -253,49 +305,58 @@
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease, filter 1s ease;
 }
 
-/* ── STAGE 2 & 3: Midday High Sun & Bright Daylight ── */
+/* ── STAGE 2, 3 & 4: Midday High Sun & Bright Daylight ── */
 .hero-scenery-backdrop.stage-2 .scenery-sun,
-.hero-scenery-backdrop.stage-3 .scenery-sun {
+.hero-scenery-backdrop.stage-3 .scenery-sun,
+.hero-scenery-backdrop.stage-4 .scenery-sun {
   transform: translateY(-22px) scale(0.88);
   opacity: 0.75;
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease, filter 1s ease;
 }
 
-/* ── STAGE 4: Arrived at Destination / Sunset Golden Hour Celebration ── */
-.hero-scenery-backdrop.stage-4 .scenery-centerlines-group {
+/* ── STAGE 5: Golden Hour Lower Sun ── */
+.hero-scenery-backdrop.stage-5 .scenery-sun {
+  transform: translateY(12px) scale(1.05);
+  filter: hue-rotate(-12deg) saturate(1.18);
+  opacity: 0.88;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease, opacity 1s ease;
+}
+
+/* ── STAGE 6: Arrived at Destination / Sunset Golden Hour Celebration ── */
+.hero-scenery-backdrop.stage-6 .scenery-centerlines-group {
   transform: translateY(12px) scale(1.05);
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.hero-scenery-backdrop.stage-4 .scenery-roadside-left {
+.hero-scenery-backdrop.stage-6 .scenery-roadside-left {
   transform: translate(-24px, 20px) scale(1.15);
 }
-.hero-scenery-backdrop.stage-4 .scenery-roadside-right {
+.hero-scenery-backdrop.stage-6 .scenery-roadside-right {
   transform: translate(28px, 18px) scale(1.14);
 }
-.hero-scenery-backdrop.stage-4 .scenery-mid-hills,
-.hero-scenery-backdrop.stage-4 .scenery-mid-trees {
+.hero-scenery-backdrop.stage-6 .scenery-mid-hills,
+.hero-scenery-backdrop.stage-6 .scenery-mid-trees {
   transform: translate(-14px, 5px);
   filter: hue-rotate(-16deg) saturate(1.22) brightness(0.92);
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s ease;
 }
-.hero-scenery-backdrop.stage-4 .scenery-far-mountains {
+.hero-scenery-backdrop.stage-6 .scenery-far-mountains {
   transform: translate(-4px, 2px);
   filter: hue-rotate(-22deg) saturate(1.25) brightness(0.92);
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s ease;
 }
-.hero-scenery-backdrop.stage-4 .scenery-sun {
+.hero-scenery-backdrop.stage-6 .scenery-sun {
   transform: translateY(34px) scale(1.15);
   filter: hue-rotate(-22deg) saturate(1.3) brightness(1.05);
   opacity: 0.95;
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s ease, opacity 1s ease;
 }
-.hero-scenery-backdrop.stage-4 .scenery-contour-lines {
+.hero-scenery-backdrop.stage-6 .scenery-contour-lines {
   stroke: #E05300;
   stroke-opacity: 0.55;
   transition: stroke 1.2s ease, stroke-opacity 1.2s ease;
 }
 
-.hero-main-card.stage-4 .sky-tag {
+.hero-main-card.stage-6 .sky-tag {
   background: rgba(32, 26, 66, 0.12);
   border-color: rgba(32, 26, 66, 0.22);
 }
@@ -508,22 +569,22 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  background: rgba(32, 26, 66, 0.88);
+  background: #FFFFFF;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1.5px solid rgba(255, 230, 56, 0.35);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
   border-radius: 16px;
   padding: 14px 16px;
   text-align: left;
-  box-shadow: 0 10px 28px rgba(32, 26, 66, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 28px rgba(32, 26, 66, 0.12), 0 2px 8px rgba(32, 26, 66, 0.05);
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s, border-color 0.22s;
 }
 
 .sky-step-card:hover {
   transform: translateY(-3px);
-  background: rgba(32, 26, 66, 0.95);
-  border-color: #FFE638;
-  box-shadow: 0 16px 36px rgba(32, 26, 66, 0.35), 0 0 16px rgba(255, 230, 56, 0.3);
+  background: #FFFFFF;
+  border-color: #F59E0B;
+  box-shadow: 0 16px 36px rgba(32, 26, 66, 0.18), 0 0 16px rgba(245, 158, 11, 0.25);
 }
 
 .sky-step-num {
@@ -535,13 +596,13 @@
   border-radius: 8px;
   line-height: 1;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.45);
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
 }
 
 .sky-step-card h3 {
   font-size: 13.5px;
   font-weight: 850;
-  color: #FFFFFF;
+  color: #201A42;
   margin-bottom: 3px;
   line-height: 1.25;
   letter-spacing: -0.01em;
@@ -550,11 +611,81 @@
 .sky-step-card p {
   font-size: 11.5px;
   font-weight: 550;
-  color: rgba(255, 255, 255, 0.82);
+  color: #4A4468;
   line-height: 1.4;
 }
 
-/* ── SLIDE 3: WHY LEELA (4 FEATURES) ── */
+/* ── SLIDE 3: OUR INSTRUCTORS ── */
+.sky-slide-instructors {
+  max-width: 980px;
+  width: 100%;
+}
+
+.sky-instructors-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.sky-instructor-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  padding: 14px 12px;
+  text-align: center;
+  box-shadow: 0 10px 28px rgba(32, 26, 66, 0.12), 0 2px 8px rgba(32, 26, 66, 0.05);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s, border-color 0.22s;
+}
+
+.sky-instructor-card:hover {
+  transform: translateY(-4px);
+  background: #FFFFFF;
+  border-color: #F59E0B;
+  box-shadow: 0 16px 36px rgba(32, 26, 66, 0.18), 0 0 16px rgba(245, 158, 11, 0.25);
+}
+
+.instructor-photo-wrap {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(32, 26, 66, 0.2);
+  border: 2.5px solid #F59E0B;
+}
+
+.instructor-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.sky-instructor-card:hover .instructor-photo-img {
+  transform: scale(1.08);
+}
+
+.instructor-name-text {
+  font-size: 13.5px;
+  font-weight: 850;
+  color: #201A42;
+  margin-top: 9px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+/* ── SLIDE 4: WHY LEELA (4 FEATURES) ── */
 .sky-slide-why {
   max-width: 1100px;
   width: 100%;
@@ -572,30 +703,30 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  background: rgba(32, 26, 66, 0.88);
+  background: #FFFFFF;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1.5px solid rgba(255, 230, 56, 0.35);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
   border-radius: 16px;
   padding: 14px 16px;
   text-align: left;
-  box-shadow: 0 10px 28px rgba(32, 26, 66, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 28px rgba(32, 26, 66, 0.12), 0 2px 8px rgba(32, 26, 66, 0.05);
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s, border-color 0.22s;
 }
 
 .sky-why-card:hover {
   transform: translateY(-3px);
-  background: rgba(32, 26, 66, 0.95);
-  border-color: #FFE638;
-  box-shadow: 0 16px 36px rgba(32, 26, 66, 0.35), 0 0 16px rgba(255, 230, 56, 0.3);
+  background: #FFFFFF;
+  border-color: #F59E0B;
+  box-shadow: 0 16px 36px rgba(32, 26, 66, 0.18), 0 0 16px rgba(245, 158, 11, 0.25);
 }
 
 .sky-why-icon {
   font-size: 17px;
   line-height: 1;
   flex-shrink: 0;
-  background: rgba(255, 230, 56, 0.16);
-  border: 1px solid rgba(255, 230, 56, 0.4);
+  background: rgba(254, 220, 42, 0.28);
+  border: 1px solid rgba(245, 158, 11, 0.35);
   padding: 6px 8px;
   border-radius: 10px;
   display: flex;
@@ -606,7 +737,7 @@
 .sky-why-card h3 {
   font-size: 13.5px;
   font-weight: 850;
-  color: #FFFFFF;
+  color: #201A42;
   margin-bottom: 3px;
   line-height: 1.25;
   letter-spacing: -0.01em;
@@ -615,24 +746,136 @@
 .sky-why-card p {
   font-size: 11.5px;
   font-weight: 550;
-  color: rgba(255, 255, 255, 0.82);
+  color: #4A4468;
   line-height: 1.4;
 }
 
-/* ── SLIDE 4: CONTACT / LESSON INQUIRY ── */
+/* ── SLIDE 5: GALLERY (EDGE-TO-EDGE AUTOMATIC HORIZONTAL SCROLL) ── */
+.sky-slide-gallery-full {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.sky-gallery-marquee-wrap {
+  width: 100vw;
+  max-width: 100vw;
+  position: relative;
+  overflow: hidden;
+  padding: 14px 0 18px 0;
+  display: flex;
+  align-items: center;
+  /* Smooth fade mask at both edges so images go in and out of the website seamlessly */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 1) 6%, rgba(0, 0, 0, 1) 94%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 1) 6%, rgba(0, 0, 0, 1) 94%, transparent 100%);
+}
+
+.sky-gallery-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: max-content;
+  animation: galleryTickerScroll 48s linear infinite;
+  will-change: transform;
+}
+
+.sky-gallery-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes galleryTickerScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.sky-gallery-item {
+  flex: 0 0 auto;
+  width: 275px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 8px 8px 10px 8px;
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 32px rgba(32, 26, 66, 0.14), 0 3px 8px rgba(32, 26, 66, 0.05);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s, border-color 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+
+.sky-gallery-item:hover {
+  transform: translateY(-6px) scale(1.025);
+  border-color: #F59E0B;
+  box-shadow: 0 20px 44px rgba(32, 26, 66, 0.2), 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+.gallery-card-image-wrap {
+  width: 100%;
+  height: 155px;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  background: #F1F5F9;
+}
+
+.gallery-slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+}
+
+.sky-gallery-item:hover .gallery-slide-img {
+  transform: scale(1.06);
+  filter: brightness(1.03);
+}
+
+.gallery-card-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, transparent 40%, rgba(32, 26, 66, 0.16) 100%);
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 1px rgba(32, 26, 66, 0.06);
+}
+
+.gallery-card-accent-bar {
+  width: 28px;
+  height: 3px;
+  background: linear-gradient(90deg, #FFE638 0%, #F59E0B 100%);
+  border-radius: 9999px;
+  margin: 7px auto 0 auto;
+  opacity: 0.85;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sky-gallery-item:hover .gallery-card-accent-bar {
+  width: 52px;
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.55);
+}
+
+/* ── SLIDE 6: CONTACT / LESSON INQUIRY ── */
 .sky-slide-contact {
   max-width: 640px;
   width: 100%;
 }
 
 .sky-contact-form {
-  background: rgba(32, 26, 66, 0.92);
+  background: #FFFFFF;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1.5px solid rgba(255, 230, 56, 0.35);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
   border-radius: 18px;
-  padding: 16px 24px;
-  box-shadow: 0 16px 40px rgba(32, 26, 66, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  padding: 18px 26px;
+  box-shadow: 0 16px 40px rgba(32, 26, 66, 0.14), 0 4px 12px rgba(32, 26, 66, 0.05);
   margin-top: 6px;
 }
 
@@ -654,7 +897,7 @@
 .sky-field label {
   font-size: 11px;
   font-weight: 850;
-  color: #FFE638;
+  color: #201A42;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -663,8 +906,8 @@
 .sky-field select {
   width: 100%;
   padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.96);
-  border: 1.5px solid rgba(255, 230, 56, 0.4);
+  background: #F8FAFC;
+  border: 1.5px solid rgba(32, 26, 66, 0.14);
   border-radius: 10px;
   font-size: 13px;
   font-weight: 600;
@@ -675,9 +918,9 @@
 
 .sky-field input:focus,
 .sky-field select:focus {
-  border-color: #FFE638;
+  border-color: #F59E0B;
   background: #FFFFFF;
-  box-shadow: 0 0 0 3px rgba(255, 230, 56, 0.3);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.22);
 }
 
 .sky-submit-btn {
@@ -703,12 +946,12 @@
 .sky-whatsapp {
   font-size: 12px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
+  color: #4A4468;
   margin-top: 8px;
 }
 
 .sky-whatsapp a {
-  color: #FFE638;
+  color: #201A42;
   font-weight: 800;
   text-decoration: underline;
 }
@@ -841,21 +1084,27 @@
   50%       { transform: translate(-50%, 6px); opacity: 1;    }
 }
 
-/* ==========================================================================
-   RESPONSIVE DESIGN
-   ========================================================================== */
 
-@media (max-width: 1100px) {
-  .sky-steps-grid,
-  .sky-why-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .hero-sky-zone {
-    height: 44vh;
-  }
-  .stage-cockpit-img {
-    max-width: 96vw;
-  }
+
+/* ── Headlight Beam Glow (Smooth cursor glow across windscreen) ── */
+.hero-headlight-beam {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  background: radial-gradient(
+    circle 260px at var(--headlight-x, 50%) var(--headlight-y, 50%),
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 240, 180, 0.08) 45%,
+    rgba(0, 0, 0, 0) 75%
+  );
+  transition: opacity 0.35s ease;
+  mix-blend-mode: screen;
+}
+
+.hero-headlight-beam.active {
+  opacity: 1;
 }
 
 /* ==========================================================================
@@ -866,6 +1115,17 @@
   .sky-steps-grid,
   .sky-why-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .sky-instructors-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .sky-gallery-item {
+    width: 235px;
+    padding: 7px 7px 9px 7px;
+  }
+  .gallery-card-image-wrap {
+    height: 135px;
   }
   .hero-sky-zone {
     height: 44vh;
@@ -902,114 +1162,157 @@
   }
 
   .sky-heading.sky-heading-xl {
-    font-size: clamp(32px, 8.5vw, 40px);
+    font-size: clamp(30px, 8vw, 38px);
     line-height: 1.14;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     color: #2435C2;
   }
 
   .sky-sub {
-    font-size: 15.5px;
+    font-size: 14.5px;
     font-weight: 600;
-    line-height: 1.55;
-    margin-bottom: 26px;
+    line-height: 1.5;
+    margin-bottom: 22px;
     max-width: 340px;
   }
 
   .sky-cta-row {
-    gap: 14px;
+    gap: 12px;
     width: 100%;
     justify-content: center;
     margin-bottom: 0;
   }
 
   .sky-btn-primary {
-    font-size: 16px;
-    padding: 14px 30px;
+    font-size: 15px;
+    padding: 12px 26px;
     box-shadow: 0 6px 20px rgba(49, 39, 108, 0.4);
   }
 
   .sky-btn-ghost {
-    font-size: 16px;
-    padding: 14px 26px;
+    font-size: 15px;
+    padding: 12px 22px;
   }
 
-  /* Slide 2 & 3 - Grid Cards */
+  /* Slide 2, 3, 4 - Grid Cards on Mobile */
   .sky-slide-steps,
+  .sky-slide-instructors,
   .sky-slide-why {
-    max-width: 410px;
+    max-width: 420px;
     width: 100%;
   }
 
   .sky-heading {
-    font-size: clamp(22px, 5.8vw, 27px);
-    margin-bottom: 12px;
+    font-size: clamp(20px, 5.5vw, 25px);
+    margin-bottom: 10px;
   }
 
   .sky-steps-grid,
   .sky-why-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 11px;
+    gap: 10px;
     margin-top: 8px;
     width: 100%;
   }
 
+  .sky-instructors-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .sky-instructor-card {
+    padding: 10px 8px;
+    border-radius: 14px;
+  }
+
+  .instructor-photo-wrap {
+    width: 52px;
+    height: 52px;
+  }
+
+  .instructor-name-text {
+    font-size: 11.5px;
+    margin-top: 6px;
+  }
+
+  /* Slide 5 - Gallery on Mobile */
+  .sky-gallery-item {
+    width: 195px;
+    padding: 6px 6px 8px 6px;
+    border-radius: 16px;
+  }
+
+  .gallery-card-image-wrap {
+    height: 115px;
+    border-radius: 11px;
+  }
+
+  .gallery-card-accent-bar {
+    width: 22px;
+    height: 2.5px;
+    margin: 5px auto 0 auto;
+  }
+
+  .sky-gallery-marquee-wrap {
+    padding: 6px 0 10px 0;
+  }
+
   .sky-step-card,
   .sky-why-card {
-    padding: 13px 12px;
-    border-radius: 15px;
-    min-height: 88px;
+    padding: 11px 10px;
+    border-radius: 14px;
+    min-height: 80px;
   }
 
   .sky-step-card h3,
   .sky-why-card h3 {
-    font-size: 13px;
-    line-height: 1.24;
-    margin-bottom: 3px;
+    font-size: 12px;
+    line-height: 1.22;
+    margin-bottom: 2px;
   }
 
   .sky-step-card p,
   .sky-why-card p {
-    font-size: 10.5px;
-    line-height: 1.35;
+    font-size: 10px;
+    line-height: 1.3;
   }
 
   .sky-step-num {
-    font-size: 11.5px;
-    padding: 4px 7px;
+    font-size: 11px;
+    padding: 3px 6px;
   }
 
   .sky-why-icon {
-    font-size: 15px;
-    padding: 5px 7px;
+    font-size: 14px;
+    padding: 4px 6px;
   }
 
-  /* Slide 4 - Contact Form */
+  /* Slide 6 - Contact Form */
   .sky-slide-contact {
     max-width: 370px;
   }
 
   .sky-contact-form {
-    padding: 16px 20px;
-    border-radius: 18px;
-    margin-top: 6px;
+    padding: 14px 18px;
+    border-radius: 16px;
+    margin-top: 4px;
   }
 
   .sky-form-row {
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   .sky-field input,
   .sky-field select {
-    padding: 10px 13px;
-    font-size: 13.5px;
+    padding: 9px 12px;
+    font-size: 13px;
   }
 
   .sky-submit-btn {
-    padding: 12px 20px;
-    font-size: 14.5px;
+    padding: 11px 18px;
+    font-size: 14px;
   }
 
   /* Cockpit Stage — scaled and elevated on mobile */

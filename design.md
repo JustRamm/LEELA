@@ -106,18 +106,18 @@ To build out the complete website, the following SVG assets are required:
 ### Illustration Assets by Directory
 
 #### A. Scroll-Driven Driving Journey (`public/illustrations/scroll/`)
-- **Stage 1 (Departure / Hero Start)**:
-  - `scenery-stage1-forest.svg`: Morning pine forest & highway departure.
-  - `cockpit-stage1-start.svg`: Attentive focused learner driver, neutral 10-and-2 hand placement, wheel straight, GPS route initialized.
+- **Stage 1 (Departure / Home)**:
+  - `cockpit-stage1-start.svg`: Attentive focused learner driver, neutral 10-and-2 hand placement, wheel straight.
 - **Stage 2 (Maneuvers / How It Works)**:
-  - `scenery-stage2-suburbs.svg`: Suburban neighborhood, speed limit 20 sign, mini-roundabout & zebra crossing.
-  - `cockpit-stage2-turning.svg`: Active steering wheel rotation (`-25°`), head tilted into the curve checking mirrors, GPS shows roundabout 2nd exit arrow.
-- **Stage 3 (Open Highway / Courses & Pricing)**:
-  - `scenery-stage3-paddy.svg`: Expansive terraced rice paddies, scenic countryside curve.
-  - `cockpit-stage3-cruising.svg`: Relaxed cruising posture, beaming smile, gentle wind in hair, GPS shows cruising speed `45 MPH`.
-- **Stage 4 (Arrival & Test Pass / Test Routes & Booking)**:
-  - `scenery-stage4-city.svg`: Official Driving Test Centre, green traffic lights, parallel parking bay, finish line.
-  - `cockpit-stage4-celebrate.svg`: Triumphant celebration pose, right hand giving proud thumbs-up `👍`, celebratory sparkle stars, GPS shows `TEST PASSED! ✓`.
+  - `cockpit-stage2-turning.svg`: Active steering wheel rotation (`-25°`), head tilted into the curve checking mirrors.
+- **Stage 3 (Certified Coaches / Our Instructors)**:
+  - `cockpit-stage3-instructors.svg`: Learner focused 10-and-2 grip, instructor guiding calmly with DVSA progress checklist.
+- **Stage 4 (Open Highway / Why LEELA)**:
+  - `cockpit-stage4-cruising.svg`: Relaxed highway cruising posture, beaming smile, instructor thumbs-up.
+- **Stage 5 (Maneuver Training / Gallery)**:
+  - `cockpit-stage5-gallery.svg`: Reverse bay parking maneuver, learner checking rearview mirror with 12 o'clock palm steering grip.
+- **Stage 6 (Arrival & Test Pass / Contact Us)**:
+  - `cockpit-stage6-celebrate.svg`: Triumphant celebration pose, right hand giving proud thumbs-up `👍`, celebratory sparkle stars, test passed!
 - **`hero-driver.svg`**: Standalone fallback illustration.
 
 #### B. Content Section Cards (`public/illustrations/home/`)

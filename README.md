@@ -24,10 +24,12 @@ LEELA/
 │   └── illustrations/
 │       ├── scroll/               # Dynamic scroll-driven driving journey
 │       │   ├── car-cockpit-frame.svg       # Base transparent cockpit frame
-│       │   ├── cockpit-stage1-start.svg    # Stage 1: Neutral grip, straight steering
-│       │   ├── cockpit-stage2-turning.svg  # Stage 2: Active turn steering (-25°)
-│       │   ├── cockpit-stage3-cruising.svg # Stage 3: Relaxed cruising & smiling
-│       │   ├── cockpit-stage4-celebrate.svg# Stage 4: Triumphant thumbs-up 👍
+│       │   ├── cockpit-stage1-start.svg        # Stage 1: Neutral grip, straight steering
+│       │   ├── cockpit-stage2-turning.svg      # Stage 2: Active turn steering (-25°)
+│       │   ├── cockpit-stage3-instructors.svg  # Stage 3: Mentoring pose with DVSA checklist
+│       │   ├── cockpit-stage4-cruising.svg     # Stage 4: Relaxed highway cruising & smiling
+│       │   ├── cockpit-stage5-gallery.svg      # Stage 5: Reverse bay parking & mirror check
+│       │   ├── cockpit-stage6-celebrate.svg    # Stage 6: Triumphant pass celebration 👍
 │       │   ├── scenery-stage1-forest.svg   # Stage 1: Morning forest highway
 │       │   ├── scenery-stage2-suburbs.svg  # Stage 2: Suburban roundabout & 20mph zone
 │       │   ├── scenery-stage3-paddy.svg    # Stage 3: Terraced paddy fields curve

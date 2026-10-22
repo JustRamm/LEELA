@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './styles/global.css';
 
 import Hero from './components/Hero';
@@ -7,18 +7,22 @@ import AuthModal from './components/AuthModal';
 import BookingModal from './components/BookingModal';
 import ProfileModal from './components/ProfileModal';
 import { CarIcon, CloseIcon } from './components/Icons';
+import { playStageTransition } from './utils/audio';
 
 // Each zone advances the driving stage.
 // The hero shows the correct sky-slide and cockpit for each stage.
 const SCROLL_ZONES = [
   { id: 'scene-home',         stage: 1 },
   { id: 'scene-how-it-works', stage: 2 },
-  { id: 'scene-why-leela',    stage: 3 },
-  { id: 'scene-contact',      stage: 4 },
+  { id: 'scene-instructors',  stage: 3 },
+  { id: 'scene-why-leela',    stage: 4 },
+  { id: 'scene-gallery',      stage: 5 },
+  { id: 'scene-contact',      stage: 6 },
 ];
 
 export default function App() {
   const [drivingStage, setDrivingStage] = useState(1);
+  const prevStageRef = useRef(1);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authModalMode, setAuthModalMode] = useState('signin');
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -44,14 +48,20 @@ export default function App() {
     }
   }, [toastMessage]);
 
-  // Robust, instant scroll-to-stage calculation
+  // Robust, instant scroll-to-stage calculation across all 6 journey stages
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const vh = window.innerHeight;
-      // 4 zones (100vh each)
-      const stage = Math.min(4, Math.max(1, Math.floor((scrollY + vh * 0.4) / vh) + 1));
-      setDrivingStage(stage);
+      // 6 zones (100vh each)
+      const stage = Math.min(6, Math.max(1, Math.floor((scrollY + vh * 0.4) / vh) + 1));
+      setDrivingStage((prev) => {
+        if (prev !== stage) {
+          playStageTransition();
+          return stage;
+        }
+        return prev;
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -128,7 +138,7 @@ export default function App() {
           <div key={id} id={id} className="scroll-zone" />
         ))}
         <div className="scroll-footer-spacer">
-          <Footer isVisible={drivingStage === 4} />
+          <Footer isVisible={drivingStage === 6} />
         </div>
       </div>
 

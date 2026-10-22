@@ -1,0 +1,248 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 190 1000 430" width="1000" height="430" fill="none">
+  <defs>
+    <!-- Car Frame Gradients (Identical to Stage 1, 2, 3, 4) -->
+    <linearGradient id="c5gPillar" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A58DF6"/>
+      <stop offset="50%" stop-color="#9375ED"/>
+      <stop offset="100%" stop-color="#7B56DE"/>
+    </linearGradient>
+
+    <linearGradient id="c5gRoof" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#B29CFA"/>
+      <stop offset="100%" stop-color="#8F71EC"/>
+    </linearGradient>
+
+    <linearGradient id="c5gHood" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8E6FE8"/>
+      <stop offset="40%" stop-color="#7B58DB"/>
+      <stop offset="100%" stop-color="#6741C9"/>
+    </linearGradient>
+
+    <linearGradient id="c5gDash" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4C479B"/>
+      <stop offset="40%" stop-color="#342D7C"/>
+      <stop offset="100%" stop-color="#241E5C"/>
+    </linearGradient>
+
+    <linearGradient id="c5gSeat" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7C68DA"/>
+      <stop offset="100%" stop-color="#5842B8"/>
+    </linearGradient>
+
+    <linearGradient id="c5gWindshieldSheen" x1="20%" y1="0%" x2="70%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.22"/>
+      <stop offset="30%" stop-color="#FFFFFF" stop-opacity="0.05"/>
+      <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="85%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.25"/>
+    </linearGradient>
+
+    <filter id="c5gDriverShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#1A1344" flood-opacity="0.3"/>
+    </filter>
+
+    <!-- Checkered Shirt Pattern for Indian Instructor -->
+    <pattern id="checkShirt5g" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#DC2626"/>
+      <rect x="0" y="0" width="8" height="16" fill="#1E3A8A" opacity="0.6"/>
+      <rect x="0" y="0" width="16" height="8" fill="#1E3A8A" opacity="0.6"/>
+      <line x1="8" y1="0" x2="8" y2="16" stroke="#FFFFFF" stroke-width="1.6" opacity="0.85"/>
+      <line x1="0" y1="8" x2="16" y2="8" stroke="#FFFFFF" stroke-width="1.6" opacity="0.85"/>
+    </pattern>
+  </defs>
+
+  <!-- 1. CAR SEATS AND HEADRESTS (Identical Coordinates) -->
+  <g fill="url(#c5gSeat)">
+    <rect x="365" y="240" width="85" height="55" rx="16"/>
+    <rect x="395" y="290" width="25" height="20" fill="#4B399E"/>
+    <path d="M345 305 C345 295 470 295 470 305 L475 440 L340 440 Z"/>
+    <rect x="560" y="240" width="130" height="60" rx="18"/>
+    <rect x="612" y="295" width="26" height="20" fill="#4B399E"/>
+    <path d="M530 310 C530 298 700 298 700 310 L705 440 L525 440 Z"/>
+  </g>
+
+  <!-- 2. THE DRIVER (Learner performing reverse bay parking & mirror check) -->
+  <g id="driver-cockpit-girl" filter="url(#c5gDriverShadow)">
+    <!-- Back Hair -->
+    <path d="M275 380 C265 310 295 240 370 230 C445 220 465 295 450 370 C440 410 420 440 405 440 C370 440 360 410 330 430 C300 450 280 430 275 380 Z" fill="#472621"/>
+
+    <!-- Neck and Ears -->
+    <rect x="355" y="340" width="35" height="45" rx="10" fill="#F8B896"/>
+    <ellipse cx="338" cy="305" rx="7" ry="11" fill="#F8B896"/>
+
+    <!-- Head and Face (Tilted slightly up and right to check rearview mirror) -->
+    <path d="M342 283 C338 243 368 233 392 236 C422 240 432 268 427 303 C422 343 392 353 367 350 C347 348 344 313 342 283 Z" fill="#FFCBB0"/>
+
+    <!-- Blush -->
+    <ellipse cx="357" cy="316" rx="8" ry="4" fill="#F79679" opacity="0.6"/>
+    <ellipse cx="407" cy="314" rx="8" ry="4" fill="#F79679" opacity="0.5"/>
+
+    <!-- Eyes (Glancing UP and to the right toward the center mirror) -->
+    <ellipse cx="375" cy="288" rx="4.5" ry="6.5" fill="#201515"/>
+    <circle cx="377" cy="285" r="1.8" fill="#FFFFFF"/>
+    
+    <ellipse cx="409" cy="286" rx="4.5" ry="6.5" fill="#201515"/>
+    <circle cx="411" cy="283" r="1.8" fill="#FFFFFF"/>
+
+    <!-- Eyebrows (Focused, confident concentration) -->
+    <path d="M368 276 Q 376 270 384 274" stroke="#472621" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+    <path d="M402 274 Q 410 269 418 273" stroke="#472621" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+    <!-- Nose and Smile -->
+    <path d="M395 294 L 398 306 L 393 308" stroke="#E5997B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M385 318 Q 395 327 404 318" stroke="#8A3D28" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+    <!-- Front Hair Bangs and Waves -->
+    <path d="M342 265 C355 240 405 242 425 258 C410 262 385 260 365 285 C355 298 348 315 346 335 C336 305 338 278 342 265 Z" fill="#58312B"/>
+    <path d="M422 262 C435 285 435 320 428 350 C418 335 418 300 422 262 Z" fill="#58312B"/>
+
+    <!-- Yellow Top (Shirt) -->
+    <path d="M310 395 C335 375 415 375 440 395 L 455 450 L 295 450 Z" fill="#FFDE17"/>
+    <path d="M352 380 Q 375 395 398 380" stroke="#E5C200" stroke-width="3" fill="none"/>
+
+    <!-- Seatbelt -->
+    <polygon points="268,360 292,350 425,480 395,490" fill="#252445"/>
+    <line x1="280" y1="355" x2="410" y2="485" stroke="#3A386D" stroke-width="2"/>
+
+    <!-- Dynamic Maneuver Arm: Left hand gripping TOP of wheel (12 o'clock) for reverse steering control -->
+    <path d="M305 405 C310 390 325 375 350 360 C362 370 348 395 330 415 Z" fill="#FFDE17"/>
+    <path d="M348 355 C355 350 375 355 378 368 C375 382 355 388 342 380 C336 372 342 360 348 355 Z" fill="#F8B896"/>
+    <line x1="354" y1="360" x2="368" y2="364" stroke="#E29775" stroke-width="2"/>
+    <line x1="355" y1="366" x2="370" y2="370" stroke="#E29775" stroke-width="2"/>
+
+    <!-- Right Arm: Supporting posture on armrest / console during maneuver -->
+    <path d="M425 415 C442 425 458 440 464 460 C454 470 436 465 422 445 Z" fill="#FFDE17"/>
+    <path d="M432 435 C427 445 434 468 447 472 C467 476 484 460 482 445 C477 430 452 428 432 435 Z" fill="#F8B896"/>
+    <path d="M440 448 C446 442 458 446 462 456" stroke="#E29775" stroke-width="2" fill="none"/>
+  </g>
+
+  <!-- 3. STEERING WHEEL (Slight tilt for bay parking maneuver) -->
+  <g id="cockpit-steering-wheel" transform="rotate(8 365 460)">
+    <circle cx="365" cy="460" r="105" stroke="#3A3E94" stroke-width="24" fill="none"/>
+    <circle cx="365" cy="460" r="105" stroke="#4F54BD" stroke-width="6" fill="none" opacity="0.6"/>
+    
+    <circle cx="365" cy="460" r="32" fill="#2E317A"/>
+    <circle cx="365" cy="460" r="28" fill="#3D429F"/>
+    
+    <path d="M272 478 L 335 465" stroke="#3A3E94" stroke-width="16" stroke-linecap="round"/>
+    <path d="M275 478 L 335 465" stroke="#FFDE17" stroke-width="5" stroke-linecap="round"/>
+    
+    <path d="M458 478 L 395 465" stroke="#3A3E94" stroke-width="16" stroke-linecap="round"/>
+    <path d="M455 478 L 395 465" stroke="#FFDE17" stroke-width="5" stroke-linecap="round"/>
+
+    <path d="M365 492 L 365 565" stroke="#3A3E94" stroke-width="18" stroke-linecap="round"/>
+  </g>
+
+  <!-- 4. DASHBOARD AND CONSOLE (Identical) -->
+  <g id="cockpit-dashboard">
+    <path d="M80 440 L 920 440 L 960 495 L 40 495 Z" fill="url(#c5gDash)"/>
+    <line x1="80" y1="440" x2="920" y2="440" stroke="#635DB8" stroke-width="3"/>
+    <ellipse cx="365" cy="445" rx="80" ry="14" fill="#6962D4" opacity="0.4"/>
+  </g>
+
+  <!-- 5. THE INSTRUCTOR (Indian male in 40s in checkered shirt, observing mirror check with approval) -->
+  <g id="instructor-male" filter="url(#c5gDriverShadow)">
+    <!-- Back Hair & Silhouette -->
+    <path d="M580 252 C580 220 608 210 635 212 C665 210 690 225 690 255 C690 280 685 305 675 320 L675 355 L585 355 L585 320 C578 305 580 275 580 252 Z" fill="#1A181C"/>
+    
+    <!-- Neck -->
+    <rect x="608" y="325" width="46" height="42" rx="10" fill="#B3734A"/>
+    <path d="M608 340 Q 631 352 654 340 L 654 365 L 608 365 Z" fill="#995E39" opacity="0.4"/>
+
+    <!-- Head & Face -->
+    <path d="M592 270 C590 230 615 225 632 225 C655 225 675 235 675 275 C675 320 660 342 633 342 C608 342 594 315 592 270 Z" fill="#C5855A"/>
+
+    <!-- Ears -->
+    <ellipse cx="589" cy="285" rx="8" ry="14" fill="#B3734A"/>
+    <ellipse cx="590" cy="285" rx="4" ry="8" fill="#995E39" opacity="0.6"/>
+    <ellipse cx="674" cy="285" rx="7" ry="13" fill="#B3734A"/>
+
+    <!-- Hair -->
+    <path d="M584 252 C585 225 612 210 635 210 C662 210 684 225 684 250 C680 255 670 242 655 240 C635 238 610 248 584 252 Z" fill="#1F1D22"/>
+    <path d="M584 248 C584 265 588 275 592 278 L592 258 Z" fill="#1F1D22"/>
+    <path d="M587 260 Q 590 270 592 275" stroke="#9E9E9E" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
+    <path d="M674 260 Q 672 270 670 275" stroke="#9E9E9E" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
+
+    <!-- Eyebrows (Approving mentor) -->
+    <path d="M602 268 Q 614 262 624 267" stroke="#1F1D22" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M640 267 Q 650 262 662 268" stroke="#1F1D22" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+    <!-- Eyes (Observing student's mirror checks approvingly) -->
+    <ellipse cx="614" cy="280" rx="5" ry="6" fill="#1B130E"/>
+    <circle cx="612" cy="278" r="1.8" fill="#FFFFFF"/>
+    <ellipse cx="650" cy="280" rx="5" ry="6" fill="#1B130E"/>
+    <circle cx="648" cy="278" r="1.8" fill="#FFFFFF"/>
+
+    <!-- Nose & Mustache -->
+    <path d="M632 275 L 634 298 L 626 302" stroke="#995E39" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M612 312 C622 308 630 311 632 313 C634 311 642 308 652 312 C656 314 650 322 632 320 C614 322 608 314 612 312 Z" fill="#1F1D22"/>
+
+    <!-- Pleased smile (Good mirror check!) -->
+    <path d="M622 325 Q 632 333 642 325" stroke="#7A3F1F" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+    <!-- Body: Checkered Shirt -->
+    <g id="instructor-shirt">
+      <path d="M555 365 C580 350 680 350 710 365 L 725 450 L 535 450 Z" fill="url(#checkShirt5g)"/>
+      
+      <!-- Collar -->
+      <polygon points="610,360 632,385 620,365" fill="#DC2626"/>
+      <polygon points="610,360 632,385 620,365" fill="url(#checkShirt5g)"/>
+      <polygon points="654,360 632,385 644,365" fill="#DC2626"/>
+      <polygon points="654,360 632,385 644,365" fill="url(#checkShirt5g)"/>
+      <path d="M608 358 L 632 385 L 656 358" stroke="#1E3A8A" stroke-width="2" fill="none"/>
+
+      <!-- Placket & Buttons -->
+      <line x1="632" y1="385" x2="632" y2="450" stroke="#B91C1C" stroke-width="8"/>
+      <circle cx="632" cy="398" r="2.5" fill="#FFFFFF"/>
+      <circle cx="632" cy="418" r="2.5" fill="#FFFFFF"/>
+      <circle cx="632" cy="438" r="2.5" fill="#FFFFFF"/>
+
+      <!-- Left Arm & Hand (Reassuring "steady speed, you have plenty of room" gesture) -->
+      <path d="M555 375 C535 395 515 415 500 440 C510 450 530 445 545 428 Z" fill="url(#checkShirt5g)"/>
+      <path d="M500 430 C492 435 488 448 498 458 C512 462 530 452 535 440 C535 428 515 422 500 430 Z" fill="#C5855A"/>
+      <line x1="492" y1="442" x2="510" y2="445" stroke="#B3734A" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="492" y1="448" x2="512" y2="450" stroke="#B3734A" stroke-width="2.5" stroke-linecap="round"/>
+
+      <!-- Right Arm (Resting safely against seat back) -->
+      <path d="M700 375 C715 390 725 410 730 435 L 695 440 Z" fill="url(#checkShirt5g)"/>
+      <ellipse cx="718" cy="438" rx="10" ry="7" fill="#C5855A"/>
+    </g>
+
+    <!-- Seatbelt across Instructor -->
+    <polygon points="685,355 708,348 575,480 550,490" fill="#252445"/>
+    <line x1="695" y1="352" x2="565" y2="485" stroke="#3A386D" stroke-width="2"/>
+  </g>
+
+  <!-- 6. WINDSHIELD FRAME & CAR CHASSIS (100% IDENTICAL FRAME TO ALL STAGES) -->
+  <g id="cockpit-outer-frame">
+    <!-- Subtle Windshield Glass Reflections -->
+    <polygon points="120,225 880,225 940,440 60,440" fill="url(#c5gWindshieldSheen)"/>
+
+    <!-- Center Rearview Mirror (Highlighted softly for mirror check) -->
+    <rect x="470" y="222" width="60" height="22" rx="7" fill="#4B399E"/>
+    <rect x="473" y="224" width="54" height="18" rx="5" fill="#38A169" opacity="0.3"/>
+    <rect x="495" y="208" width="10" height="15" fill="#3A2D7C"/>
+
+    <!-- Car Front Lower Hood Panel -->
+    <path d="M40 480 C180 470 820 470 960 480 L 1000 620 L 0 620 Z" fill="url(#c5gHood)"/>
+    <path d="M80 488 C240 480 760 480 920 488 L 945 540 C800 535 200 535 55 540 Z" fill="#9377EE" opacity="0.5"/>
+
+    <!-- Classic Driving School "L" Plate Sticker on Hood -->
+    <g id="learner-l-sticker">
+      <rect x="477" y="490" width="46" height="46" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+      <rect x="479" y="492" width="42" height="42" rx="6" fill="#FFFFFF"/>
+      <rect x="481" y="494" width="38" height="38" rx="5" fill="#FFFFFF" stroke="#DC2626" stroke-width="0.8" stroke-opacity="0.25"/>
+      <path d="M492 500 L 499 500 L 499 524 L 514 524 L 514 530 L 492 530 Z" fill="#DC2626"/>
+    </g>
+
+    <!-- Left and Right A-Pillars and Top Roof Frame -->
+    <path d="M0 620 L 60 490 L 175 235 C185 215 215 200 250 200 L 750 200 C785 200 815 215 825 235 L 940 490 L 1000 620 L 940 620 L 870 450 L 795 240 C790 230 775 225 750 225 L 250 225 C225 225 210 230 205 240 L 130 450 L 60 620 Z" fill="url(#c5gPillar)"/>
+
+    <!-- Roof Visor Line -->
+    <path d="M220 220 L 780 220 L 760 205 L 240 205 Z" fill="url(#c5gRoof)"/>
+
+    <!-- Quarter-Glass Window Divider Bars -->
+    <polygon points="120,440 135,440 245,225 235,225" fill="#7552D8"/>
+    <polygon points="880,440 865,440 755,225 765,225" fill="#7552D8"/>
+  </g>
+</svg>
