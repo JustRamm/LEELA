@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
+import { 
+  GraduationCapIcon, 
+  ShieldCheckIcon, 
+  CalendarIcon, 
+  CheckBadgeIcon, 
+  ChevronDownIcon 
+} from './Icons';
 import '../styles/Hero.css';
 
 // ─── Inline contact form (lives in the yellow sky area on stage 4) ───────────
@@ -13,12 +20,12 @@ function ContactSlide({ onShowToast }) {
     const phoneStr = form.phone.trim();
 
     // Pre-drafted WhatsApp message
-    const message = `Hi LEELA Driving School! 👋\n\nI would like to request my first driving lesson.\n\n👤 Name: ${nameStr}${phoneStr ? `\n📞 Phone: ${phoneStr}` : ''}\n\nPlease let me know your available slots and lesson packages. Thank you!`;
+    const message = `Hi LEELA Driving School,\n\nI would like to request my first driving lesson.\n\nName: ${nameStr}${phoneStr ? `\nPhone: ${phoneStr}` : ''}\n\nPlease let me know your available slots and lesson packages. Thank you!`;
 
-    const waUrl = `https://wa.me/8129005453?text=${encodeURIComponent(message)}`;
+    const waUrl = `https://wa.me/918129005452?text=${encodeURIComponent(message)}`;
 
     if (onShowToast) {
-      onShowToast(`Routing to WhatsApp for ${nameStr}... 💬`);
+      onShowToast(`Routing to WhatsApp for ${nameStr}...`);
     }
 
     // Direct routing to WhatsApp
@@ -62,10 +69,10 @@ function ContactSlide({ onShowToast }) {
 
 // ─── Stage progress dots ──────────────────────────────────────────────────────
 const STAGES = [
-  { stage: 1, emoji: '🌲', label: 'Home'         },
-  { stage: 2, emoji: '🔄', label: 'How it works' },
-  { stage: 3, emoji: '🛡️', label: 'Why LEELA'   },
-  { stage: 4, emoji: '👍', label: 'Contact'      },
+  { stage: 1, label: 'Home'         },
+  { stage: 2, label: 'How it works' },
+  { stage: 3, label: 'Why LEELA'   },
+  { stage: 4, label: 'Contact'      },
 ];
 
 // ─── Subtle Scenery Landscape Backdrop (Embedded Vector Pattern) ─────────────
@@ -280,7 +287,7 @@ export default function Hero({
                 { num: '01', title: 'Theory & Cockpit Setup',    desc: 'Controls, mirrors, clutch bite-point in a stress-free zone.' },
                 { num: '02', title: 'Maneuvers & Road Skills',   desc: 'Roundabouts, parallel parking, 3-point turns with patience.' },
                 { num: '03', title: 'Test Route Simulation',     desc: 'Practice real examiner routes until you drive independently.' },
-                { num: '04', title: 'Test Day & Celebration',    desc: "Use your instructor's car, pass first time, celebrate! 🎉"  },
+                { num: '04', title: 'Test Day & Celebration',    desc: "Use your instructor's car, pass first time, celebrate!"  },
               ].map((step) => (
                 <div key={step.num} className="sky-step-card">
                   <span className="sky-step-num">{step.num}</span>
@@ -301,13 +308,15 @@ export default function Hero({
             <h2 className="sky-heading">Why Students Love LEELA</h2>
             <div className="sky-why-grid">
               {[
-                { icon: '🎓', title: 'DVSA Certified Instructors',  desc: 'Fully background-checked, specially trained for nervous learners.' },
-                { icon: '🛡️', title: 'Dual-Control Safety Fleet',   desc: 'Instructor can brake at any time. 5-star Euro NCAP vehicles.'     },
-                { icon: '📅', title: 'Flexible Scheduling',         desc: 'Morning, evening &amp; weekend slots. Doorstep pickup included.'  },
-                { icon: '✅', title: '1st Pass Guarantee',           desc: 'Free re-test mock &amp; car if you don\'t pass on first attempt.' },
+                { Icon: GraduationCapIcon, title: 'DVSA Certified Instructors',  desc: 'Fully background-checked, specially trained for nervous learners.' },
+                { Icon: ShieldCheckIcon,   title: 'Dual-Control Safety Fleet',   desc: 'Instructor can brake at any time. 5-star Euro NCAP vehicles.'     },
+                { Icon: CalendarIcon,      title: 'Flexible Scheduling',         desc: 'Morning, evening &amp; weekend slots. Doorstep pickup included.'  },
+                { Icon: CheckBadgeIcon,    title: '1st Pass Guarantee',           desc: 'Free re-test mock &amp; car if you don\'t pass on first attempt.' },
               ].map((f) => (
                 <div key={f.title} className="sky-why-card">
-                  <span className="sky-why-icon">{f.icon}</span>
+                  <span className="sky-why-icon">
+                    <f.Icon size={18} color="#FFE638" />
+                  </span>
                   <div>
                     <h3>{f.title}</h3>
                     <p dangerouslySetInnerHTML={{ __html: f.desc }} />
@@ -356,7 +365,9 @@ export default function Hero({
             style={{ cursor: 'pointer' }}
           >
             <span>Scroll to continue</span>
-            <div className="scroll-arrow">↓</div>
+            <div className="scroll-arrow">
+              <ChevronDownIcon size={14} color="#201A42" />
+            </div>
           </div>
         )}
       </div>

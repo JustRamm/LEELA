@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import AuthModal from './components/AuthModal';
 import BookingModal from './components/BookingModal';
 import ProfileModal from './components/ProfileModal';
+import { CarIcon, CloseIcon } from './components/Icons';
 
 // Each zone advances the driving stage.
 // The hero shows the correct sky-slide and cockpit for each stage.
@@ -156,9 +157,11 @@ export default function App() {
       {/* Toast */}
       {toastMessage && (
         <div className="toast-notification">
-          <span>🚗</span>
+          <CarIcon size={18} color="#FFE638" />
           <span>{toastMessage}</span>
-          <button onClick={() => setToastMessage(null)}>✕</button>
+          <button onClick={() => setToastMessage(null)} aria-label="Dismiss toast">
+            <CloseIcon size={13} />
+          </button>
         </div>
       )}
     </div>

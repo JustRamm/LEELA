@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { UserIcon } from './Icons';
 import '../styles/Navbar.css';
 
 export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpenProfile }) {
@@ -32,7 +33,7 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpen
               title={`${currentUser.name} — My Profile`}
             >
               <span className="profile-icon-avatar">
-                {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : '👤'}
+                {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : <UserIcon size={14} color="#201A42" />}
               </span>
               <span className="profile-icon-label">
                 {currentUser.name ? currentUser.name.split(' ')[0] : 'Profile'}
@@ -88,7 +89,7 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpen
                   onClick={() => { setMobileOpen(false); onOpenProfile(); }}
                 >
                   <span className="profile-icon-avatar">
-                    {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : '👤'}
+                    {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : <UserIcon size={14} color="#201A42" />}
                   </span>
                   <span>My Profile ({currentUser.name ? currentUser.name.split(' ')[0] : 'Account'})</span>
                 </button>

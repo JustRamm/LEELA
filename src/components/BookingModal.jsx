@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { CarIcon, CloseIcon, ArrowRightIcon } from './Icons';
 import '../styles/BookingModal.css';
 
 export default function BookingModal({ isOpen, initialPackage, onClose, onSuccess }) {
@@ -51,12 +52,13 @@ export default function BookingModal({ isOpen, initialPackage, onClose, onSucces
             onClick={onClose}
             aria-label="Close"
           >
-            ✕
+            <CloseIcon size={14} />
           </button>
         </div>
 
         <div className="package-highlight-badge">
-          <span>🚗 Selected Package: <strong>{selectedPackage}</strong></span>
+          <CarIcon size={15} color="#7A5800" />
+          <span>Selected Package: <strong>{selectedPackage}</strong></span>
         </div>
 
         <form className="booking-form-fields" onSubmit={handleSubmit}>
@@ -154,8 +156,13 @@ export default function BookingModal({ isOpen, initialPackage, onClose, onSucces
             </div>
           </div>
 
-          <button type="submit" className="btn-booking-confirm">
-            Confirm & Reserve Lesson ➔
+          <button 
+            type="submit" 
+            className="btn-booking-confirm"
+            style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+          >
+            <span>Confirm & Reserve Lesson</span>
+            <ArrowRightIcon size={16} />
           </button>
         </form>
       </div>

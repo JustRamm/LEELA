@@ -1,4 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { 
+  GraduationCapIcon, 
+  IdCardIcon, 
+  GearIcon, 
+  ZapIcon, 
+  CarIcon, 
+  CheckIcon, 
+  RefreshCwIcon, 
+  ClockIcon, 
+  CalendarIcon, 
+  EditIcon 
+} from './Icons';
 import '../styles/ProfileModal.css';
 
 export default function ProfileModal({ 
@@ -101,12 +113,21 @@ export default function ProfileModal({
           <div className="profile-user-info">
             <div className="profile-name-row">
               <h2>{user.name}</h2>
-              <span className="profile-status-pill">🎓 Active Learner</span>
+              <span className="profile-status-pill">
+                <GraduationCapIcon size={13} color="#201A42" style={{ marginRight: 5, verticalAlign: -2 }} />
+                Active Learner
+              </span>
             </div>
             <p className="profile-email-text">{user.email}</p>
             <div className="profile-meta-tags">
-              <span className="meta-tag-item">🪪 ID: {user.licenceNumber || 'LEE-84920'}</span>
-              <span className="meta-tag-item">⚙️ {user.transmission === 'automatic' ? 'Automatic' : 'Manual'}</span>
+              <span className="meta-tag-item">
+                <IdCardIcon size={13} color="#475569" style={{ marginRight: 5, verticalAlign: -2 }} />
+                ID: {user.licenceNumber || 'LEE-84920'}
+              </span>
+              <span className="meta-tag-item">
+                <GearIcon size={13} color="#475569" style={{ marginRight: 5, verticalAlign: -2 }} />
+                {user.transmission === 'automatic' ? 'Automatic' : 'Manual'}
+              </span>
             </div>
           </div>
         </div>
@@ -139,15 +160,19 @@ export default function ProfileModal({
                   type="button"
                   className={`btn-trans-choice ${editData.transmission === 'manual' ? 'active' : ''}`}
                   onClick={() => setEditData({ ...editData, transmission: 'manual' })}
+                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
                 >
-                  ⚙️ Manual
+                  <GearIcon size={14} />
+                  <span>Manual</span>
                 </button>
                 <button
                   type="button"
                   className={`btn-trans-choice ${editData.transmission === 'automatic' ? 'active' : ''}`}
                   onClick={() => setEditData({ ...editData, transmission: 'automatic' })}
+                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
                 >
-                  ⚡ Automatic
+                  <ZapIcon size={14} />
+                  <span>Automatic</span>
                 </button>
               </div>
             </div>
@@ -171,7 +196,9 @@ export default function ProfileModal({
 
             {/* Next Scheduled Lesson Card */}
             <div className="profile-lesson-card">
-              <div className="lesson-card-icon">🚗</div>
+              <div className="lesson-card-icon">
+                <CarIcon size={22} color="#7C3AED" />
+              </div>
               <div className="lesson-card-details">
                 <h4>Next Scheduled Lesson</h4>
                 <p className="lesson-time">{user.nextLesson || 'Saturday at 10:30 AM (2 hours)'}</p>
@@ -193,11 +220,26 @@ export default function ProfileModal({
             <div className="profile-skills-section">
               <h5>Curriculum Milestones</h5>
               <div className="skills-badge-grid">
-                <span className="skill-badge passed">✓ Cockpit Drill</span>
-                <span className="skill-badge passed">✓ Clutch Control</span>
-                <span className="skill-badge passed">✓ Roundabouts</span>
-                <span className="skill-badge current">🔄 Parallel Parking</span>
-                <span className="skill-badge pending">⏳ Mock Driving Test</span>
+                <span className="skill-badge passed">
+                  <CheckIcon size={12} color="#065F46" style={{ marginRight: 5 }} />
+                  Cockpit Drill
+                </span>
+                <span className="skill-badge passed">
+                  <CheckIcon size={12} color="#065F46" style={{ marginRight: 5 }} />
+                  Clutch Control
+                </span>
+                <span className="skill-badge passed">
+                  <CheckIcon size={12} color="#065F46" style={{ marginRight: 5 }} />
+                  Roundabouts
+                </span>
+                <span className="skill-badge current">
+                  <RefreshCwIcon size={12} color="#92400E" style={{ marginRight: 5 }} />
+                  Parallel Parking
+                </span>
+                <span className="skill-badge pending">
+                  <ClockIcon size={12} color="#94A3B8" style={{ marginRight: 5 }} />
+                  Mock Driving Test
+                </span>
               </div>
             </div>
 
@@ -210,15 +252,19 @@ export default function ProfileModal({
                   onClose();
                   onOpenBooking();
                 }}
+                style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
               >
-                📅 Book Next Lesson
+                <CalendarIcon size={15} color="#201A42" />
+                <span>Book Next Lesson</span>
               </button>
               <button 
                 type="button" 
                 className="btn-profile-edit"
                 onClick={() => setIsEditing(true)}
+                style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
               >
-                ✏️ Edit Profile
+                <EditIcon size={14} color="#475569" />
+                <span>Edit Profile</span>
               </button>
               <button 
                 type="button" 

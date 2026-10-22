@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AlertTriangleIcon, EyeIcon, EyeOffIcon } from './Icons';
 import '../styles/AuthModal.css';
 
 export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onSuccess }) {
@@ -115,7 +116,7 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
 
         {passwordError && (
           <div className="auth-error-message">
-            <span>⚠️</span>
+            <AlertTriangleIcon size={16} color="#DC2626" />
             <span>{passwordError}</span>
           </div>
         )}
@@ -179,7 +180,7 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label="Toggle password visibility"
               >
-                {showPassword ? '🙈' : '👁️'}
+                {showPassword ? <EyeOffIcon size={16} color="#64748B" /> : <EyeIcon size={16} color="#64748B" />}
               </button>
             </div>
           </div>
@@ -205,7 +206,7 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   aria-label="Toggle confirm password visibility"
                 >
-                  {showConfirmPassword ? '🙈' : '👁️'}
+                  {showConfirmPassword ? <EyeOffIcon size={16} color="#64748B" /> : <EyeIcon size={16} color="#64748B" />}
                 </button>
               </div>
             </div>
