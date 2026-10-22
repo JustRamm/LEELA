@@ -4,13 +4,25 @@ import '../styles/Hero.css';
 
 // ─── Inline contact form (lives in the yellow sky area on stage 4) ───────────
 function ContactSlide({ onShowToast }) {
-  const [form, setForm] = useState({ name: '', phone: '', transmission: 'manual' });
+  const [form, setForm] = useState({ name: '', phone: '' });
   const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (onShowToast) onShowToast(`Inquiry sent, ${form.name}! We'll WhatsApp you shortly. 👍`);
-    setForm({ name: '', phone: '', transmission: 'manual' });
+    const nameStr = form.name.trim() || 'Learner';
+    const phoneStr = form.phone.trim();
+
+    // Pre-drafted WhatsApp message
+    const message = `Hi LEELA Driving School! 👋\n\nI would like to request my first driving lesson.\n\n👤 Name: ${nameStr}${phoneStr ? `\n📞 Phone: ${phoneStr}` : ''}\n\nPlease let me know your available slots and lesson packages. Thank you!`;
+
+    const waUrl = `https://wa.me/918129005452?text=${encodeURIComponent(message)}`;
+
+    if (onShowToast) {
+      onShowToast(`Routing to WhatsApp for ${nameStr}... 💬`);
+    }
+
+    // Direct routing to WhatsApp
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -23,26 +35,26 @@ function ContactSlide({ onShowToast }) {
         <div className="sky-form-row">
           <div className="sky-field">
             <label>Your Name</label>
-            <input type="text" required placeholder="Alex Morgan"
-              value={form.name} onChange={(e) => set('name', e.target.value)} />
+            <input 
+              type="text" 
+              required 
+              placeholder="Alex Morgan"
+              value={form.name} 
+              onChange={(e) => set('name', e.target.value)} 
+            />
           </div>
           <div className="sky-field">
             <label>Phone / WhatsApp</label>
-            <input type="tel" required placeholder="+44 7123 456789"
-              value={form.phone} onChange={(e) => set('phone', e.target.value)} />
-          </div>
-          <div className="sky-field">
-            <label>Transmission</label>
-            <select value={form.transmission} onChange={(e) => set('transmission', e.target.value)}>
-              <option value="manual">Manual</option>
-              <option value="automatic">Automatic</option>
-            </select>
+            <input 
+              type="tel" 
+              required 
+              placeholder="+91 81290 05452"
+              value={form.phone} 
+              onChange={(e) => set('phone', e.target.value)} 
+            />
           </div>
         </div>
         <button type="submit" className="sky-submit-btn">Request My First Lesson →</button>
-        <p className="sky-whatsapp">
-          Or message us directly on <a href="https://wa.me/" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-        </p>
       </form>
     </div>
   );
