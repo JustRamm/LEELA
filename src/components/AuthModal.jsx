@@ -4,16 +4,20 @@ import '../styles/AuthModal.css';
 export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onSuccess }) {
   const [mode, setMode] = useState(initialMode);
   const [showPassword, setShowPassword] = useState(false);
-  const [transmission, setTransmission] = useState('manual');
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     password: '',
   });
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   useEffect(() => {
     setMode(initialMode);
+    setPasswordError('');
+    setConfirmPassword('');
   }, [initialMode, isOpen]);
 
   useEffect(() => {
@@ -30,12 +34,26 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // In signup mode, verify that password and confirm password match
+    if (mode === 'signup') {
+      if (formData.password !== confirmPassword) {
+        setPasswordError('Passwords do not match. Please check and try again.');
+        return;
+      }
+      if (formData.password.length < 6) {
+        setPasswordError('Password should be at least 6 characters.');
+        return;
+      }
+    }
+
+    setPasswordError('');
     const actionText = mode === 'signin' ? 'Welcome back to LEELA!' : 'Account created! Welcome to LEELA Driving School.';
     const user = {
       name: formData.name || (formData.email ? formData.email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Alex Morgan'),
       email: formData.email || 'alex@example.com',
       phone: formData.phone || '+44 7123 456789',
-      transmission: transmission || 'manual',
+      transmission: 'manual',
       licenceNumber: 'LEE-84920',
       lessonsCompleted: 6,
       totalLessons: 20,
@@ -95,6 +113,13 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
           <p>{mode === 'signin' ? 'Sign in to track your driving progress & lessons' : 'Start your driving journey with top-rated instructors'}</p>
         </div>
 
+        {passwordError && (
+          <div className="auth-error-message">
+            <span>⚠️</span>
+            <span>{passwordError}</span>
+          </div>
+        )}
+
         <form className="auth-form-fields" onSubmit={handleSubmit}>
           {mode === 'signup' && (
             <div className="auth-form-group">
@@ -122,28 +147,6 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
             />
           </div>
 
-          {mode === 'signup' && (
-            <div className="auth-form-group">
-              <label>Preferred Transmission</label>
-              <div className="transmission-auth-row">
-                <button
-                  type="button"
-                  className={`btn-trans-auth ${transmission === 'manual' ? 'active' : ''}`}
-                  onClick={() => setTransmission('manual')}
-                >
-                  ⚙️ Manual
-                </button>
-                <button
-                  type="button"
-                  className={`btn-trans-auth ${transmission === 'automatic' ? 'active' : ''}`}
-                  onClick={() => setTransmission('automatic')}
-                >
-                  ⚡ Automatic
-                </button>
-              </div>
-            </div>
-          )}
-
           <div className="auth-form-group">
             <div className="label-with-forgot">
               <label htmlFor="auth-pass">Password</label>
@@ -165,7 +168,10 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
                 placeholder="••••••••"
                 required
                 value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                onChange={(e) => {
+                  setFormData({ ...formData, password: e.target.value });
+                  if (passwordError) setPasswordError('');
+                }}
               />
               <button
                 type="button"
@@ -178,6 +184,33 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
             </div>
           </div>
 
+          {mode === 'signup' && (
+            <div className="auth-form-group">
+              <label htmlFor="auth-confirm-pass">Confirm Password</label>
+              <div className="password-wrap-relative">
+                <input
+                  id="auth-confirm-pass"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  placeholder="••••••••"
+                  required
+                  value={confirmPassword}
+                  onChange={(e) => {
+                    setConfirmPassword(e.target.value);
+                    if (passwordError) setPasswordError('');
+                  }}
+                />
+                <button
+                  type="button"
+                  className="btn-eye-toggle"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  aria-label="Toggle confirm password visibility"
+                >
+                  {showConfirmPassword ? '🙈' : '👁️'}
+                </button>
+              </div>
+            </div>
+          )}
+
           <button type="submit" className="btn-auth-primary-submit">
             {mode === 'signin' ? 'Sign In' : 'Create Account'}
           </button>
@@ -188,7 +221,10 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
           <button
             type="button"
             className="btn-auth-toggle-mode"
-            onClick={() => setMode(mode === 'signin' ? 'signup' : 'signin')}
+            onClick={() => {
+              setMode(mode === 'signin' ? 'signup' : 'signin');
+              setPasswordError('');
+            }}
           >
             {mode === 'signin' ? 'Sign Up' : 'Sign In'}
           </button>

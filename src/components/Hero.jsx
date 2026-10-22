@@ -15,7 +15,7 @@ function ContactSlide({ onShowToast }) {
     // Pre-drafted WhatsApp message
     const message = `Hi LEELA Driving School! 👋\n\nI would like to request my first driving lesson.\n\n👤 Name: ${nameStr}${phoneStr ? `\n📞 Phone: ${phoneStr}` : ''}\n\nPlease let me know your available slots and lesson packages. Thank you!`;
 
-    const waUrl = `https://wa.me/918129005452?text=${encodeURIComponent(message)}`;
+    const waUrl = `https://wa.me/8129005453?text=${encodeURIComponent(message)}`;
 
     if (onShowToast) {
       onShowToast(`Routing to WhatsApp for ${nameStr}... 💬`);
@@ -227,7 +227,6 @@ export default function Hero({
   drivingStage, 
   onOpenSignIn, 
   onOpenSignUp, 
-  onOpenBooking,
   onShowToast, 
   onSelectStage,
   currentUser,
@@ -261,20 +260,12 @@ export default function Hero({
               Dual-control vehicles &amp; 98.4% first-time pass guarantee.
             </p>
             <div className="sky-cta-row">
-              <button 
-                type="button" 
-                className="sky-btn-primary" 
-                onClick={onOpenBooking}
-              >
-                Book a Lesson
-              </button>
-              <button 
-                type="button" 
-                className="sky-btn-ghost" 
-                onClick={currentUser ? onOpenProfile : onOpenSignIn}
-              >
-                {currentUser ? 'My Profile' : 'Sign In'}
-              </button>
+              <button className="sky-btn-primary" onClick={onOpenSignUp}>Book a Lesson</button>
+              {currentUser ? (
+                <button className="sky-btn-ghost" onClick={onOpenProfile}>My Profile</button>
+              ) : (
+                <button className="sky-btn-ghost" onClick={onOpenSignIn}>Sign In</button>
+              )}
             </div>
           </div>
         </div>
