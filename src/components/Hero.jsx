@@ -11,16 +11,16 @@ import '../styles/Hero.css';
 
 // ─── Inline contact form (lives in the yellow sky area on stage 4) ───────────
 function ContactSlide({ onShowToast }) {
-  const [form, setForm] = useState({ name: '', phone: '' });
+  const [form, setForm] = useState({ name: '', email: '' });
   const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const nameStr = form.name.trim() || 'Learner';
-    const phoneStr = form.phone.trim();
+    const emailStr = form.email.trim();
 
     // Pre-drafted WhatsApp message
-    const message = `Hi LEELA Driving School,\n\nI would like to request my first driving lesson.\n\nName: ${nameStr}${phoneStr ? `\nPhone: ${phoneStr}` : ''}\n\nPlease let me know your available slots and lesson packages. Thank you!`;
+    const message = `Hi LEELA Driving School,\n\nI would like to request my first driving lesson.\n\nName: ${nameStr}${emailStr ? `\nEmail: ${emailStr}` : ''}\n\nPlease let me know your available slots and lesson packages. Thank you!`;
 
     const waUrl = `https://wa.me/918129005452?text=${encodeURIComponent(message)}`;
 
@@ -51,13 +51,13 @@ function ContactSlide({ onShowToast }) {
             />
           </div>
           <div className="sky-field">
-            <label>Phone / WhatsApp</label>
+            <label>Email Address</label>
             <input 
-              type="tel" 
+              type="email" 
               required 
-              placeholder="+91 81290 05452"
-              value={form.phone} 
-              onChange={(e) => set('phone', e.target.value)} 
+              placeholder="alex@example.com"
+              value={form.email} 
+              onChange={(e) => set('email', e.target.value)} 
             />
           </div>
         </div>
