@@ -60,6 +60,10 @@ export default function App() {
 
   const openSignIn  = () => { setAuthModalMode('signin');  setAuthModalOpen(true); };
   const openSignUp  = () => { setAuthModalMode('signup');  setAuthModalOpen(true); };
+  const openBooking = (pkg) => {
+    if (pkg && typeof pkg === 'string') setBookingPackage(pkg);
+    setBookingModalOpen(true);
+  };
   const openProfile = () => { setProfileModalOpen(true); };
   const showToast   = (msg) => setToastMessage(msg);
 
@@ -109,6 +113,7 @@ export default function App() {
           drivingStage={drivingStage}
           onOpenSignIn={openSignIn}
           onOpenSignUp={openSignUp}
+          onOpenBooking={openBooking}
           onShowToast={showToast}
           onSelectStage={selectStage}
           currentUser={currentUser}

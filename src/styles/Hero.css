@@ -76,20 +76,24 @@
   padding: 0 28px;
   text-align: center;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   transform: translateY(18px) scale(0.985);
   transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.45s;
 }
 
 .sky-slide.active {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
   transform: translateY(0) scale(1);
 }
 
 .sky-slide.exit-up {
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   transform: translateY(-18px) scale(0.985);
 }

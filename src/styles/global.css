@@ -97,12 +97,16 @@ a {
 
 /* Allow interaction on all clickable items inside Hero */
 .hero-fixed-layer nav,
-.hero-fixed-layer a,
-.hero-fixed-layer button,
-.hero-fixed-layer input,
-.hero-fixed-layer select,
+.hero-fixed-layer .hero-navbar,
+.hero-fixed-layer .hero-navbar button,
+.hero-fixed-layer .hero-navbar a,
 .hero-fixed-layer .sky-slide.active,
+.hero-fixed-layer .sky-slide.active button,
+.hero-fixed-layer .sky-slide.active a,
+.hero-fixed-layer .sky-slide.active input,
+.hero-fixed-layer .sky-slide.active select,
 .hero-fixed-layer .hero-stage-dots,
+.hero-fixed-layer .hero-scroll-hint,
 .hero-fixed-layer .toast-notification {
   pointer-events: auto;
 }
