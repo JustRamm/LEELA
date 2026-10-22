@@ -220,6 +220,14 @@
     <path d="M40 480 C180 470 820 470 960 480 L 1000 620 L 0 620 Z" fill="url(#c2Hood)"/>
     <path d="M80 488 C240 480 760 480 920 488 L 945 540 C800 535 200 535 55 540 Z" fill="#9377EE" opacity="0.5"/>
 
+    <!-- Classic Driving School "L" Plate Sticker on Hood -->
+    <g id="learner-l-sticker">
+      <rect x="477" y="490" width="46" height="46" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+      <rect x="479" y="492" width="42" height="42" rx="6" fill="#FFFFFF"/>
+      <rect x="481" y="494" width="38" height="38" rx="5" fill="#FFFFFF" stroke="#DC2626" stroke-width="0.8" stroke-opacity="0.25"/>
+      <path d="M492 500 L 499 500 L 499 524 L 514 524 L 514 530 L 492 530 Z" fill="#DC2626"/>
+    </g>
+
     <path d="M0 620 L 60 490 L 175 235 C185 215 215 200 250 200 L 750 200 C785 200 815 215 825 235 L 940 490 L 1000 620 L 940 620 L 870 450 L 795 240 C790 230 775 225 750 225 L 250 225 C225 225 210 230 205 240 L 130 450 L 60 620 Z" fill="url(#c2Pillar)"/>
     <path d="M220 220 L 780 220 L 760 205 L 240 205 Z" fill="url(#c2Roof)"/>
 

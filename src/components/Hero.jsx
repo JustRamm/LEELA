@@ -229,7 +229,6 @@ export default function Hero({ drivingStage, onOpenSignIn, onOpenSignUp, onShowT
         {/* ── SLIDE 1: Home intro ── */}
         <div className={`sky-slide ${drivingStage === 1 ? 'active' : drivingStage > 1 ? 'exit-up' : ''}`}>
           <div className="sky-slide-home">
-            <span className="sky-tag">DVSA CERTIFIED DRIVING SCHOOL</span>
             <h1 className="sky-heading sky-heading-xl">Driving with LEELA is easy</h1>
             <p className="sky-sub">
               Learn to drive with patience, confidence, and zero stress.
@@ -238,13 +237,6 @@ export default function Hero({ drivingStage, onOpenSignIn, onOpenSignUp, onShowT
             <div className="sky-cta-row">
               <button className="sky-btn-primary" onClick={onOpenSignUp}>Book a Lesson</button>
               <button className="sky-btn-ghost" onClick={onOpenSignIn}>Sign In</button>
-            </div>
-            <div className="sky-stats-row">
-              <div className="sky-stat"><span className="sky-stat-num">98.4%</span><span className="sky-stat-label">Pass Rate</span></div>
-              <div className="sky-stat-div" />
-              <div className="sky-stat"><span className="sky-stat-num">2,400+</span><span className="sky-stat-label">Students Passed</span></div>
-              <div className="sky-stat-div" />
-              <div className="sky-stat"><span className="sky-stat-num">5★</span><span className="sky-stat-label">Google Rating</span></div>
             </div>
           </div>
         </div>
@@ -308,10 +300,10 @@ export default function Hero({ drivingStage, onOpenSignIn, onOpenSignUp, onShowT
       <div className="hero-windshield-stage">
         {/* Driver & cockpit stage */}
         <div className="stage-cockpit-wrap">
-          <img src="/illustrations/scroll/cockpit-stage1-start.svg?v=instructor"     alt="Learner and Indian instructor starting lesson"       className={`stage-cockpit-img ${drivingStage === 1 ? 'active' : ''}`} />
-          <img src="/illustrations/scroll/cockpit-stage2-turning.svg?v=instructor"   alt="Instructor coaching learner through turns"            className={`stage-cockpit-img ${drivingStage === 2 ? 'active' : ''}`} />
-          <img src="/illustrations/scroll/cockpit-stage3-cruising.svg?v=instructor"  alt="Instructor giving thumbs up while cruising"           className={`stage-cockpit-img ${drivingStage === 3 ? 'active' : ''}`} />
-          <img src="/illustrations/scroll/cockpit-stage4-celebrate.svg?v=instructor" alt="Instructor and learner celebrating test passed"       className={`stage-cockpit-img ${drivingStage === 4 ? 'active' : ''}`} />
+          <img src="/illustrations/scroll/cockpit-stage1-start.svg?v=lplate"     alt="Learner and Indian instructor starting lesson"       className={`stage-cockpit-img ${drivingStage === 1 ? 'active' : ''}`} />
+          <img src="/illustrations/scroll/cockpit-stage2-turning.svg?v=lplate"   alt="Instructor coaching learner through turns"            className={`stage-cockpit-img ${drivingStage === 2 ? 'active' : ''}`} />
+          <img src="/illustrations/scroll/cockpit-stage3-cruising.svg?v=lplate"  alt="Instructor giving thumbs up while cruising"           className={`stage-cockpit-img ${drivingStage === 3 ? 'active' : ''}`} />
+          <img src="/illustrations/scroll/cockpit-stage4-celebrate.svg?v=lplate" alt="Instructor and learner celebrating test passed"       className={`stage-cockpit-img ${drivingStage === 4 ? 'active' : ''}`} />
         </div>
 
         {/* Progress dots — bottom centre of the windshield */}
