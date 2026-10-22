@@ -16,6 +16,37 @@
 }
 
 /* ==========================================================================
+   SUBTLE SCENIC LANDSCAPE BACKDROP
+   Soft rolling hills, sun glow, gentle clouds, and perspective road that
+   eliminate the plain yellow void while keeping typography crystal clear.
+   ========================================================================== */
+
+.hero-scenery-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-scenery-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes sceneryCloudFloat {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(18px); }
+}
+
+.scenery-clouds {
+  animation: sceneryCloudFloat 18s ease-in-out infinite;
+}
+
+/* ==========================================================================
    THE SKY CONTENT ZONE (Between Navbar and Car Roof)
    Fills the upper portion of the screen cleanly without excessive empty space.
    ========================================================================== */

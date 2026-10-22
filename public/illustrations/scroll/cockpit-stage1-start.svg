@@ -49,6 +49,15 @@
     <filter id="cockpitHudShadow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#201850" flood-opacity="0.25"/>
     </filter>
+
+    <!-- Checkered Shirt Pattern for Indian Instructor -->
+    <pattern id="checkShirt" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#DC2626"/>
+      <rect x="0" y="0" width="8" height="16" fill="#1E3A8A" opacity="0.6"/>
+      <rect x="0" y="0" width="16" height="8" fill="#1E3A8A" opacity="0.6"/>
+      <line x1="8" y1="0" x2="8" y2="16" stroke="#FFFFFF" stroke-width="1.6" opacity="0.85"/>
+      <line x1="0" y1="8" x2="16" y2="8" stroke="#FFFFFF" stroke-width="1.6" opacity="0.85"/>
+    </pattern>
   </defs>
 
   <!-- 1. CAR SEATS AND HEADRESTS (Visible inside cabin) -->
@@ -146,30 +155,109 @@
     <ellipse cx="365" cy="445" rx="80" ry="14" fill="#6962D4" opacity="0.4"/>
   </g>
 
-  <!-- 5. HOLOGRAPHIC GPS NAVIGATION HUD (Translucent Tablet) -->
-  <g id="cockpit-gps-hud" filter="url(#cockpitHudShadow)" transform="translate(545, 290)">
-    <polygon points="15,0 155,0 185,150 0,150" fill="url(#cockpitHudGlass)"/>
-    <polygon points="15,0 155,0 185,150 0,150" stroke="#FFFFFF" stroke-width="2.5" stroke-opacity="0.8" fill="none"/>
+  <!-- 5. THE INSTRUCTOR (Indian male in 40s, friendly mentor, check shirt teaching student) -->
+  <g id="instructor-male" filter="url(#cockpitDriverShadow)">
+    <!-- Back Hair & Silhouette -->
+    <path d="M580 252 C580 220 608 210 635 212 C665 210 690 225 690 255 C690 280 685 305 675 320 L675 355 L585 355 L585 320 C578 305 580 275 580 252 Z" fill="#1A181C"/>
+    
+    <!-- Neck -->
+    <rect x="608" y="325" width="46" height="42" rx="10" fill="#B3734A"/>
+    <path d="M608 340 Q 631 352 654 340 L 654 365 L 608 365 Z" fill="#995E39" opacity="0.4"/>
 
-    <rect x="30" y="20" width="75" height="7" rx="3.5" fill="#887BC7" opacity="0.6"/>
-    <rect x="30" y="34" width="105" height="5" rx="2.5" fill="#887BC7" opacity="0.35"/>
-    <rect x="30" y="44" width="90" height="5" rx="2.5" fill="#887BC7" opacity="0.35"/>
+    <!-- Head & Face (Friendly 40s Indian Instructor) -->
+    <path d="M592 270 C590 230 615 225 632 225 C655 225 675 235 675 275 C675 320 660 342 633 342 C608 342 594 315 592 270 Z" fill="#C5855A"/>
 
-    <!-- Active Route Waypoint Path -->
-    <path d="M42 125 C45 105 85 105 80 85 C75 68 115 65 125 58" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-    <path d="M42 125 C45 105 85 105 80 85 C75 68 115 65 125 58" stroke="#8874E6" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <!-- Ears -->
+    <ellipse cx="589" cy="285" rx="8" ry="14" fill="#B3734A"/>
+    <ellipse cx="590" cy="285" rx="4" ry="8" fill="#995E39" opacity="0.6"/>
+    <ellipse cx="674" cy="285" rx="7" ry="13" fill="#B3734A"/>
 
-    <circle cx="42" cy="125" r="5" fill="#FFFFFF"/>
-    <circle cx="42" cy="125" r="2.5" fill="#8874E6"/>
+    <!-- Hair (Neat short side-part with distinguished temple styling) -->
+    <path d="M584 252 C585 225 612 210 635 210 C662 210 684 225 684 250 C680 255 670 242 655 240 C635 238 610 248 584 252 Z" fill="#1F1D22"/>
+    <path d="M584 248 C584 265 588 275 592 278 L592 258 Z" fill="#1F1D22"/>
+    <!-- Subtle distinguished grey hair highlights near temples -->
+    <path d="M587 260 Q 590 270 592 275" stroke="#9E9E9E" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
+    <path d="M674 260 Q 672 270 670 275" stroke="#9E9E9E" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
 
-    <g transform="translate(125, 58)">
-      <line x1="-5" y1="-5" x2="5" y2="5" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
-      <line x1="5" y1="-5" x2="-5" y2="5" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+    <!-- Eyebrows (Warm, expressive, encouraging teacher) -->
+    <path d="M602 268 Q 614 262 624 267" stroke="#1F1D22" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M640 267 Q 650 262 662 268" stroke="#1F1D22" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+    <!-- Eyes (Attentive, glancing warmly at the student/road) -->
+    <ellipse cx="614" cy="280" rx="5" ry="6" fill="#1B130E"/>
+    <circle cx="613" cy="278" r="1.8" fill="#FFFFFF"/>
+    <path d="M605 284 Q 602 286 600 288" stroke="#995E39" stroke-width="1.2" stroke-linecap="round"/>
+
+    <ellipse cx="650" cy="280" rx="5" ry="6" fill="#1B130E"/>
+    <circle cx="649" cy="278" r="1.8" fill="#FFFFFF"/>
+    <path d="M658 284 Q 662 286 664 288" stroke="#995E39" stroke-width="1.2" stroke-linecap="round"/>
+
+    <!-- Friendly Nose -->
+    <path d="M632 275 L 634 298 L 626 302" stroke="#995E39" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- Distinguished Indian Mustache -->
+    <path d="M612 312 C622 308 630 311 632 313 C634 311 642 308 652 312 C656 314 650 322 632 320 C614 322 608 314 612 312 Z" fill="#1F1D22"/>
+
+    <!-- Gentle Mentor Smile -->
+    <path d="M622 325 Q 632 332 642 325" stroke="#7A3F1F" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+    <!-- Cheerful Face Shadows / Cheek Dimples -->
+    <ellipse cx="602" cy="298" rx="8" ry="4" fill="#B36A3D" opacity="0.4"/>
+    <ellipse cx="660" cy="298" rx="8" ry="4" fill="#B36A3D" opacity="0.4"/>
+
+    <!-- Body: Wearing Checkered Button-Up Shirt -->
+    <g id="instructor-shirt">
+      <!-- Main Shirt Body -->
+      <path d="M555 365 C580 350 680 350 710 365 L 725 450 L 535 450 Z" fill="url(#checkShirt)"/>
+      
+      <!-- Collar -->
+      <polygon points="610,360 632,385 620,365" fill="#DC2626"/>
+      <polygon points="610,360 632,385 620,365" fill="url(#checkShirt)"/>
+      <polygon points="654,360 632,385 644,365" fill="#DC2626"/>
+      <polygon points="654,360 632,385 644,365" fill="url(#checkShirt)"/>
+      <path d="M608 358 L 632 385 L 656 358" stroke="#1E3A8A" stroke-width="2" fill="none"/>
+
+      <!-- Front Placket & Buttons -->
+      <line x1="632" y1="385" x2="632" y2="450" stroke="#B91C1C" stroke-width="8"/>
+      <circle cx="632" cy="398" r="2.5" fill="#FFFFFF"/>
+      <circle cx="632" cy="418" r="2.5" fill="#FFFFFF"/>
+      <circle cx="632" cy="438" r="2.5" fill="#FFFFFF"/>
+
+      <!-- Left Arm & Hand (Teaching gesture: open guiding hand pointing calmly ahead) -->
+      <path d="M555 375 C540 390 525 410 515 435 C520 445 540 440 550 425 Z" fill="url(#checkShirt)"/>
+      <path d="M515 425 C508 430 500 442 510 452 C522 458 542 450 546 438 C546 425 528 418 515 425 Z" fill="#C5855A"/>
+      <!-- Fingers guiding forward gently toward student / road -->
+      <path d="M508 438 Q 498 435 490 436" stroke="#B3734A" stroke-width="3" stroke-linecap="round"/>
+      <path d="M508 444 Q 496 442 488 444" stroke="#B3734A" stroke-width="2.8" stroke-linecap="round"/>
+
+      <!-- Right Arm (Holding Instructor Lesson Clipboard) -->
+      <path d="M700 375 C715 390 725 410 730 435 L 695 440 Z" fill="url(#checkShirt)"/>
+      
+      <!-- Instructor Clipboard / Progress Checklist -->
+      <g transform="translate(670, 360) rotate(-6)">
+        <!-- Board -->
+        <rect x="0" y="0" width="60" height="75" rx="5" fill="#854D0E"/>
+        <rect x="3" y="6" width="54" height="65" rx="3" fill="#F8FAFC"/>
+        <rect x="18" y="-4" width="24" height="8" rx="2" fill="#94A3B8"/>
+        <!-- Sheet text lines & green checks -->
+        <line x1="8" y1="16" x2="35" y2="16" stroke="#334155" stroke-width="2.5"/>
+        <path d="M42 16 L 46 20 L 52 14" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        
+        <line x1="8" y1="28" x2="38" y2="28" stroke="#334155" stroke-width="2.5"/>
+        <path d="M42 28 L 46 32 L 52 26" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+        <line x1="8" y1="40" x2="32" y2="40" stroke="#334155" stroke-width="2.5"/>
+        <path d="M42 40 L 46 44 L 52 38" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+        <!-- Instructor Hand holding board -->
+        <ellipse cx="10" cy="55" rx="9" ry="6" fill="#C5855A"/>
+        <circle cx="16" cy="53" r="3.5" fill="#C5855A"/>
+      </g>
     </g>
 
-    <circle cx="115" cy="132" r="2.5" fill="#887BC7" opacity="0.5"/>
-    <circle cx="125" cy="132" r="2.5" fill="#887BC7" opacity="0.5"/>
-    <circle cx="135" cy="132" r="2.5" fill="#887BC7" opacity="0.8"/>
+    <!-- Seatbelt across Instructor (Safety First!) -->
+    <polygon points="685,355 708,348 575,480 550,490" fill="#252445"/>
+    <line x1="695" y1="352" x2="565" y2="485" stroke="#3A386D" stroke-width="2"/>
   </g>
 
   <!-- 6. WINDSHIELD FRAME & CAR CHASSIS (Foreground Silhouette with Transparent Glass Opening) -->

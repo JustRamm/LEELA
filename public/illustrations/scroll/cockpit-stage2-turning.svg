@@ -42,6 +42,15 @@
     <filter id="c2HudShadow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#201850" flood-opacity="0.25"/>
     </filter>
+
+    <!-- Checkered Shirt Pattern for Indian Instructor -->
+    <pattern id="checkShirt" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#DC2626"/>
+      <rect x="0" y="0" width="8" height="16" fill="#1E3A8A" opacity="0.6"/>
+      <rect x="0" y="0" width="16" height="8" fill="#1E3A8A" opacity="0.6"/>
+      <line x1="8" y1="0" x2="8" y2="16" stroke="#FFFFFF" stroke-width="1.6" opacity="0.85"/>
+      <line x1="0" y1="8" x2="16" y2="8" stroke="#FFFFFF" stroke-width="1.6" opacity="0.85"/>
+    </pattern>
   </defs>
 
   <!-- 1. SEATS -->
@@ -122,23 +131,84 @@
     <ellipse cx="365" cy="445" rx="80" ry="14" fill="#6962D4" opacity="0.4"/>
   </g>
 
-  <!-- 5. GPS HUD (Showing Roundabout 2nd Exit Instruction) -->
-  <g id="gps-hud-turning" filter="url(#c2HudShadow)" transform="translate(545, 290)">
-    <polygon points="15,0 155,0 185,150 0,150" fill="url(#c2HudGlass)"/>
-    <polygon points="15,0 155,0 185,150 0,150" stroke="#FFFFFF" stroke-width="2.5" stroke-opacity="0.8" fill="none"/>
-
-    <!-- Roundabout Navigation Turn Indicator -->
-    <rect x="25" y="16" width="115" height="24" rx="6" fill="#31276C"/>
-    <text x="82" y="32" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="800" fill="#FFE033" text-anchor="middle">2ND EXIT • ROUNDABOUT</text>
+  <!-- 5. THE INSTRUCTOR (Indian male in 40s, guiding steering & roundabouts in check shirt) -->
+  <g id="instructor-turning" filter="url(#c2DriverShadow)" transform="rotate(-2 630 330)">
+    <!-- Back Hair & Silhouette -->
+    <path d="M580 252 C580 220 608 210 635 212 C665 210 690 225 690 255 C690 280 685 305 675 320 L675 355 L585 355 L585 320 C578 305 580 275 580 252 Z" fill="#1A181C"/>
     
-    <!-- Curved Maneuver Arrow -->
-    <path d="M45 125 C45 95 80 95 85 70 C88 55 110 55 125 50" stroke="#8874E6" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-    <polygon points="135,48 122,42 124,56" fill="#8874E6"/>
+    <!-- Neck -->
+    <rect x="608" y="325" width="46" height="42" rx="10" fill="#B3734A"/>
+    <path d="M608 340 Q 631 352 654 340 L 654 365 L 608 365 Z" fill="#995E39" opacity="0.4"/>
 
-    <circle cx="45" cy="125" r="5" fill="#31276C"/>
-    <circle cx="115" cy="132" r="2.5" fill="#887BC7" opacity="0.8"/>
-    <circle cx="125" cy="132" r="2.5" fill="#887BC7" opacity="0.5"/>
-    <circle cx="135" cy="132" r="2.5" fill="#887BC7" opacity="0.5"/>
+    <!-- Head & Face (Looking attentively toward the steering wheel and mirrors) -->
+    <path d="M590 270 C588 230 614 225 632 225 C655 225 675 235 675 275 C675 320 660 342 633 342 C608 342 592 315 590 270 Z" fill="#C5855A"/>
+
+    <!-- Ears -->
+    <ellipse cx="587" cy="285" rx="8" ry="14" fill="#B3734A"/>
+    <ellipse cx="588" cy="285" rx="4" ry="8" fill="#995E39" opacity="0.6"/>
+    <ellipse cx="674" cy="285" rx="7" ry="13" fill="#B3734A"/>
+
+    <!-- Hair (Neat side-part with distinguished temple styling) -->
+    <path d="M582 252 C583 225 610 210 635 210 C662 210 684 225 684 250 C680 255 670 242 655 240 C635 238 608 248 582 252 Z" fill="#1F1D22"/>
+    <path d="M582 248 C582 265 586 275 590 278 L590 258 Z" fill="#1F1D22"/>
+    <path d="M585 260 Q 588 270 590 275" stroke="#9E9E9E" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
+    <path d="M674 260 Q 672 270 670 275" stroke="#9E9E9E" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
+
+    <!-- Eyebrows (Coaching, reassuring expression) -->
+    <path d="M598 266 Q 610 260 622 265" stroke="#1F1D22" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M638 265 Q 648 260 660 266" stroke="#1F1D22" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+    <!-- Eyes (Focused glance toward the roundabout / student's hands) -->
+    <ellipse cx="610" cy="278" rx="5" ry="6" fill="#1B130E"/>
+    <circle cx="608" cy="276" r="1.8" fill="#FFFFFF"/>
+
+    <ellipse cx="646" cy="278" rx="5" ry="6" fill="#1B130E"/>
+    <circle cx="644" cy="276" r="1.8" fill="#FFFFFF"/>
+
+    <!-- Nose & Mustache -->
+    <path d="M628 274 L 630 297 L 622 301" stroke="#995E39" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M608 311 C618 307 626 310 628 312 C630 310 638 307 648 311 C652 313 646 321 628 319 C610 321 604 313 608 311 Z" fill="#1F1D22"/>
+    <path d="M618 324 Q 628 331 638 324" stroke="#7A3F1F" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+    <!-- Body: Check Shirt -->
+    <g id="instructor-shirt-turning">
+      <path d="M555 365 C580 350 680 350 710 365 L 725 450 L 535 450 Z" fill="url(#checkShirt)"/>
+      
+      <!-- Collar -->
+      <polygon points="610,360 632,385 620,365" fill="#DC2626"/>
+      <polygon points="610,360 632,385 620,365" fill="url(#checkShirt)"/>
+      <polygon points="654,360 632,385 644,365" fill="#DC2626"/>
+      <polygon points="654,360 632,385 644,365" fill="url(#checkShirt)"/>
+      <path d="M608 358 L 632 385 L 656 358" stroke="#1E3A8A" stroke-width="2" fill="none"/>
+
+      <!-- Front Placket & Buttons -->
+      <line x1="632" y1="385" x2="632" y2="450" stroke="#B91C1C" stroke-width="8"/>
+      <circle cx="632" cy="398" r="2.5" fill="#FFFFFF"/>
+      <circle cx="632" cy="418" r="2.5" fill="#FFFFFF"/>
+      <circle cx="632" cy="438" r="2.5" fill="#FFFFFF"/>
+
+      <!-- Left Hand Guiding Curve ("Feed the wheel smoothly") -->
+      <path d="M555 375 C535 385 510 405 490 425 C495 435 515 432 530 415 Z" fill="url(#checkShirt)"/>
+      <path d="M490 418 C480 422 470 435 480 445 C492 452 510 445 515 432 Z" fill="#C5855A"/>
+      <path d="M480 430 Q 470 428 460 432" stroke="#B3734A" stroke-width="3" stroke-linecap="round"/>
+      <path d="M482 436 Q 472 435 464 440" stroke="#B3734A" stroke-width="2.8" stroke-linecap="round"/>
+
+      <!-- Right Arm (Holding Lesson Notes) -->
+      <path d="M700 375 C715 390 725 410 730 435 L 695 440 Z" fill="url(#checkShirt)"/>
+      <g transform="translate(670, 360) rotate(-4)">
+        <rect x="0" y="0" width="58" height="72" rx="5" fill="#854D0E"/>
+        <rect x="3" y="6" width="52" height="62" rx="3" fill="#F8FAFC"/>
+        <line x1="8" y1="16" x2="35" y2="16" stroke="#334155" stroke-width="2.5"/>
+        <path d="M40 16 L 44 20 L 50 14" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <line x1="8" y1="28" x2="38" y2="28" stroke="#334155" stroke-width="2.5"/>
+        <path d="M40 28 L 44 32 L 50 26" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <ellipse cx="10" cy="55" rx="9" ry="6" fill="#C5855A"/>
+      </g>
+    </g>
+
+    <!-- Seatbelt -->
+    <polygon points="685,355 708,348 575,480 550,490" fill="#252445"/>
+    <line x1="695" y1="352" x2="565" y2="485" stroke="#3A386D" stroke-width="2"/>
   </g>
 
   <!-- 6. FOREGROUND CHASSIS FRAME -->
