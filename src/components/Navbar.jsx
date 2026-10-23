@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { UserIcon, Volume2Icon, VolumeXIcon } from './Icons';
-import { playButtonTap, toggleSound, isSoundEnabled } from '../utils/audio';
+import { UserIcon } from './Icons';
+import { playButtonTap } from '../utils/audio';
 import '../styles/Navbar.css';
 
 export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpenProfile, onOpenDemoTest }) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [soundOn, setSoundOn] = useState(isSoundEnabled());
 
   const handleNavClick = (cb) => {
     playButtonTap();
@@ -40,20 +39,6 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpen
 
         {/* Header Action Buttons / Profile Icon */}
         <div className="nav-actions">
-          {/* Tactile Sound FX Toggle */}
-          <button
-            type="button"
-            className="btn-nav-sound"
-            onClick={() => {
-              const next = toggleSound();
-              setSoundOn(next);
-            }}
-            aria-label={soundOn ? 'Mute sounds' : 'Enable sounds'}
-            title={soundOn ? 'Sound FX On (Click to Mute)' : 'Sound FX Off (Click to Enable)'}
-          >
-            {soundOn ? <Volume2Icon size={16} /> : <VolumeXIcon size={16} />}
-          </button>
-
           {currentUser ? (
             <button
               type="button"
@@ -88,11 +73,14 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpen
             </>
           )}
 
-          {/* Mobile Menu Hamburger */}
+          {/* Mobile Menu Hamburger / Close Toggle */}
           <button 
             type="button" 
-            className="nav-mobile-toggle" 
-            onClick={() => setMobileOpen(!mobileOpen)}
+            className={`nav-mobile-toggle ${mobileOpen ? 'open' : ''}`}
+            onClick={() => {
+              playButtonTap();
+              setMobileOpen(!mobileOpen);
+            }}
             aria-label={mobileOpen ? 'Close mobile menu' : 'Open mobile menu'}
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav-drawer"

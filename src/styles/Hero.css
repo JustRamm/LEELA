@@ -891,43 +891,37 @@
 .gallery-controls-bar {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
   margin-top: 10px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(255, 255, 255, 0.95);
-  border-radius: 9999px;
-  padding: 4px 14px 4px 6px;
-  box-shadow: 0 6px 18px rgba(32, 26, 66, 0.08);
 }
 
 .gallery-pause-btn {
-  border: none;
+  border: 1.5px solid rgba(254, 220, 42, 0.35);
   background: #201A42;
   color: #FFE638;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 850;
-  padding: 5px 13px;
+  padding: 6px 16px;
   border-radius: 9999px;
   cursor: pointer;
+  box-shadow: 0 4px 14px rgba(32, 26, 66, 0.2);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .gallery-pause-btn:hover {
   background: #2E255F;
-  transform: scale(1.04);
+  border-color: #FFE638;
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 18px rgba(32, 26, 66, 0.3);
 }
 
 .gallery-pause-btn.paused {
   background: #D97706;
+  border-color: #FBBF24;
   color: #FFFFFF;
-}
-
-.gallery-hint-text {
-  font-size: 11.5px;
-  font-weight: 650;
-  color: #4A4468;
 }
 
 /* ── Gallery High-Res Lightbox Overlay ── */
@@ -1463,11 +1457,6 @@
   box-shadow: 0 0 10px rgba(254, 220, 42, 0.8);
 }
 
-/* ── Mobile Floating Stage Navigation Bar (Hidden on Desktop) ── */
-.mobile-floating-nav-bar {
-  display: none;
-}
-
 /* ── Scroll Hint (Stage 1 only) ── */
 .hero-scroll-hint {
   position: absolute;
@@ -1610,61 +1599,67 @@
 
   /* Slide 2, 3, 4 - Grid Cards on Mobile */
   .sky-slide-steps,
-  .sky-slide-instructors,
   .sky-slide-why {
-    max-width: 420px;
+    max-width: 370px;
+    width: 100%;
+  }
+
+  .sky-slide-instructors {
+    max-width: 310px;
     width: 100%;
   }
 
   .sky-heading {
     font-size: clamp(20px, 5.5vw, 25px);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   .sky-steps-grid,
   .sky-why-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 8px;
+    gap: 8px;
+    margin-top: 6px;
     width: 100%;
   }
 
   .sky-instructors-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 8px;
+    margin-top: 8px;
   }
 
   .sky-instructor-card {
-    padding: 10px 8px;
-    border-radius: 14px;
+    padding: 8px 6px;
+    border-radius: 12px;
   }
 
   .instructor-photo-wrap {
-    width: 52px;
-    height: 52px;
+    width: 44px;
+    height: 44px;
+    border-width: 2px;
   }
 
   .instructor-name-text {
-    font-size: 11.5px;
-    margin-top: 6px;
+    font-size: 11px;
+    margin-top: 4px;
   }
 
   /* Slide 5 - Gallery on Mobile */
   .sky-gallery-item {
-    width: 195px;
-    padding: 6px 6px 8px 6px;
-    border-radius: 16px;
+    width: clamp(270px, 76vw, 320px);
+    padding: 8px 8px 10px 8px;
+    border-radius: 18px;
   }
 
   .gallery-card-image-wrap {
-    height: 115px;
-    border-radius: 11px;
+    height: clamp(160px, 45vw, 195px);
+    border-radius: 13px;
   }
 
   .gallery-card-accent-bar {
-    width: 22px;
-    height: 2.5px;
-    margin: 5px auto 0 auto;
+    width: 28px;
+    height: 3px;
+    margin: 6px auto 0 auto;
   }
 
   .sky-gallery-marquee-wrap {
@@ -1673,32 +1668,35 @@
 
   .sky-step-card,
   .sky-why-card {
-    padding: 11px 10px;
-    border-radius: 14px;
-    min-height: 80px;
+    padding: 8px 9px;
+    border-radius: 12px;
+    min-height: 0;
+    gap: 8px;
   }
 
   .sky-step-card h3,
   .sky-why-card h3 {
-    font-size: 12px;
-    line-height: 1.22;
+    font-size: 11.5px;
+    line-height: 1.2;
     margin-bottom: 2px;
   }
 
   .sky-step-card p,
   .sky-why-card p {
-    font-size: 10px;
-    line-height: 1.3;
+    font-size: 9.5px;
+    line-height: 1.25;
   }
 
   .sky-step-num {
-    font-size: 11px;
-    padding: 3px 6px;
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 6px;
   }
 
   .sky-why-icon {
-    font-size: 14px;
-    padding: 4px 6px;
+    font-size: 13px;
+    padding: 3px 5px;
+    border-radius: 8px;
   }
 
   /* Slide 6 - Contact Form & Office Map on Mobile */
@@ -1814,7 +1812,7 @@
     width: 135vw;
     max-width: none;
     height: auto;
-    bottom: 8px; /* Elevated to bring the car a bit higher up */
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     object-fit: contain;
@@ -1830,79 +1828,8 @@
     display: none;
   }
 
-  .mobile-floating-nav-bar {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 25;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(32, 26, 66, 0.94);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1.5px solid rgba(254, 220, 42, 0.4);
-    border-radius: 9999px;
-    padding: 4px 6px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-    width: auto;
-    max-width: 92vw;
-    transition: bottom 0.3s ease;
-  }
-
-  .mobile-floating-nav-bar.with-footer {
-    bottom: 58px;
-  }
-
-  .mobile-stage-nav-btn {
-    background: rgba(255, 255, 255, 0.14);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    color: #FFE638;
-    font-size: 11px;
-    font-weight: 850;
-    padding: 5px 12px;
-    border-radius: 9999px;
-    cursor: pointer;
-    line-height: 1;
-    transition: all 0.18s ease;
-  }
-
-  .mobile-stage-nav-btn:active {
-    background: #FFE638;
-    color: #201A42;
-    transform: scale(0.95);
-  }
-
-  .mobile-stage-nav-placeholder {
-    width: 20px;
-  }
-
-  .mobile-stage-indicator {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0 4px;
-    white-space: nowrap;
-  }
-
-  .mobile-stage-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #FEDC2A;
-    box-shadow: 0 0 8px rgba(254, 220, 42, 0.85);
-  }
-
-  .mobile-stage-text {
-    font-size: 11.5px;
-    font-weight: 800;
-    color: #FFFFFF;
-    letter-spacing: 0.02em;
-  }
-
   .hero-scroll-hint {
-    bottom: 74px; /* Sits nicely above mobile floating nav pill */
+    bottom: 24px;
     font-size: 10.5px;
   }
 }
@@ -1915,14 +1842,10 @@
 
   .stage-cockpit-img {
     width: 130vw;
-    bottom: 6px;
-  }
-
-  .mobile-floating-nav-bar {
-    bottom: 14px;
+    bottom: 0;
   }
 
   .hero-scroll-hint {
-    bottom: 66px;
+    bottom: 16px;
   }
 }

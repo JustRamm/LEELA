@@ -686,7 +686,7 @@ export default function Hero({
             </div>
           </div>
 
-          {/* Pause / Resume & Lightbox Hint Control Pill */}
+          {/* Pause / Resume Control */}
           <div className="gallery-controls-bar">
             <button
               type="button"
@@ -699,7 +699,6 @@ export default function Hero({
             >
               <span>{isGalleryPaused ? '▶ Resume Scroll' : '⏸ Pause'}</span>
             </button>
-            <span className="gallery-hint-text">Tap any photo to expand full screen</span>
           </div>
         </div>
 
@@ -752,60 +751,6 @@ export default function Hero({
           ))}
         </div>
 
-        {/* Floating Mobile Stage Navigation Pill (Prev / Stage Counter / Next) */}
-        <div className={`mobile-floating-nav-bar ${drivingStage === 6 ? 'with-footer' : ''}`} aria-label="Mobile stage navigation">
-          {drivingStage > 1 ? (
-            <button
-              type="button"
-              className="mobile-stage-nav-btn prev"
-              onClick={() => {
-                playStageTransition();
-                onSelectStage && onSelectStage(drivingStage - 1);
-              }}
-              aria-label="Previous Stage"
-              title="Previous Stage"
-            >
-              <span>↑ Prev</span>
-            </button>
-          ) : (
-            <span className="mobile-stage-nav-placeholder" aria-hidden="true" />
-          )}
-
-          <div className="mobile-stage-indicator">
-            <span className="mobile-stage-dot active" />
-            <span className="mobile-stage-text">
-              {drivingStage}/6 • {meta.label}
-            </span>
-          </div>
-
-          {drivingStage < 6 ? (
-            <button
-              type="button"
-              className="mobile-stage-nav-btn next"
-              onClick={() => {
-                playStageTransition();
-                onSelectStage && onSelectStage(drivingStage + 1);
-              }}
-              aria-label="Next Stage"
-              title="Next Stage"
-            >
-              <span>Next ↓</span>
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="mobile-stage-nav-btn top"
-              onClick={() => {
-                playStageTransition();
-                onSelectStage && onSelectStage(1);
-              }}
-              aria-label="Back to Top"
-              title="Back to Top"
-            >
-              <span>Top ⤊</span>
-            </button>
-          )}
-        </div>
 
         {/* Scroll hint (stage 1 only) */}
         {drivingStage === 1 && (

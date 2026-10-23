@@ -411,7 +411,7 @@ export const EXAM_QUESTIONS = [
   {
     id: 23,
     category: 'road_markings',
-    signType: 'zebra_crossing',
+    signType: null,
     question: {
       ml: 'സീബ്ര ലൈനുകൾ (Zebra Crossing) ഉള്ള കാൽനട ക്രോസിംഗിൽ ഡ്രൈവർ എന്ത് ചെയ്യണം?',
       en: 'What must a driver do when approaching a pedestrian Zebra Crossing?',
@@ -505,7 +505,7 @@ export const EXAM_QUESTIONS = [
   {
     id: 28,
     category: 'driving_rules',
-    signType: 'defensive_driving',
+    signType: null,
     question: {
       ml: 'ഡ്രൈവിംഗിലെ "MSM" തത്വം എന്തിനെ പ്രതിനിധീകരിക്കുന്നു?',
       en: 'What does the standard driving routine acronym "MSM" stand for?',
@@ -523,7 +523,7 @@ export const EXAM_QUESTIONS = [
   {
     id: 29,
     category: 'driving_rules',
-    signType: 'clutch_control',
+    signType: null,
     question: {
       ml: '"ക്ലച്ച് റൈഡിംഗ്" (Clutch Riding) എന്നതുകൊണ്ട് അർത്ഥമാക്കുന്നത് എന്ത്?',
       en: 'What is meant by the term "Clutch Riding" in manual vehicle driving?',
@@ -541,7 +541,7 @@ export const EXAM_QUESTIONS = [
   {
     id: 30,
     category: 'driving_rules',
-    signType: 'steep_downhill',
+    signType: null,
     question: {
       ml: 'കുത്തനെയുള്ള ഇറക്കത്തിലേക്ക് വാഹനം ഓടിക്കുമ്പോൾ ഏറ്റവും സുരക്ഷിതമായ മാർഗ്ഗം ഏതാണ്?',
       en: 'What is the safest procedure when driving down a steep incline or descent?',
@@ -559,7 +559,7 @@ export const EXAM_QUESTIONS = [
   {
     id: 31,
     category: 'driving_rules',
-    signType: 'night_headlight',
+    signType: null,
     question: {
       ml: 'രാത്രിയിൽ എതിരെ വാഹനം വരുമ്പോൾ നിങ്ങളുടെ വാഹനത്തിന്റെ ഹെഡ് ലൈറ്റ് ഏത് രീതിയിൽ ആയിരിക്കണം?',
       en: 'How should your headlights be adjusted when a vehicle approaches from the opposite direction at night?',
@@ -577,7 +577,7 @@ export const EXAM_QUESTIONS = [
   {
     id: 32,
     category: 'driving_rules',
-    signType: 'emergency_vehicles',
+    signType: null,
     question: {
       ml: 'ആംബുലൻസോ ഫയർഫോഴ്സ് വാഹനമോ സൈറൺ മുഴക്കി പിന്നിൽ അടുത്തെത്തുമ്പോൾ നിങ്ങൾ എന്ത് ചെയ്യണം?',
       en: 'What should a driver do when an emergency vehicle (ambulance/fire engine) approaches with siren blaring?',
@@ -595,7 +595,7 @@ export const EXAM_QUESTIONS = [
   {
     id: 33,
     category: 'driving_rules',
-    signType: 'blind_spot',
+    signType: null,
     question: {
       ml: 'ഡ്രൈവിംഗിൽ "ബ്ലൈൻഡ് സ്പോട്ട്" (Blind Spot) എന്നതുകൊണ്ട് എന്താണ് അർത്ഥമാക്കുന്നത്?',
       en: 'What is a vehicle "Blind Spot" in driving terminology?',
@@ -615,7 +615,7 @@ export const EXAM_QUESTIONS = [
   {
     id: 34,
     category: 'legal_rules',
-    signType: 'alcohol_limit',
+    signType: null,
     question: {
       ml: 'മോട്ടോർ വാഹന നിയമം സെക്ഷൻ 185 പ്രകാരം രക്തത്തിൽ എത്ര മില്ലിഗ്രാമിൽ കൂടുതൽ മദ്യം കണ്ടെത്തിയാൽ ശിക്ഷാർഹമാണ്?',
       en: 'Under Section 185 of the Motor Vehicles Act 1988, what is the maximum permissible blood alcohol limit while driving?',
@@ -633,7 +633,7 @@ export const EXAM_QUESTIONS = [
   {
     id: 35,
     category: 'legal_rules',
-    signType: 'minimum_age',
+    signType: null,
     question: {
       ml: 'സ്വകാര്യ ലൈറ്റ് മോട്ടോർ വാഹനം (LMV - കാർ) ഓടിക്കുന്നതിനുള്ള ഡ്രൈവിംഗ് ലൈസൻസ് ലഭിക്കുന്നതിനുള്ള കുറഞ്ഞ പ്രായപരിധി എത്രയാണ്?',
       en: 'What is the minimum legal age required to obtain a driving license for a private Light Motor Vehicle (LMV / Car)?',
@@ -651,7 +651,7 @@ export const EXAM_QUESTIONS = [
   {
     id: 36,
     category: 'legal_rules',
-    signType: 'number_plates',
+    signType: null,
     question: {
       ml: 'ഇലക്ട്രിക് പ്രൈവറ്റ് വാഹനങ്ങളുടെ (Electric Vehicles) നമ്പർ പ്ലേറ്റിന്റെ നിറം എങ്ങനെയായിരിക്കും?',
       en: 'What is the official color scheme for the registration number plate of private Electric Vehicles (EVs)?',
@@ -669,7 +669,7 @@ export const EXAM_QUESTIONS = [
   {
     id: 37,
     category: 'legal_rules',
-    signType: 'mandatory_documents',
+    signType: null,
     question: {
       ml: 'ഒരു സ്വകാര്യ വാഹനം ഓടിക്കുമ്പോൾ ഡ്രൈവർ നിർബന്ധമായും കൈവശം വെക്കേണ്ട രേഖകൾ ഏതെല്ലാമാണ്?',
       en: 'Which mandatory documents must a driver carry (or have in DigiLocker/mParivahan) while operating a vehicle?',
@@ -687,7 +687,7 @@ export const EXAM_QUESTIONS = [
   {
     id: 38,
     category: 'legal_rules',
-    signType: 'accident_emergency',
+    signType: null,
     question: {
       ml: 'റോഡപകടത്തിൽ പെടുന്നവർക്ക് ഉടനടി അടിയന്തര ആംബുലൻസ് സഹായം ലഭ്യമാക്കുന്നതിനുള്ള ടോൾ ഫ്രീ നമ്പർ ഏതാണ്?',
       en: 'What is the emergency helpline number in India to dispatch ambulance services for road accident trauma care?',
@@ -705,7 +705,7 @@ export const EXAM_QUESTIONS = [
   {
     id: 39,
     category: 'driving_rules',
-    signType: 'good_samaritan',
+    signType: null,
     question: {
       ml: 'റോഡപകടത്തിൽ പെട്ട ഒരാളെ സഹായിച്ച് ആശുപത്രിയിൽ എത്തിക്കുന്ന വ്യക്തിയെ (ഗുഡ് സമരിറ്റൻ) സംബന്ധിച്ച് ശരിയായ പ്രസ്താവന ഏതാണ്?',
       en: 'Under the Good Samaritan Law, what protection is afforded to a bystander who helps a road accident victim?',
@@ -723,7 +723,7 @@ export const EXAM_QUESTIONS = [
   {
     id: 40,
     category: 'legal_rules',
-    signType: 'learners_validity',
+    signType: null,
     question: {
       ml: 'കേരളത്തിൽ മോട്ടോർ വാഹന വകുപ്പ് നൽകുന്ന ലേണേഴ്സ് ലൈസൻസിന്റെ (LL) കാലാവധി എത്ര മാസമാണ്?',
       en: 'What is the legal validity period of a Learner\'s Driving License issued by the RTO in Kerala?',
