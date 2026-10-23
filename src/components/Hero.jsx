@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from './Navbar';
 import { 
   GraduationCapIcon, 
@@ -10,7 +10,8 @@ import {
   ExternalLinkIcon,
   NavigationIcon,
   PhoneIcon,
-  ClockIcon
+  ClockIcon,
+  CloseIcon
 } from './Icons';
 import { playButtonTap, playSuccessChime, playStageTransition } from '../utils/audio';
 import '../styles/Hero.css';
@@ -415,6 +416,59 @@ export default function Hero({
 }) {
   const meta = STAGES.find((s) => s.stage === drivingStage) || STAGES[0];
   const [headlight, setHeadlight] = useState({ x: 50, y: 55, active: false });
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [isGalleryPaused, setIsGalleryPaused] = useState(false);
+
+  // Touch Swipe Gesture Detection for Mobile
+  const touchStartRef = useRef({ x: 0, y: 0, time: 0 });
+
+  const handleTouchStart = (e) => {
+    if (e.touches && e.touches[0]) {
+      touchStartRef.current = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+        time: Date.now(),
+      };
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (lightboxIndex !== null) return; // Don't switch stage while viewing photo in lightbox
+    if (e.changedTouches && e.changedTouches[0]) {
+      const deltaY = touchStartRef.current.y - e.changedTouches[0].clientY;
+      const deltaX = touchStartRef.current.x - e.changedTouches[0].clientX;
+      const deltaTime = Date.now() - touchStartRef.current.time;
+
+      // Vertical swipe gesture threshold check
+      if (Math.abs(deltaY) > 42 && Math.abs(deltaY) > Math.abs(deltaX) * 1.15 && deltaTime < 650) {
+        if (deltaY > 0 && drivingStage < 6) {
+          playStageTransition();
+          onSelectStage && onSelectStage(drivingStage + 1);
+        } else if (deltaY < 0 && drivingStage > 1) {
+          playStageTransition();
+          onSelectStage && onSelectStage(drivingStage - 1);
+        }
+      }
+    }
+  };
+
+  // Keyboard navigation for Lightbox
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setLightboxIndex(null);
+      } else if (e.key === 'ArrowLeft') {
+        setLightboxIndex((prev) => (prev > 0 ? prev - 1 : GALLERY_IMAGES.length - 1));
+      } else if (e.key === 'ArrowRight') {
+        setLightboxIndex((prev) => (prev < GALLERY_IMAGES.length - 1 ? prev + 1 : 0));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex]);
 
   const handleWindshieldMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -428,7 +482,12 @@ export default function Hero({
   };
 
   return (
-    <section className={`hero-main-card stage-${drivingStage}`} aria-label="Driving journey hero">
+    <section 
+      className={`hero-main-card stage-${drivingStage}`} 
+      aria-label="Driving journey hero"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
 
       {/* ── Day-to-Dusk Atmospheric Sky Layers (Smooth Optical Gradient Shift) ── */}
       <div className="hero-sky-atmosphere" aria-hidden="true">
@@ -568,21 +627,52 @@ export default function Hero({
           </div>
         </div>
 
-        {/* ── SLIDE 5: Gallery (Edge-to-Edge Automatic Horizontal Scroll, No Texts) ── */}
+        {/* ── SLIDE 5: Gallery (Edge-to-Edge Automatic Horizontal Scroll with Pause & Lightbox) ── */}
         <div className={`sky-slide sky-slide-gallery-full ${drivingStage === 5 ? 'active' : drivingStage > 5 ? 'exit-up' : ''}`}>
           <div className="sky-gallery-marquee-wrap">
-            <div className="sky-gallery-marquee-track">
+            <div className={`sky-gallery-marquee-track ${isGalleryPaused ? 'is-paused' : ''}`}>
               {/* Loop duplicated twice for seamless infinite automatic scrolling */}
-              {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((imgSrc, idx) => (
-                <div key={idx} className="sky-gallery-item">
-                  <div className="gallery-card-image-wrap">
-                    <img src={imgSrc} alt="LEELA Driving School" className="gallery-slide-img" loading="lazy" />
-                    <div className="gallery-card-overlay" />
+              {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((imgSrc, idx) => {
+                const realIndex = idx % GALLERY_IMAGES.length;
+                return (
+                  <div 
+                    key={idx} 
+                    className="sky-gallery-item"
+                    onClick={() => {
+                      playButtonTap();
+                      setLightboxIndex(realIndex);
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`View training photo ${realIndex + 1} full screen`}
+                    title="Click to view full photo"
+                  >
+                    <div className="gallery-card-image-wrap">
+                      <img src={imgSrc} alt="LEELA Driving School Training" className="gallery-slide-img" loading="lazy" />
+                      <div className="gallery-card-overlay" />
+                      <span className="gallery-zoom-hint">🔍 Expand</span>
+                    </div>
+                    <div className="gallery-card-accent-bar" aria-hidden="true" />
                   </div>
-                  <div className="gallery-card-accent-bar" aria-hidden="true" />
-                </div>
-              ))}
+                );
+              })}
             </div>
+          </div>
+
+          {/* Pause / Resume & Lightbox Hint Control Pill */}
+          <div className="gallery-controls-bar">
+            <button
+              type="button"
+              className={`gallery-pause-btn ${isGalleryPaused ? 'paused' : ''}`}
+              onClick={() => {
+                playButtonTap();
+                setIsGalleryPaused(!isGalleryPaused);
+              }}
+              title={isGalleryPaused ? 'Resume scrolling' : 'Pause scrolling'}
+            >
+              <span>{isGalleryPaused ? '▶ Resume Scroll' : '⏸ Pause'}</span>
+            </button>
+            <span className="gallery-hint-text">Tap any photo to expand full screen</span>
           </div>
         </div>
 
@@ -620,7 +710,7 @@ export default function Hero({
           <img src="/illustrations/scroll/cockpit-stage6-celebrate.svg?v=lplate"   alt="Instructor and learner celebrating test passed"                   className={`stage-cockpit-img ${drivingStage === 6 ? 'active' : ''}`} />
         </div>
 
-        {/* Progress dots — bottom centre of the windshield */}
+        {/* Progress dots — bottom centre of the windshield (Desktop) */}
         <div className={`hero-stage-dots ${drivingStage === 6 ? 'with-footer' : ''}`} aria-label="Journey progress">
           {STAGES.map((s) => (
             <span
@@ -635,6 +725,61 @@ export default function Hero({
           ))}
         </div>
 
+        {/* Floating Mobile Stage Navigation Pill (Prev / Stage Counter / Next) */}
+        <div className={`mobile-floating-nav-bar ${drivingStage === 6 ? 'with-footer' : ''}`} aria-label="Mobile stage navigation">
+          {drivingStage > 1 ? (
+            <button
+              type="button"
+              className="mobile-stage-nav-btn prev"
+              onClick={() => {
+                playStageTransition();
+                onSelectStage && onSelectStage(drivingStage - 1);
+              }}
+              aria-label="Previous Stage"
+              title="Previous Stage"
+            >
+              <span>↑ Prev</span>
+            </button>
+          ) : (
+            <span className="mobile-stage-nav-placeholder" aria-hidden="true" />
+          )}
+
+          <div className="mobile-stage-indicator">
+            <span className="mobile-stage-dot active" />
+            <span className="mobile-stage-text">
+              {drivingStage}/6 • {meta.label}
+            </span>
+          </div>
+
+          {drivingStage < 6 ? (
+            <button
+              type="button"
+              className="mobile-stage-nav-btn next"
+              onClick={() => {
+                playStageTransition();
+                onSelectStage && onSelectStage(drivingStage + 1);
+              }}
+              aria-label="Next Stage"
+              title="Next Stage"
+            >
+              <span>Next ↓</span>
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="mobile-stage-nav-btn top"
+              onClick={() => {
+                playStageTransition();
+                onSelectStage && onSelectStage(1);
+              }}
+              aria-label="Back to Top"
+              title="Back to Top"
+            >
+              <span>Top ⤊</span>
+            </button>
+          )}
+        </div>
+
         {/* Scroll hint (stage 1 only) */}
         {drivingStage === 1 && (
           <div 
@@ -646,13 +791,76 @@ export default function Hero({
             }}
             style={{ cursor: 'pointer' }}
           >
-            <span>Scroll to continue</span>
+            <span>Scroll or swipe</span>
             <div className="scroll-arrow">
               <ChevronDownIcon size={14} color="#201A42" />
             </div>
           </div>
         )}
       </div>
+
+      {/* ── Gallery High-Res Lightbox Modal ── */}
+      {lightboxIndex !== null && (
+        <div 
+          className="gallery-lightbox-overlay" 
+          role="dialog" 
+          aria-modal="true"
+          onClick={() => {
+            playButtonTap();
+            setLightboxIndex(null);
+          }}
+        >
+          <div className="gallery-lightbox-modal" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className="gallery-lightbox-close"
+              onClick={() => {
+                playButtonTap();
+                setLightboxIndex(null);
+              }}
+              aria-label="Close Lightbox"
+            >
+              <CloseIcon size={18} />
+            </button>
+
+            <button
+              type="button"
+              className="gallery-lightbox-nav prev"
+              onClick={() => {
+                playButtonTap();
+                setLightboxIndex((prev) => (prev > 0 ? prev - 1 : GALLERY_IMAGES.length - 1));
+              }}
+              aria-label="Previous photo"
+            >
+              ‹
+            </button>
+
+            <div className="gallery-lightbox-img-wrap">
+              <img 
+                src={GALLERY_IMAGES[lightboxIndex].replace('w=600', 'w=1400')} 
+                alt={`LEELA Training Session ${lightboxIndex + 1}`} 
+                className="gallery-lightbox-img" 
+              />
+              <div className="gallery-lightbox-caption">
+                <span className="caption-badge">LEELA Driving School · Practical Session</span>
+                <span className="caption-count">{lightboxIndex + 1} / {GALLERY_IMAGES.length}</span>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="gallery-lightbox-nav next"
+              onClick={() => {
+                playButtonTap();
+                setLightboxIndex((prev) => (prev < GALLERY_IMAGES.length - 1 ? prev + 1 : 0));
+              }}
+              aria-label="Next photo"
+            >
+              ›
+            </button>
+          </div>
+        </div>
+      )}
 
     </section>
   );
