@@ -144,7 +144,6 @@ export default function TrafficSignGraphic({ signType, size = 160 }) {
           height: 'auto',
           objectFit: 'contain',
           display: 'block',
-          imageRendering: 'crisp-edges',
         }}
         loading="eager"
       />
