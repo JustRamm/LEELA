@@ -40,6 +40,7 @@ export default function ExamSimulationPage({
   const [showExitConfirm, setShowExitConfirm] = useState(false);
   const [startTime] = useState(Date.now());
   const [totalTimeSpent, setTotalTimeSpent] = useState(0);
+  const [reviewFilter, setReviewFilter] = useState('all'); // 'all' | 'mistakes' | 'correct'
 
   const timerRef = useRef(null);
   const questionStartTimeRef = useRef(Date.now());
@@ -115,6 +116,7 @@ export default function ExamSimulationPage({
         correctAnswer: currentQ.correctAnswer,
         isCorrect,
         timeSpent,
+        questionIndex: currentIndex,
       },
     ];
 
@@ -177,6 +179,7 @@ export default function ExamSimulationPage({
     setSelectedOption(null);
     setUserAnswers([]);
     setTimeLeft(QUESTION_TIME_LIMIT);
+    setReviewFilter('all');
     setIsExamCompleted(false);
   };
 
@@ -412,56 +415,141 @@ export default function ExamSimulationPage({
               </button>
             </div>
 
-            {/* Comprehensive Question Review Accordion */}
+            {/* Comprehensive Question Review Accordion & Filter Pills */}
             <div className="review-section">
-              <h3 className="review-title">Detailed Question Review &amp; Explanations</h3>
-              <p className="review-sub">Review your answers against the official Kerala Driving School answer key:</p>
+              <div className="review-header-flex">
+                <div>
+                  <h3 className="review-title">Detailed Question Review &amp; Explanations</h3>
+                  <p className="review-sub">Review your answers against the official Kerala Driving School answer key:</p>
+                </div>
+
+                {/* Filter Pills ("All", "Mistakes Only", "Correct") */}
+                <div className="review-filter-pills" role="tablist" aria-label="Filter review questions">
+                  <button
+                    type="button"
+                    className={`review-filter-pill ${reviewFilter === 'all' ? 'active' : ''}`}
+                    onClick={() => {
+                      playButtonTap();
+                      setReviewFilter('all');
+                    }}
+                    role="tab"
+                    aria-selected={reviewFilter === 'all'}
+                  >
+                    <span>All</span>
+                    <span className="filter-count-badge count-all">{userAnswers.length}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    className={`review-filter-pill mistakes ${reviewFilter === 'mistakes' ? 'active' : ''}`}
+                    onClick={() => {
+                      playButtonTap();
+                      setReviewFilter('mistakes');
+                    }}
+                    role="tab"
+                    aria-selected={reviewFilter === 'mistakes'}
+                  >
+                    <CloseIcon size={12} />
+                    <span>Mistakes Only</span>
+                    <span className="filter-count-badge count-mistakes">
+                      {userAnswers.filter((a) => !a.isCorrect).length}
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    className={`review-filter-pill correct ${reviewFilter === 'correct' ? 'active' : ''}`}
+                    onClick={() => {
+                      playButtonTap();
+                      setReviewFilter('correct');
+                    }}
+                    role="tab"
+                    aria-selected={reviewFilter === 'correct'}
+                  >
+                    <CheckIcon size={12} />
+                    <span>Correct</span>
+                    <span className="filter-count-badge count-correct">
+                      {userAnswers.filter((a) => a.isCorrect).length}
+                    </span>
+                  </button>
+                </div>
+              </div>
 
               <div className="review-items-list">
-                {userAnswers.map((item, idx) => {
-                  const q = item.question;
-                  const isCorrect = item.isCorrect;
-                  const chosenText = item.selectedOption !== null 
-                    ? q.options[lang][item.selectedOption] 
-                    : '(Timed Out / No Answer)';
-                  const correctText = q.options[lang][q.correctAnswer];
+                {userAnswers
+                  .filter((item) => {
+                    if (reviewFilter === 'mistakes') return !item.isCorrect;
+                    if (reviewFilter === 'correct') return item.isCorrect;
+                    return true;
+                  })
+                  .map((item) => {
+                    const q = item.question;
+                    const isCorrect = item.isCorrect;
+                    const qNum = (item.questionIndex !== undefined ? item.questionIndex : userAnswers.indexOf(item)) + 1;
+                    const chosenText = item.selectedOption !== null 
+                      ? q.options[lang][item.selectedOption] 
+                      : '(Timed Out / No Answer)';
+                    const correctText = q.options[lang][q.correctAnswer];
 
-                  return (
-                    <div key={idx} className={`review-card ${isCorrect ? 'correct' : 'incorrect'}`}>
-                      <div className="review-card-head">
-                        <span className={`status-pill ${isCorrect ? 'correct' : 'incorrect'}`}>
-                          {isCorrect ? '✓ Correct' : '✗ Incorrect'}
-                        </span>
-                        <span className="review-q-num">Question {idx + 1}</span>
-                      </div>
-
-                      <h4 className="review-q-text">{q.question[lang]}</h4>
-
-                      {q.signType && (
-                        <div className="review-graphic-thumb">
-                          <TrafficSignGraphic signType={q.signType} size={100} />
+                    return (
+                      <div key={q.id || qNum} className={`review-card ${isCorrect ? 'correct' : 'incorrect'}`}>
+                        <div className="review-card-head">
+                          <span className={`status-pill ${isCorrect ? 'correct' : 'incorrect'}`}>
+                            {isCorrect ? '✓ Correct' : '✗ Incorrect'}
+                          </span>
+                          <span className="review-q-num">Question {qNum} of {questions.length}</span>
                         </div>
-                      )}
 
-                      <div className="review-answers-grid">
-                        <div className="answer-box chosen">
-                          <span className="ans-label">Your Answer:</span>
-                          <p className={`ans-val ${isCorrect ? 'text-green' : 'text-red'}`}>{chosenText}</p>
-                        </div>
-                        {!isCorrect && (
-                          <div className="answer-box correct-ans">
-                            <span className="ans-label">Correct Answer:</span>
-                            <p className="ans-val text-green">{correctText}</p>
+                        <h4 className="review-q-text">{q.question[lang]}</h4>
+
+                        {q.signType && (
+                          <div className="review-graphic-thumb">
+                            <TrafficSignGraphic signType={q.signType} size={100} />
                           </div>
                         )}
-                      </div>
 
-                      <div className="review-explanation-box">
-                        <strong>Explanation:</strong> {q.explanation[lang]}
+                        <div className="review-answers-grid">
+                          <div className="answer-box chosen">
+                            <span className="ans-label">Your Answer:</span>
+                            <p className={`ans-val ${isCorrect ? 'text-green' : 'text-red'}`}>{chosenText}</p>
+                          </div>
+                          {!isCorrect && (
+                            <div className="answer-box correct-ans">
+                              <span className="ans-label">Correct Answer:</span>
+                              <p className="ans-val text-green">{correctText}</p>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="review-explanation-box">
+                          <strong>Explanation:</strong> {q.explanation[lang]}
+                        </div>
                       </div>
+                    );
+                  })}
+
+                {/* Empty State when filter yields 0 questions */}
+                {userAnswers.filter((item) => {
+                  if (reviewFilter === 'mistakes') return !item.isCorrect;
+                  if (reviewFilter === 'correct') return item.isCorrect;
+                  return true;
+                }).length === 0 && (
+                  <div className="review-empty-state">
+                    <div className={`empty-state-bubble ${reviewFilter === 'mistakes' ? 'perfect' : 'zero'}`}>
+                      {reviewFilter === 'mistakes' ? (
+                        <CheckIcon size={26} color="#059669" />
+                      ) : (
+                        <CloseIcon size={26} color="#DC2626" />
+                      )}
                     </div>
-                  );
-                })}
+                    <h4>{reviewFilter === 'mistakes' ? 'Flawless! No Mistakes Made' : 'No Correct Answers'}</h4>
+                    <p>
+                      {reviewFilter === 'mistakes'
+                        ? 'You answered every question correctly! Great mastery of the Kerala RTO curriculum.'
+                        : 'None of the questions in this session were answered correctly. Retake to practice again!'}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

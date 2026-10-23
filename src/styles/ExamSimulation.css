@@ -622,7 +622,135 @@
 .review-sub {
   font-size: 13px;
   color: #64748B;
-  margin: 0 0 18px 0;
+  margin: 0;
+}
+
+/* ── Filter Pills Header Bar ── */
+.review-header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.review-filter-pills {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #F1F5F9;
+  padding: 4px;
+  border-radius: 9999px;
+  border: 1px solid #E2E8F0;
+}
+
+.review-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: #64748B;
+  font-size: 12.5px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.review-filter-pill:hover {
+  color: #1E293B;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.review-filter-pill.active {
+  background: #FFFFFF;
+  color: #201A42;
+  box-shadow: 0 2px 8px rgba(32, 26, 66, 0.1);
+}
+
+.review-filter-pill.mistakes.active {
+  color: #991B1B;
+  background: #FEE2E2;
+}
+
+.review-filter-pill.correct.active {
+  color: #166534;
+  background: #DCFCE7;
+}
+
+.filter-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 850;
+  background: rgba(100, 116, 139, 0.14);
+  color: inherit;
+  line-height: 1;
+}
+
+.filter-count-badge.count-mistakes {
+  background: rgba(220, 38, 38, 0.15);
+  color: #991B1B;
+}
+
+.filter-count-badge.count-correct {
+  background: rgba(22, 101, 52, 0.15);
+  color: #166534;
+}
+
+/* ── Filter Empty State ── */
+.review-empty-state {
+  text-align: center;
+  padding: 38px 20px;
+  background: #F8FAFC;
+  border: 1.5px dashed #CBD5E1;
+  border-radius: 16px;
+  margin: 6px 0 16px 0;
+}
+
+.empty-state-bubble {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px auto;
+}
+
+.empty-state-bubble.perfect {
+  background: #DCFCE7;
+  border: 2px solid #86EFAC;
+}
+
+.empty-state-bubble.zero {
+  background: #FEE2E2;
+  border: 2px solid #FCA5A5;
+}
+
+.review-empty-state h4 {
+  font-size: 16px;
+  font-weight: 850;
+  color: #1E293B;
+  margin: 0 0 6px 0;
+}
+
+.review-empty-state p {
+  font-size: 13px;
+  color: #64748B;
+  max-width: 440px;
+  margin: 0 auto;
+  line-height: 1.5;
 }
 
 .review-items-list {
@@ -841,5 +969,22 @@
   }
   .review-answers-grid {
     grid-template-columns: 1fr;
+  }
+  .review-header-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .review-filter-pills {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .review-filter-pill {
+    flex: 1;
+    justify-content: center;
+    padding: 7px 6px;
+    font-size: 11px;
+    gap: 4px;
   }
 }
