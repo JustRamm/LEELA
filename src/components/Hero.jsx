@@ -5,17 +5,23 @@ import {
   ShieldCheckIcon, 
   CalendarIcon, 
   CheckBadgeIcon, 
-  ChevronDownIcon 
+  ChevronDownIcon,
+  MapPinIcon,
+  ExternalLinkIcon,
+  NavigationIcon,
+  PhoneIcon,
+  ClockIcon
 } from './Icons';
 import { playButtonTap, playSuccessChime, playStageTransition } from '../utils/audio';
 import '../styles/Hero.css';
 
-// ─── Inline contact form (lives in the yellow sky area on stage 4) ───────────
+// ─── Contact Slide & Office Location Map (Connected to Google Maps) ───────────
 function ContactSlide({ onShowToast, currentUser }) {
   const [form, setForm] = useState({ 
     name: currentUser?.name || '', 
     email: currentUser?.email || '' 
   });
+  const [mobileTab, setMobileTab] = useState('map'); // 'map' | 'form' on small devices
 
   useEffect(() => {
     if (currentUser) {
@@ -47,36 +53,150 @@ function ContactSlide({ onShowToast, currentUser }) {
     window.open(waUrl, '_blank', 'noopener,noreferrer');
   };
 
+  // Office Location (Dummy location connected directly to Google Maps)
+  const officeLocation = {
+    name: 'LEELA Driving Academy & Testing Grounds',
+    address: 'Metro Pillar 542, Banerji Road, Kaloor, Kochi, Kerala 682017',
+    hours: 'Mon - Sat: 7:00 AM - 7:30 PM | Sun: 8:00 AM - 1:00 PM',
+    phone: '+91 81290 05453',
+    // Public embed iframe without billing keys
+    mapsEmbedUrl: 'https://maps.google.com/maps?q=Kaloor%20Metro%20Station%2C%20Kochi%2C%20Kerala&t=&z=15&ie=UTF8&iwloc=&output=embed',
+    // Universal Google Maps search & view link
+    mapsDirectUrl: 'https://www.google.com/maps/search/?api=1&query=Kaloor+Metro+Station+Kochi+Kerala',
+    // Turn-by-turn navigation / directions link
+    directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Kaloor+Metro+Station,+Kochi,+Kerala',
+  };
+
   return (
     <div className="sky-slide-contact">
-      <h2 className="sky-heading">Ready to Get Behind the Wheel?</h2>
-      <p className="sky-sub">Schedule your first lesson — an instructor in your area will reply within 1 hour.</p>
+      <h2 className="sky-heading">Visit Our Office or Connect Today</h2>
+      <p className="sky-sub">Dual-control practice grounds &amp; air-conditioned lecture facility in Central Kochi.</p>
 
-      <form className="sky-contact-form" onSubmit={handleSubmit}>
-        <div className="sky-form-row">
-          <div className="sky-field">
-            <label>Your Name</label>
-            <input 
-              type="text" 
-              required 
-              placeholder="Alex Morgan"
-              value={form.name} 
-              onChange={(e) => set('name', e.target.value)} 
-            />
-          </div>
-          <div className="sky-field">
-            <label>Email Address</label>
-            <input 
-              type="email" 
-              required 
-              placeholder="alex@example.com"
-              value={form.email} 
-              onChange={(e) => set('email', e.target.value)} 
-            />
+      {/* Mobile Screen Segmented Switcher */}
+      <div className="contact-mobile-tabs" role="tablist">
+        <button
+          type="button"
+          className={`contact-tab-btn ${mobileTab === 'map' ? 'active' : ''}`}
+          onClick={() => {
+            playButtonTap();
+            setMobileTab('map');
+          }}
+          aria-selected={mobileTab === 'map'}
+        >
+          <MapPinIcon size={13} color={mobileTab === 'map' ? '#201A42' : '#64748B'} />
+          <span>Office &amp; Map</span>
+        </button>
+        <button
+          type="button"
+          className={`contact-tab-btn ${mobileTab === 'form' ? 'active' : ''}`}
+          onClick={() => {
+            playButtonTap();
+            setMobileTab('form');
+          }}
+          aria-selected={mobileTab === 'form'}
+        >
+          <span>Quick Inquiry</span>
+        </button>
+      </div>
+
+      <div className="contact-hub-grid">
+        {/* Left Column: Inquiry Form */}
+        <div className={`contact-hub-col contact-col-form ${mobileTab === 'form' ? 'mobile-visible' : ''}`}>
+          <form className="sky-contact-form" onSubmit={handleSubmit}>
+            <div className="contact-form-header">
+              <span className="contact-form-title">Request First Lesson</span>
+              <span className="contact-reply-time">Replies in &lt;1 hr</span>
+            </div>
+            <div className="sky-form-row">
+              <div className="sky-field">
+                <label>Your Name</label>
+                <input 
+                  type="text" 
+                  required 
+                  placeholder="Alex Morgan"
+                  value={form.name} 
+                  onChange={(e) => set('name', e.target.value)} 
+                />
+              </div>
+              <div className="sky-field">
+                <label>Email Address</label>
+                <input 
+                  type="email" 
+                  required 
+                  placeholder="alex@example.com"
+                  value={form.email} 
+                  onChange={(e) => set('email', e.target.value)} 
+                />
+              </div>
+            </div>
+            <button type="submit" className="sky-submit-btn">Request My First Lesson →</button>
+            <div className="contact-quick-info">
+              <span title="Operating Hours">
+                <ClockIcon size={12} color="#D97706" /> {officeLocation.hours.split('|')[0].trim()}
+              </span>
+              <a href={`tel:${officeLocation.phone.replace(/[^0-9+]/g, '')}`} className="contact-phone-link" title="Call Office">
+                <PhoneIcon size={12} color="#D97706" /> {officeLocation.phone}
+              </a>
+            </div>
+          </form>
+        </div>
+
+        {/* Right Column: Interactive Google Map */}
+        <div className={`contact-hub-col contact-col-map ${mobileTab === 'map' ? 'mobile-visible' : ''}`}>
+          <div className="contact-map-card">
+            <div className="contact-map-card-header">
+              <div className="map-badge-pin">
+                <MapPinIcon size={15} color="#D97706" />
+              </div>
+              <div className="map-address-meta">
+                <strong>{officeLocation.name}</strong>
+                <span>{officeLocation.address}</span>
+              </div>
+            </div>
+
+            <div className="contact-map-iframe-wrap">
+              <iframe
+                title="LEELA Driving School Office Location"
+                src={officeLocation.mapsEmbedUrl}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+              <div className="map-overlay-tag">
+                <span>Google Maps · Central Kochi</span>
+              </div>
+            </div>
+
+            <div className="contact-map-card-footer">
+              <a
+                href={officeLocation.mapsDirectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-open-google-maps"
+                onClick={() => playButtonTap()}
+                title="Open and view office location in Google Maps"
+              >
+                <span>View on Google Maps</span>
+                <ExternalLinkIcon size={12} />
+              </a>
+              <a
+                href={officeLocation.directionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-get-directions"
+                onClick={() => playButtonTap()}
+                title="Open navigation directions in Google Maps"
+              >
+                <NavigationIcon size={12} />
+                <span>Directions</span>
+              </a>
+            </div>
           </div>
         </div>
-        <button type="submit" className="sky-submit-btn">Request My First Lesson →</button>
-      </form>
+      </div>
     </div>
   );
 }
