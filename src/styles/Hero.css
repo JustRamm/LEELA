@@ -928,15 +928,19 @@
 .gallery-lightbox-overlay {
   position: fixed;
   inset: 0;
-  z-index: 1000;
-  background: rgba(15, 23, 42, 0.9);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  z-index: 99999;
+  background: rgba(10, 14, 26, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
-  animation: fadeInLightbox 0.25s ease-out;
+  animation: fadeInLightbox 0.22s ease-out;
+  pointer-events: auto !important;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
 @keyframes fadeInLightbox {
@@ -946,36 +950,45 @@
 
 .gallery-lightbox-modal {
   position: relative;
-  max-width: 920px;
-  width: 100%;
-  max-height: 86vh;
+  max-width: 960px;
+  width: auto;
+  max-height: 88vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: auto !important;
+  z-index: 10;
 }
 
 .gallery-lightbox-img-wrap {
   position: relative;
   max-width: 100%;
-  max-height: 80vh;
+  max-height: 82vh;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.18);
   background: #000000;
+  pointer-events: auto !important;
+  cursor: grab;
+}
+
+.gallery-lightbox-img-wrap:active {
+  cursor: grabbing;
 }
 
 .gallery-lightbox-img {
   display: block;
   max-width: 100%;
-  max-height: 75vh;
+  max-height: 76vh;
   width: auto;
   height: auto;
   object-fit: contain;
-  animation: scaleInLightbox 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: scaleInLightbox 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto !important;
 }
 
 @keyframes scaleInLightbox {
-  from { transform: scale(0.95); opacity: 0; }
+  from { transform: scale(0.96); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
 
@@ -984,80 +997,139 @@
   bottom: 0;
   inset-inline: 0;
   padding: 12px 20px;
-  background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.9) 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(10, 14, 26, 0.94) 100%);
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: #FFFFFF;
   font-size: 13px;
   font-weight: 700;
+  pointer-events: none;
 }
 
 .caption-badge {
   color: #FFE638;
   font-weight: 850;
   font-size: 12.5px;
+  letter-spacing: 0.2px;
 }
 
 .caption-count {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 12px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 3px 9px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
 }
 
 .gallery-lightbox-close {
   position: absolute;
-  top: -46px;
-  right: 0;
-  width: 38px;
-  height: 38px;
+  top: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(15, 23, 42, 0.82);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 60;
+  pointer-events: auto !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .gallery-lightbox-close:hover {
-  background: rgba(255, 255, 255, 0.4);
+  background: #FEDC2A;
+  color: #1A1333;
+  border-color: #FEDC2A;
   transform: scale(1.08);
+}
+
+.gallery-lightbox-close:active {
+  transform: scale(0.95);
 }
 
 .gallery-lightbox-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(15, 23, 42, 0.82);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   color: #FFFFFF;
-  font-size: 26px;
+  font-size: 32px;
+  font-weight: 300;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 10;
+  z-index: 60;
+  pointer-events: auto !important;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .gallery-lightbox-nav:hover {
-  background: rgba(255, 255, 255, 0.45);
-  color: #FFE638;
+  background: #FEDC2A;
+  color: #1A1333;
+  border-color: #FEDC2A;
   transform: translateY(-50%) scale(1.08);
 }
 
+.gallery-lightbox-nav:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
 .gallery-lightbox-nav.prev {
-  left: -56px;
+  left: 24px;
 }
 
 .gallery-lightbox-nav.next {
-  right: -56px;
+  right: 24px;
+}
+
+@media (max-width: 768px) {
+  .gallery-lightbox-overlay {
+    padding: 16px;
+  }
+
+  .gallery-lightbox-close {
+    top: 14px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .gallery-lightbox-nav {
+    width: 44px;
+    height: 44px;
+    font-size: 26px;
+  }
+
+  .gallery-lightbox-nav.prev {
+    left: 12px;
+  }
+
+  .gallery-lightbox-nav.next {
+    right: 12px;
+  }
+
+  .gallery-lightbox-img {
+    max-height: 72vh;
+  }
 }
 
 /* ── SLIDE 6: CONTACT / LESSON INQUIRY & GOOGLE MAP ── */

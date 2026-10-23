@@ -149,7 +149,9 @@ a {
 .hero-fixed-layer .sky-slide.active select,
 .hero-fixed-layer .hero-stage-dots,
 .hero-fixed-layer .hero-scroll-hint,
-.hero-fixed-layer .toast-notification {
+.hero-fixed-layer .toast-notification,
+.hero-fixed-layer .gallery-lightbox-overlay,
+.hero-fixed-layer .gallery-lightbox-overlay * {
   pointer-events: auto;
 }
 

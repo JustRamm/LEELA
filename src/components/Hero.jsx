@@ -452,6 +452,59 @@ export default function Hero({
     }
   };
 
+  // Lightbox handlers & gestures
+  const lightboxTouchRef = useRef({ x: 0, y: 0, time: 0 });
+
+  const handleCloseLightbox = (e) => {
+    if (e && e.stopPropagation) {
+      e.stopPropagation();
+    }
+    playButtonTap();
+    setLightboxIndex(null);
+  };
+
+  const handlePrevPhoto = (e) => {
+    if (e && e.stopPropagation) {
+      e.stopPropagation();
+    }
+    playButtonTap();
+    setLightboxIndex((prev) => (prev > 0 ? prev - 1 : GALLERY_IMAGES.length - 1));
+  };
+
+  const handleNextPhoto = (e) => {
+    if (e && e.stopPropagation) {
+      e.stopPropagation();
+    }
+    playButtonTap();
+    setLightboxIndex((prev) => (prev < GALLERY_IMAGES.length - 1 ? prev + 1 : 0));
+  };
+
+  const handleLightboxTouchStart = (e) => {
+    if (e.touches && e.touches[0]) {
+      lightboxTouchRef.current = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+        time: Date.now(),
+      };
+    }
+  };
+
+  const handleLightboxTouchEnd = (e) => {
+    if (e.changedTouches && e.changedTouches[0]) {
+      const deltaX = lightboxTouchRef.current.x - e.changedTouches[0].clientX;
+      const deltaY = lightboxTouchRef.current.y - e.changedTouches[0].clientY;
+      const deltaTime = Date.now() - lightboxTouchRef.current.time;
+
+      if (Math.abs(deltaX) > 36 && Math.abs(deltaX) > Math.abs(deltaY) && deltaTime < 650) {
+        if (deltaX > 0) {
+          handleNextPhoto(e);
+        } else {
+          handlePrevPhoto(e);
+        }
+      }
+    }
+  };
+
   // Keyboard navigation & WCAG 2.1 focus trap for Lightbox
   const lightboxRef = useRef(null);
   useEffect(() => {
@@ -774,46 +827,43 @@ export default function Hero({
       {/* ── Gallery High-Res Lightbox Modal ── */}
       {lightboxIndex !== null && (
         <div 
+          ref={lightboxRef}
           className="gallery-lightbox-overlay" 
           role="dialog" 
           aria-modal="true"
           aria-labelledby="gallery-lightbox-caption"
-          onClick={() => {
-            playButtonTap();
-            setLightboxIndex(null);
-          }}
+          onClick={handleCloseLightbox}
         >
+          {/* Direct Close Button */}
+          <button
+            type="button"
+            className="gallery-lightbox-close"
+            onClick={handleCloseLightbox}
+            aria-label="Close Lightbox"
+          >
+            <CloseIcon size={20} />
+          </button>
+
+          {/* Previous Photo Button */}
+          <button
+            type="button"
+            className="gallery-lightbox-nav prev"
+            onClick={handlePrevPhoto}
+            aria-label="Previous photo"
+          >
+            ‹
+          </button>
+
           <div 
-            ref={lightboxRef} 
             tabIndex={-1} 
             className="gallery-lightbox-modal" 
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              type="button"
-              className="gallery-lightbox-close"
-              onClick={() => {
-                playButtonTap();
-                setLightboxIndex(null);
-              }}
-              aria-label="Close Lightbox"
+            <div 
+              className="gallery-lightbox-img-wrap"
+              onTouchStart={handleLightboxTouchStart}
+              onTouchEnd={handleLightboxTouchEnd}
             >
-              <CloseIcon size={18} />
-            </button>
-
-            <button
-              type="button"
-              className="gallery-lightbox-nav prev"
-              onClick={() => {
-                playButtonTap();
-                setLightboxIndex((prev) => (prev > 0 ? prev - 1 : GALLERY_IMAGES.length - 1));
-              }}
-              aria-label="Previous photo"
-            >
-              ‹
-            </button>
-
-            <div className="gallery-lightbox-img-wrap">
               <img 
                 src={GALLERY_IMAGES[lightboxIndex].replace('w=600', 'w=1400')} 
                 alt={`LEELA Training Session ${lightboxIndex + 1}`} 
@@ -824,19 +874,17 @@ export default function Hero({
                 <span className="caption-count">{lightboxIndex + 1} / {GALLERY_IMAGES.length}</span>
               </div>
             </div>
-
-            <button
-              type="button"
-              className="gallery-lightbox-nav next"
-              onClick={() => {
-                playButtonTap();
-                setLightboxIndex((prev) => (prev < GALLERY_IMAGES.length - 1 ? prev + 1 : 0));
-              }}
-              aria-label="Next photo"
-            >
-              ›
-            </button>
           </div>
+
+          {/* Next Photo Button */}
+          <button
+            type="button"
+            className="gallery-lightbox-nav next"
+            onClick={handleNextPhoto}
+            aria-label="Next photo"
+          >
+            ›
+          </button>
         </div>
       )}
 
