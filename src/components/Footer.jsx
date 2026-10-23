@@ -12,7 +12,7 @@ export default function Footer({ isVisible }) {
         <span>·</span>
         <a href="#scene-contact">Contact</a>
       </div>
-      <p className="footer-copy">© 2026 LEELA Driving School · DVSA Certified · Drive with confidence.</p>
+      <p className="footer-copy">© 2026 LEELA Driving School · Kerala MVD Govt Approved · Drive with confidence.</p>
     </footer>
   );
 }

@@ -320,7 +320,7 @@ export default function ProfileModal({
               <div className="lesson-card-details">
                 <h4>Next Scheduled Lesson</h4>
                 <p className="lesson-time">{user.nextLesson || 'Saturday at 10:30 AM (2 hours)'}</p>
-                <p className="lesson-instructor">Instructor: <strong>{user.instructor || 'Rajesh K. (DVSA Grade A)'}</strong></p>
+                <p className="lesson-instructor">Instructor: <strong>{user.instructor || 'Rajesh K. (Kerala MVD Certified)'}</strong></p>
               </div>
               <button 
                 type="button" 

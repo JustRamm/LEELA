@@ -63,7 +63,7 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
       licenceNumber: 'LEE-84920',
       lessonsCompleted: 6,
       totalLessons: 20,
-      instructor: 'Rajesh K. (DVSA Grade A)',
+      instructor: 'Rajesh K. (Kerala MVD Certified)',
       nextLesson: 'Saturday at 10:30 AM (2 hours)',
       joinedDate: 'October 2026',
     };

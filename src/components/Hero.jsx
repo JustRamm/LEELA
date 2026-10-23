@@ -549,8 +549,8 @@ export default function Hero({
             <h2 className="sky-heading">Why Students Love LEELA</h2>
             <div className="sky-why-grid">
               {[
-                { Icon: GraduationCapIcon, title: 'DVSA Certified Instructors',  desc: 'Fully background-checked, specially trained for nervous learners.' },
-                { Icon: ShieldCheckIcon,   title: 'Dual-Control Safety Fleet',   desc: 'Instructor can brake at any time. 5-star Euro NCAP vehicles.'     },
+                { Icon: GraduationCapIcon, title: 'Kerala MVD Certified Coaches',  desc: 'Govt. approved instructors, specially trained for nervous beginners &amp; first-time drivers.' },
+                { Icon: ShieldCheckIcon,   title: 'Dual-Control Safety Fleet',   desc: 'Instructor dual pedals (brake &amp; clutch) with 5-star Bharat safety certified fleet.' },
                 { Icon: CalendarIcon,      title: 'Flexible Scheduling',         desc: 'Morning, evening &amp; weekend slots. Doorstep pickup included.'  },
                 { Icon: CheckBadgeIcon,    title: '1st Pass Guarantee',           desc: 'Free re-test mock &amp; car if you don\'t pass on first attempt.' },
               ].map((f) => (
@@ -614,7 +614,7 @@ export default function Hero({
         <div className="stage-cockpit-wrap">
           <img src="/illustrations/scroll/cockpit-stage1-start.svg?v=lplate"       alt="Learner and instructor starting lesson"                           className={`stage-cockpit-img ${drivingStage === 1 ? 'active' : ''}`} />
           <img src="/illustrations/scroll/cockpit-stage2-turning.svg?v=lplate"     alt="Instructor coaching learner through turns"                        className={`stage-cockpit-img ${drivingStage === 2 ? 'active' : ''}`} />
-          <img src="/illustrations/scroll/cockpit-stage3-instructors.svg?v=lplate" alt="Instructor with DVSA assessment clipboard coaching learner"      className={`stage-cockpit-img ${drivingStage === 3 ? 'active' : ''}`} />
+          <img src="/illustrations/scroll/cockpit-stage3-instructors.svg?v=lplate" alt="Instructor with Kerala MVD assessment clipboard coaching learner" className={`stage-cockpit-img ${drivingStage === 3 ? 'active' : ''}`} />
           <img src="/illustrations/scroll/cockpit-stage4-cruising.svg?v=lplate"    alt="Instructor giving thumbs up while cruising"                       className={`stage-cockpit-img ${drivingStage === 4 ? 'active' : ''}`} />
           <img src="/illustrations/scroll/cockpit-stage5-gallery.svg?v=lplate"     alt="Learner executing reverse bay parking maneuver with radar assist" className={`stage-cockpit-img ${drivingStage === 5 ? 'active' : ''}`} />
           <img src="/illustrations/scroll/cockpit-stage6-celebrate.svg?v=lplate"   alt="Instructor and learner celebrating test passed"                   className={`stage-cockpit-img ${drivingStage === 6 ? 'active' : ''}`} />
