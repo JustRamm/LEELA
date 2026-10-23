@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { CarIcon, CloseIcon, ArrowRightIcon } from './Icons';
+import { CarIcon, CloseIcon, ArrowRightIcon, IdCardIcon } from './Icons';
 import { playButtonTap, playSuccessChime } from '../utils/audio';
 import '../styles/BookingModal.css';
 
-export default function BookingModal({ isOpen, initialPackage, onClose, onSuccess, currentUser }) {
+export default function BookingModal({ isOpen, initialPackage, onClose, onSuccess, currentUser, onOpenSignIn }) {
   const [selectedPackage, setSelectedPackage] = useState(initialPackage || 'Complete Pass Guarantee');
   const [transmission, setTransmission] = useState('Manual');
   const [formData, setFormData] = useState({
@@ -85,7 +85,31 @@ export default function BookingModal({ isOpen, initialPackage, onClose, onSucces
           <span>Selected Package: <strong>{selectedPackage}</strong></span>
         </div>
 
-        <form className="booking-form-fields" onSubmit={handleSubmit}>
+        {!currentUser ? (
+          <div className="booking-login-required-card">
+            <div className="login-required-icon-wrap">
+              <IdCardIcon size={28} color="#D97706" />
+            </div>
+            <h3>Sign In Required to Book</h3>
+            <p>
+              To schedule a driving lesson, lock in your instructor slot, and enable doorstep pickup, please log in to your account.
+            </p>
+            <div className="booking-login-actions">
+              <button
+                type="button"
+                className="btn-booking-signin-now"
+                onClick={() => {
+                  playButtonTap();
+                  onClose();
+                  onOpenSignIn && onOpenSignIn();
+                }}
+              >
+                Sign In to Continue →
+              </button>
+            </div>
+          </div>
+        ) : (
+          <form className="booking-form-fields" onSubmit={handleSubmit}>
           <div className="booking-two-col">
             <div className="booking-form-group">
               <label htmlFor="book-package">Course Package</label>
@@ -189,6 +213,7 @@ export default function BookingModal({ isOpen, initialPackage, onClose, onSucces
             <ArrowRightIcon size={16} />
           </button>
         </form>
+        )}
       </div>
     </div>
   );

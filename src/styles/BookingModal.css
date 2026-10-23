@@ -151,6 +151,70 @@
   box-shadow: 0 8px 22px rgba(32, 26, 66, 0.45);
 }
 
+/* ── Account Sign-in Required Card ── */
+.booking-login-required-card {
+  text-align: center;
+  padding: 24px 16px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-required-icon-wrap {
+  width: 58px;
+  height: 58px;
+  border-radius: 20px;
+  background: rgba(254, 220, 42, 0.28);
+  border: 1.5px solid rgba(245, 158, 11, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.2);
+}
+
+.booking-login-required-card h3 {
+  font-size: 19px;
+  font-weight: 850;
+  color: #201A42;
+  margin: 0 0 8px 0;
+}
+
+.booking-login-required-card p {
+  font-size: 13.5px;
+  color: #64748B;
+  line-height: 1.5;
+  margin: 0 0 22px 0;
+  max-width: 380px;
+}
+
+.booking-login-actions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.btn-booking-signin-now {
+  width: 100%;
+  padding: 13px 24px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #FFE638 0%, #F59E0B 100%);
+  color: #201A42;
+  font-size: 14.5px;
+  font-weight: 850;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-booking-signin-now:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #FFF066 0%, #FBBF24 100%);
+  box-shadow: 0 10px 24px rgba(245, 158, 11, 0.45);
+}
+
 @media (max-width: 500px) {
   .booking-two-col {
     grid-template-columns: 1fr;

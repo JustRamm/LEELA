@@ -33,6 +33,7 @@ export default function App() {
   const [examRulesOpen, setExamRulesOpen] = useState(false);
   const [examLang, setExamLang] = useState('ml');
   const [toastMessage, setToastMessage] = useState(null);
+  const [pendingBookingAfterAuth, setPendingBookingAfterAuth] = useState(false);
 
   // Initialize or persist current logged-in user
   const [currentUser, setCurrentUser] = useState(() => {
@@ -88,6 +89,13 @@ export default function App() {
   const openSignUp  = () => { setAuthModalMode('signup');  setAuthModalOpen(true); };
   const openBooking = (pkg) => {
     if (pkg && typeof pkg === 'string') setBookingPackage(pkg);
+    if (!currentUser) {
+      setPendingBookingAfterAuth(true);
+      showToast('Please sign in to schedule and book your driving session.');
+      setAuthModalMode('signin');
+      setAuthModalOpen(true);
+      return;
+    }
     setBookingModalOpen(true);
   };
   const openProfile = () => { setProfileModalOpen(true); };
@@ -111,6 +119,10 @@ export default function App() {
       } catch (e) {}
     }
     showToast(msg);
+    if (pendingBookingAfterAuth) {
+      setPendingBookingAfterAuth(false);
+      setBookingModalOpen(true);
+    }
   };
 
   // Sign out handler
@@ -235,9 +247,13 @@ export default function App() {
       <BookingModal
         isOpen={bookingModalOpen}
         initialPackage={bookingPackage}
-        onClose={() => setBookingModalOpen(false)}
+        onClose={() => {
+          setBookingModalOpen(false);
+          setPendingBookingAfterAuth(false);
+        }}
         onSuccess={showToast}
         currentUser={currentUser}
+        onOpenSignIn={openSignIn}
       />
 
       <ProfileModal
@@ -246,7 +262,7 @@ export default function App() {
         onClose={() => setProfileModalOpen(false)}
         onSignOut={handleSignOut}
         onUpdateUser={handleUpdateUser}
-        onOpenBooking={() => setBookingModalOpen(true)}
+        onOpenBooking={() => openBooking()}
         onOpenDemoTest={openDemoTest}
       />
 

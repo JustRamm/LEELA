@@ -346,11 +346,7 @@ export default function Hero({
                 className="sky-btn-primary" 
                 onClick={() => {
                   playButtonTap();
-                  if (currentUser) {
-                    onOpenBooking();
-                  } else {
-                    onOpenSignUp();
-                  }
+                  onOpenBooking();
                 }}
               >
                 Book a Lesson
