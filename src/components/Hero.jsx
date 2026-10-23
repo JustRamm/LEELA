@@ -452,17 +452,44 @@ export default function Hero({
     }
   };
 
-  // Keyboard navigation for Lightbox
+  // Keyboard navigation & WCAG 2.1 focus trap for Lightbox
+  const lightboxRef = useRef(null);
   useEffect(() => {
     if (lightboxIndex === null) return;
 
+    const modal = lightboxRef.current;
+    if (modal) {
+      const closeBtn = modal.querySelector('.gallery-lightbox-close');
+      if (closeBtn) closeBtn.focus();
+    }
+
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
+        e.preventDefault();
         setLightboxIndex(null);
       } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
         setLightboxIndex((prev) => (prev > 0 ? prev - 1 : GALLERY_IMAGES.length - 1));
       } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
         setLightboxIndex((prev) => (prev < GALLERY_IMAGES.length - 1 ? prev + 1 : 0));
+      } else if (e.key === 'Tab' && modal) {
+        const focusables = modal.querySelectorAll('button:not([disabled])');
+        if (focusables.length > 0) {
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            }
+          } else {
+            if (document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
+        }
       }
     };
 
@@ -805,12 +832,18 @@ export default function Hero({
           className="gallery-lightbox-overlay" 
           role="dialog" 
           aria-modal="true"
+          aria-labelledby="gallery-lightbox-caption"
           onClick={() => {
             playButtonTap();
             setLightboxIndex(null);
           }}
         >
-          <div className="gallery-lightbox-modal" onClick={(e) => e.stopPropagation()}>
+          <div 
+            ref={lightboxRef} 
+            tabIndex={-1} 
+            className="gallery-lightbox-modal" 
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               type="button"
               className="gallery-lightbox-close"
@@ -842,7 +875,7 @@ export default function Hero({
                 className="gallery-lightbox-img" 
               />
               <div className="gallery-lightbox-caption">
-                <span className="caption-badge">LEELA Driving School · Practical Session</span>
+                <span id="gallery-lightbox-caption" className="caption-badge">LEELA Driving School · Practical Session</span>
                 <span className="caption-count">{lightboxIndex + 1} / {GALLERY_IMAGES.length}</span>
               </div>
             </div>

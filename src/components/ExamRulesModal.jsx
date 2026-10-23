@@ -9,6 +9,7 @@ import {
   GraduationCapIcon
 } from './Icons';
 import { playButtonTap } from '../utils/audio';
+import { useFocusTrap } from '../utils/focusTrap';
 import '../styles/ExamRulesModal.css';
 
 export default function ExamRulesModal({ 
@@ -19,16 +20,7 @@ export default function ExamRulesModal({
   currentUser 
 }) {
   const [selectedLang, setSelectedLang] = useState(initialLang);
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  const modalRef = useFocusTrap(isOpen, onClose);
 
   if (!isOpen) return null;
 
@@ -41,7 +33,12 @@ export default function ExamRulesModal({
     <div className="exam-rules-overlay" role="dialog" aria-modal="true" aria-labelledby="exam-rules-title">
       <div className="exam-rules-backdrop" onClick={onClose} />
       
-      <div className="exam-rules-card" onClick={(e) => e.stopPropagation()}>
+      <div 
+        ref={modalRef} 
+        tabIndex={-1} 
+        className="exam-rules-card" 
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Close Button */}
         <button 
           type="button" 

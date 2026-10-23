@@ -18,6 +18,7 @@ import {
   playExamFail,
   playSuccessChime
 } from '../utils/audio';
+import { useFocusTrap } from '../utils/focusTrap';
 import '../styles/ExamSimulation.css';
 
 const QUESTION_TIME_LIMIT = 30; // 30 seconds per question (official Kerala RTO standard)
@@ -41,6 +42,8 @@ export default function ExamSimulationPage({
   const [startTime] = useState(Date.now());
   const [totalTimeSpent, setTotalTimeSpent] = useState(0);
   const [reviewFilter, setReviewFilter] = useState('all'); // 'all' | 'mistakes' | 'correct'
+
+  const exitModalRef = useFocusTrap(showExitConfirm, () => setShowExitConfirm(false));
 
   const timerRef = useRef(null);
   const questionStartTimeRef = useRef(Date.now());
@@ -87,7 +90,7 @@ export default function ExamSimulationPage({
 
   // Keyboard navigation (1, 2, 3, 4, and Enter)
   useEffect(() => {
-    if (isExamCompleted) return;
+    if (isExamCompleted || showExitConfirm) return;
 
     const handleKeyDown = (e) => {
       if (['1', '2', '3', '4'].includes(e.key)) {
@@ -101,7 +104,7 @@ export default function ExamSimulationPage({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedOption, currentIndex, isExamCompleted]);
+  }, [selectedOption, currentIndex, isExamCompleted, showExitConfirm]);
 
   // Advance to next question or finalize
   const advanceQuestion = (chosenIdx) => {
@@ -558,10 +561,20 @@ export default function ExamSimulationPage({
 
       {/* ── Exit Confirmation Dialog ── */}
       {showExitConfirm && (
-        <div className="exit-confirm-dialog-overlay" role="dialog" aria-modal="true">
-          <div className="exit-confirm-card">
-            <h3>Exit Mock Test?</h3>
-            <p>Your current test progress will be lost if you exit before finishing. Are you sure you want to return to the home screen?</p>
+        <div 
+          className="exit-confirm-dialog-overlay" 
+          role="dialog" 
+          aria-modal="true"
+          aria-labelledby="exit-dialog-title"
+          aria-describedby="exit-dialog-desc"
+        >
+          <div 
+            ref={exitModalRef}
+            tabIndex={-1}
+            className="exit-confirm-card"
+          >
+            <h3 id="exit-dialog-title">Exit Mock Test?</h3>
+            <p id="exit-dialog-desc">Your current test progress will be lost if you exit before finishing. Are you sure you want to return to the home screen?</p>
             <div className="exit-confirm-actions">
               <button
                 type="button"

@@ -12,6 +12,7 @@ import {
   GraduationCapIcon
 } from './Icons';
 import { playButtonTap, playSuccessChime } from '../utils/audio';
+import { useFocusTrap } from '../utils/focusTrap';
 import '../styles/ProfileModal.css';
 
 export default function ProfileModal({ 
@@ -33,6 +34,8 @@ export default function ProfileModal({
     dropPoint: user?.dropPoint || 'Same as Pickup (or Metro Station)',
   });
 
+  const modalRef = useFocusTrap(isOpen, onClose);
+
   useEffect(() => {
     if (user) {
       setEditData({
@@ -45,16 +48,6 @@ export default function ProfileModal({
       });
     }
   }, [user]);
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
 
   if (!isOpen || !user) return null;
 
@@ -84,7 +77,7 @@ export default function ProfileModal({
   const passRate = totalAttempts > 0 ? Math.round((passedAttempts / totalAttempts) * 100) : 0;
 
   return (
-    <div className="profile-modal-overlay" role="dialog" aria-modal="true">
+    <div className="profile-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title">
       {/* Scenic Backdrop Matching Sign In / Sign Up */}
       <div 
         className="profile-scenic-backdrop" 
@@ -102,7 +95,12 @@ export default function ProfileModal({
       </div>
 
       {/* Floating Glassmorphic Card — Extra Spacious Dashboard */}
-      <div className="profile-floating-card profile-card-large" onClick={(e) => e.stopPropagation()}>
+      <div 
+        ref={modalRef} 
+        tabIndex={-1} 
+        className="profile-floating-card profile-card-large" 
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Top Header Navigation */}
         <div className="profile-top-nav">
           <button
@@ -112,9 +110,9 @@ export default function ProfileModal({
               playButtonTap();
               onClose();
             }}
-            aria-label="Back to site"
+            aria-label="Back to site and close profile"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
             <span>Back to site</span>
@@ -126,9 +124,9 @@ export default function ProfileModal({
               playButtonTap();
               onClose();
             }}
-            aria-label="Close"
+            aria-label="Close profile modal"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
@@ -143,7 +141,7 @@ export default function ProfileModal({
           </div>
           <div className="profile-user-info">
             <div className="profile-name-row">
-              <h2>{user.name}</h2>
+              <h2 id="profile-modal-title">{user.name}</h2>
             </div>
             <p className="profile-email-text">{user.email}</p>
             <div className="profile-meta-tags">

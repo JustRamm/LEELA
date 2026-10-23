@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AlertTriangleIcon, EyeIcon, EyeOffIcon } from './Icons';
 import { playButtonTap, playSuccessChime } from '../utils/audio';
+import { useFocusTrap } from '../utils/focusTrap';
 import '../styles/AuthModal.css';
 
 export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onSuccess }) {
@@ -16,21 +17,13 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
   });
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const modalRef = useFocusTrap(isOpen, onClose);
+
   useEffect(() => {
     setMode(initialMode);
     setPasswordError('');
     setConfirmPassword('');
   }, [initialMode, isOpen]);
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -72,7 +65,7 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
   };
 
   return (
-    <div className="auth-modal-overlay" role="dialog" aria-modal="true">
+    <div className="auth-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
       {/* Scenic Backdrop: Terraced Paddy Fields */}
       <div 
         className="auth-scenic-backdrop" 
@@ -90,7 +83,12 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
       </div>
 
       {/* Floating Glassmorphic Card */}
-      <div className="auth-floating-card" onClick={(e) => e.stopPropagation()}>
+      <div 
+        ref={modalRef} 
+        tabIndex={-1} 
+        className="auth-floating-card" 
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="auth-top-nav">
           <button
             type="button"
@@ -99,9 +97,9 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
               playButtonTap();
               onClose();
             }}
-            aria-label="Close"
+            aria-label="Close dialog and back to site"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
             <span>Back to site</span>
@@ -113,9 +111,9 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
               playButtonTap();
               onClose();
             }}
-            aria-label="Close"
+            aria-label="Close dialog"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
@@ -127,7 +125,7 @@ export default function AuthModal({ isOpen, initialMode = 'signin', onClose, onS
         </div>
 
         <div className="auth-heading-group">
-          <h2>{mode === 'signin' ? 'Welcome Back' : 'Join LEELA School'}</h2>
+          <h2 id="auth-modal-title">{mode === 'signin' ? 'Welcome Back' : 'Join LEELA School'}</h2>
           <p>{mode === 'signin' ? 'Sign in to track your driving progress & lessons' : 'Start your driving journey with top-rated instructors'}</p>
         </div>
 

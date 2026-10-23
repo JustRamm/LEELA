@@ -93,8 +93,9 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpen
             type="button" 
             className="nav-mobile-toggle" 
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle mobile menu"
+            aria-label={mobileOpen ? 'Close mobile menu' : 'Open mobile menu'}
             aria-expanded={mobileOpen}
+            aria-controls="mobile-nav-drawer"
           >
             <span></span>
             <span></span>
@@ -104,7 +105,12 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpen
 
         {/* Mobile Drawer */}
         {mobileOpen && (
-          <div className="mobile-drawer">
+          <div 
+            id="mobile-nav-drawer" 
+            className="mobile-drawer" 
+            role="region" 
+            aria-label="Mobile Navigation Drawer"
+          >
             <a href="#scene-how-it-works" className="nav-item" onClick={() => setMobileOpen(false)}>How it works</a>
             <a href="#scene-instructors" className="nav-item" onClick={() => setMobileOpen(false)}>Instructors</a>
             <a href="#scene-why-leela" className="nav-item" onClick={() => setMobileOpen(false)}>Why LEELA</a>

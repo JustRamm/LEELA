@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CarIcon, CloseIcon, ArrowRightIcon, IdCardIcon } from './Icons';
 import { playButtonTap, playSuccessChime } from '../utils/audio';
+import { useFocusTrap } from '../utils/focusTrap';
 import '../styles/BookingModal.css';
 
 export default function BookingModal({ isOpen, initialPackage, onClose, onSuccess, currentUser, onOpenSignIn }) {
@@ -14,6 +15,8 @@ export default function BookingModal({ isOpen, initialPackage, onClose, onSucces
     timeSlot: 'Morning (09:00 - 11:00)',
     notes: '',
   });
+
+  const modalRef = useFocusTrap(isOpen, onClose);
 
   useEffect(() => {
     if (currentUser) {
@@ -32,16 +35,6 @@ export default function BookingModal({ isOpen, initialPackage, onClose, onSucces
     }
   }, [initialPackage, isOpen]);
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
-
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
@@ -56,15 +49,21 @@ export default function BookingModal({ isOpen, initialPackage, onClose, onSucces
       className="booking-modal-overlay" 
       role="dialog" 
       aria-modal="true" 
+      aria-labelledby="booking-modal-title"
       onClick={() => {
         playButtonTap();
         onClose();
       }}
     >
-      <div className="booking-modal-card" onClick={(e) => e.stopPropagation()}>
+      <div 
+        ref={modalRef} 
+        tabIndex={-1} 
+        className="booking-modal-card" 
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="booking-modal-header">
           <div>
-            <h2>Schedule Your Driving Lesson</h2>
+            <h2 id="booking-modal-title">Schedule Your Driving Lesson</h2>
             <p>Pick your slot and our certified instructor will come to your door.</p>
           </div>
           <button
@@ -74,7 +73,7 @@ export default function BookingModal({ isOpen, initialPackage, onClose, onSucces
               playButtonTap();
               onClose();
             }}
-            aria-label="Close"
+            aria-label="Close booking modal"
           >
             <CloseIcon size={14} />
           </button>
