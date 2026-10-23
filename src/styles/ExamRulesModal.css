@@ -1,0 +1,317 @@
+/* ==========================================================================
+   EXAM RULES MODAL — KERALA RTO DEMO TEST GUIDELINES
+   ========================================================================== */
+
+.exam-rules-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  overflow-y: auto;
+  animation: examRulesFadeIn 0.25s ease-out;
+}
+
+@keyframes examRulesFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.exam-rules-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.exam-rules-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 580px;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  padding: 30px 32px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28), 0 4px 16px rgba(15, 23, 42, 0.08);
+  animation: examRulesCardPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+}
+
+@keyframes examRulesCardPop {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.btn-exam-rules-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(15, 23, 42, 0.12);
+  background: #F8FAFC;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-exam-rules-close:hover {
+  background: #EF4444;
+  border-color: #EF4444;
+  color: #FFFFFF;
+  transform: rotate(90deg);
+}
+
+.exam-rules-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.exam-emblem-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: rgba(254, 220, 42, 0.3);
+  border: 1.5px solid rgba(245, 158, 11, 0.4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.2);
+}
+
+.exam-gov-tag {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 850;
+  color: #D97706;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.exam-rules-title {
+  font-size: 24px;
+  font-weight: 900;
+  color: #1E293B;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.exam-rules-subtitle {
+  font-size: 13.5px;
+  color: #64748B;
+  line-height: 1.5;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ── Language Selector ── */
+.exam-lang-selector-box {
+  background: #F8FAFC;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+}
+
+.exam-lang-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 750;
+  color: #334155;
+  margin-bottom: 10px;
+}
+
+.exam-lang-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-lang-choice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-lang-choice:hover {
+  border-color: #F59E0B;
+  background: #FFFBEB;
+}
+
+.btn-lang-choice.active {
+  background: #FFFBEB;
+  border-color: #F59E0B;
+  color: #B45309;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+}
+
+.exam-lang-hint {
+  display: block;
+  font-size: 11px;
+  color: #94A3B8;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* ── Rules Grid ── */
+.exam-rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.rule-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+.rule-icon-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: #F1F5F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rule-text-wrap h4 {
+  font-size: 13px;
+  font-weight: 800;
+  color: #1E293B;
+  margin-bottom: 3px;
+}
+
+.rule-text-wrap p {
+  font-size: 11px;
+  color: #64748B;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ── Tip Alert ── */
+.exam-rules-alert {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 22px;
+}
+
+.exam-rules-alert p {
+  font-size: 12px;
+  color: #1E40AF;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.exam-rules-alert code {
+  background: #DBEAFE;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+/* ── Footer ── */
+.exam-rules-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-exam-cancel {
+  padding: 11px 22px;
+  border-radius: 9999px;
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-exam-cancel:hover {
+  background: #E2E8F0;
+  color: #1E293B;
+}
+
+.btn-exam-proceed {
+  padding: 11px 28px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #FFE638 0%, #F59E0B 100%);
+  border: none;
+  font-size: 14.5px;
+  font-weight: 900;
+  color: #201A42;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-exam-proceed:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #FFF066 0%, #FBBF24 100%);
+  box-shadow: 0 10px 24px rgba(245, 158, 11, 0.45);
+}
+
+.btn-exam-proceed .arrow-icon {
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.btn-exam-proceed:hover .arrow-icon {
+  transform: translateX(3px);
+}
+
+@media (max-width: 640px) {
+  .exam-rules-card {
+    padding: 22px 18px;
+  }
+  .exam-rules-grid {
+    grid-template-columns: 1fr;
+  }
+  .exam-lang-options {
+    grid-template-columns: 1fr;
+  }
+}

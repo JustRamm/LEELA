@@ -8,7 +8,8 @@ import {
   CalendarIcon, 
   EditIcon,
   MapPinIcon,
-  NavigationIcon
+  NavigationIcon,
+  GraduationCapIcon
 } from './Icons';
 import { playButtonTap, playSuccessChime } from '../utils/audio';
 import '../styles/ProfileModal.css';
@@ -19,7 +20,8 @@ export default function ProfileModal({
   onClose, 
   onSignOut, 
   onUpdateUser,
-  onOpenBooking 
+  onOpenBooking,
+  onOpenDemoTest 
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState({
@@ -73,6 +75,13 @@ export default function ProfileModal({
 
   const initial = user.name ? user.name.charAt(0).toUpperCase() : 'U';
   const progressPercent = Math.round(((user.lessonsCompleted || 6) / (user.totalLessons || 20)) * 100);
+
+  // Demo test statistics
+  const examHistory = user.examHistory || [];
+  const totalAttempts = examHistory.length;
+  const bestScore = totalAttempts > 0 ? Math.max(...examHistory.map((a) => a.score)) : 0;
+  const passedAttempts = examHistory.filter((a) => a.passed).length;
+  const passRate = totalAttempts > 0 ? Math.round((passedAttempts / totalAttempts) * 100) : 0;
 
   return (
     <div className="profile-modal-overlay" role="dialog" aria-modal="true">
@@ -351,6 +360,75 @@ export default function ProfileModal({
                   Mock Driving Test
                 </span>
               </div>
+            </div>
+
+            {/* RTO Mock Test Performance & History Card */}
+            <div className="profile-exam-history-card">
+              <div className="exam-card-header">
+                <div className="exam-header-left">
+                  <div className="exam-icon-badge">
+                    <GraduationCapIcon size={18} color="#D97706" />
+                  </div>
+                  <div>
+                    <h4>RTO Mock Driving Test Records</h4>
+                    <p className="exam-history-sub">Official Kerala Learner's License computer test simulation attempts</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  className="btn-take-exam-mini"
+                  onClick={() => {
+                    playButtonTap();
+                    onClose();
+                    onOpenDemoTest && onOpenDemoTest();
+                  }}
+                >
+                  Take Test →
+                </button>
+              </div>
+
+              {/* Stats Overview */}
+              <div className="exam-history-stats-grid">
+                <div className="eh-stat-box">
+                  <span className="eh-stat-label">Total Attempts</span>
+                  <strong className="eh-stat-val">{totalAttempts}</strong>
+                </div>
+                <div className="eh-stat-box">
+                  <span className="eh-stat-label">Best Score</span>
+                  <strong className="eh-stat-val text-green">{totalAttempts > 0 ? `${bestScore} / 20` : '—'}</strong>
+                </div>
+                <div className="eh-stat-box">
+                  <span className="eh-stat-label">Pass Rate</span>
+                  <strong className="eh-stat-val">{totalAttempts > 0 ? `${passRate}%` : '—'}</strong>
+                </div>
+              </div>
+
+              {/* Recent Attempts List */}
+              {examHistory.length > 0 ? (
+                <div className="exam-attempts-scroll">
+                  {examHistory.slice(0, 6).map((att, idx) => (
+                    <div key={idx} className="exam-attempt-item">
+                      <div className="attempt-left">
+                        <span className={`attempt-badge ${att.passed ? 'passed' : 'failed'}`}>
+                          {att.passed ? '✓ PASSED' : '✗ FAILED'}
+                        </span>
+                        <div className="attempt-meta">
+                          <span className="attempt-date">{att.date} • {att.time}</span>
+                          <span className="attempt-id">{att.sessionId || `Session #${examHistory.length - idx}`}</span>
+                        </div>
+                      </div>
+                      <div className="attempt-score">
+                        <strong>{att.score} / {att.total}</strong>
+                        <span className="attempt-pct">({att.percentage}%)</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="exam-empty-state">
+                  <p>No practice tests recorded yet. Click <strong>Take Test</strong> to benchmark your driving theory readiness!</p>
+                </div>
+              )}
             </div>
 
             {/* Quick Actions Footer */}

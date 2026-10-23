@@ -6,6 +6,8 @@ import Footer from './components/Footer';
 import AuthModal from './components/AuthModal';
 import BookingModal from './components/BookingModal';
 import ProfileModal from './components/ProfileModal';
+import ExamRulesModal from './components/ExamRulesModal';
+import ExamSimulationPage from './components/ExamSimulationPage';
 import { CarIcon, CloseIcon } from './components/Icons';
 import { playStageTransition } from './utils/audio';
 
@@ -21,20 +23,31 @@ const SCROLL_ZONES = [
 ];
 
 export default function App() {
+  const [activeView, setActiveView] = useState('home'); // 'home' | 'exam'
   const [drivingStage, setDrivingStage] = useState(1);
-  const prevStageRef = useRef(1);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authModalMode, setAuthModalMode] = useState('signin');
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [bookingPackage, setBookingPackage] = useState('Complete Pass (20h)');
   const [profileModalOpen, setProfileModalOpen] = useState(false);
+  const [examRulesOpen, setExamRulesOpen] = useState(false);
+  const [examLang, setExamLang] = useState('ml');
   const [toastMessage, setToastMessage] = useState(null);
 
   // Initialize or persist current logged-in user
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const saved = localStorage.getItem('leela_current_user');
-      return saved ? JSON.parse(saved) : null;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // Merge with guest exam history if present
+        const guestHistory = JSON.parse(localStorage.getItem('leela_guest_exam_history') || '[]');
+        if (guestHistory.length > 0 && !parsed.examHistory) {
+          parsed.examHistory = guestHistory;
+        }
+        return parsed;
+      }
+      return null;
     } catch {
       return null;
     }
@@ -50,6 +63,8 @@ export default function App() {
 
   // Robust, instant scroll-to-stage calculation across all 6 journey stages
   useEffect(() => {
+    if (activeView === 'exam') return;
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const vh = window.innerHeight;
@@ -67,7 +82,7 @@ export default function App() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [activeView]);
 
   const openSignIn  = () => { setAuthModalMode('signin');  setAuthModalOpen(true); };
   const openSignUp  = () => { setAuthModalMode('signup');  setAuthModalOpen(true); };
@@ -76,11 +91,20 @@ export default function App() {
     setBookingModalOpen(true);
   };
   const openProfile = () => { setProfileModalOpen(true); };
+  const openDemoTest = () => { setExamRulesOpen(true); };
   const showToast   = (msg) => setToastMessage(msg);
 
   // Authentication success handler
   const handleAuthSuccess = (msg, user) => {
     if (user) {
+      // Inherit any guest test history
+      try {
+        const guestHistory = JSON.parse(localStorage.getItem('leela_guest_exam_history') || '[]');
+        if (guestHistory.length > 0) {
+          user.examHistory = [...(user.examHistory || []), ...guestHistory];
+        }
+      } catch (e) {}
+
       setCurrentUser(user);
       try {
         localStorage.setItem('leela_current_user', JSON.stringify(user));
@@ -108,6 +132,42 @@ export default function App() {
     showToast('Profile updated successfully!');
   };
 
+  // Exam Routing Handlers
+  const handleProceedToExam = (chosenLang) => {
+    setExamLang(chosenLang);
+    setExamRulesOpen(false);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setActiveView('exam');
+  };
+
+  const handleExitExam = () => {
+    setActiveView('home');
+  };
+
+  // Save exam results to profile
+  const handleSaveExamResult = (record) => {
+    // 1. Update current user state and persistence
+    if (currentUser) {
+      const updatedUser = {
+        ...currentUser,
+        examHistory: [record, ...(currentUser.examHistory || [])],
+      };
+      setCurrentUser(updatedUser);
+      try {
+        localStorage.setItem('leela_current_user', JSON.stringify(updatedUser));
+      } catch (e) {}
+    } else {
+      // Guest user persistence
+      try {
+        const existing = JSON.parse(localStorage.getItem('leela_guest_exam_history') || '[]');
+        localStorage.setItem('leela_guest_exam_history', JSON.stringify([record, ...existing]));
+      } catch (e) {}
+    }
+
+    const verdict = record.passed ? 'PASSED 🎉' : 'Needs Practice';
+    showToast(`Mock Test Complete: ${record.score}/${record.total} (${verdict})`);
+  };
+
   const selectStage = (stage) => {
     window.scrollTo({
       top: (stage - 1) * window.innerHeight,
@@ -115,6 +175,19 @@ export default function App() {
     });
   };
 
+  // ── Dedicated Exam Simulation Route ──
+  if (activeView === 'exam') {
+    return (
+      <ExamSimulationPage
+        initialLang={examLang}
+        currentUser={currentUser}
+        onExit={handleExitExam}
+        onSaveResult={handleSaveExamResult}
+      />
+    );
+  }
+
+  // ── Standard Hero / Driving School Journey Route ──
   return (
     <div className="leela-root">
 
@@ -129,6 +202,7 @@ export default function App() {
           onSelectStage={selectStage}
           currentUser={currentUser}
           onOpenProfile={openProfile}
+          onOpenDemoTest={openDemoTest}
         />
       </div>
 
@@ -143,12 +217,21 @@ export default function App() {
       </div>
 
       {/* Modals */}
+      <ExamRulesModal
+        isOpen={examRulesOpen}
+        onClose={() => setExamRulesOpen(false)}
+        onProceed={handleProceedToExam}
+        initialLang={examLang}
+        currentUser={currentUser}
+      />
+
       <AuthModal
         isOpen={authModalOpen}
         initialMode={authModalMode}
         onClose={() => setAuthModalOpen(false)}
         onSuccess={handleAuthSuccess}
       />
+
       <BookingModal
         isOpen={bookingModalOpen}
         initialPackage={bookingPackage}
@@ -156,6 +239,7 @@ export default function App() {
         onSuccess={showToast}
         currentUser={currentUser}
       />
+
       <ProfileModal
         isOpen={profileModalOpen}
         user={currentUser}
@@ -163,6 +247,7 @@ export default function App() {
         onSignOut={handleSignOut}
         onUpdateUser={handleUpdateUser}
         onOpenBooking={() => setBookingModalOpen(true)}
+        onOpenDemoTest={openDemoTest}
       />
 
       {/* Toast */}

@@ -49,6 +49,55 @@
   color: var(--color-purple-deep);
 }
 
+/* ── Demo Test Button in Navbar ── */
+.nav-item-demotest {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #201A42;
+  color: #FEDC2A !important;
+  font-size: 13px !important;
+  font-weight: 850 !important;
+  padding: 6px 14px !important;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(254, 220, 42, 0.4);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(32, 26, 66, 0.2);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1;
+}
+
+.nav-item-demotest:hover {
+  background: #2E255F;
+  border-color: #FEDC2A;
+  color: #FFFFFF !important;
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 16px rgba(32, 26, 66, 0.3);
+}
+
+.demotest-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22C55E;
+  box-shadow: 0 0 8px #22C55E;
+  display: inline-block;
+  animation: liveDotPulse 2s infinite ease-in-out;
+}
+
+@keyframes liveDotPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.35); opacity: 0.6; }
+}
+
+.nav-item-demotest.mobile {
+  width: 100%;
+  justify-content: center;
+  padding: 11px 18px !important;
+  margin: 6px 0;
+  font-size: 14.5px !important;
+}
+
 .nav-actions {
   display: flex;
   align-items: center;

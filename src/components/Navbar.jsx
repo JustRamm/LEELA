@@ -3,7 +3,7 @@ import { UserIcon, Volume2Icon, VolumeXIcon } from './Icons';
 import { playButtonTap, toggleSound, isSoundEnabled } from '../utils/audio';
 import '../styles/Navbar.css';
 
-export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpenProfile }) {
+export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpenProfile, onOpenDemoTest }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [soundOn, setSoundOn] = useState(isSoundEnabled());
 
@@ -27,6 +27,15 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpen
           <a href="#scene-why-leela" className="nav-item" onClick={() => playButtonTap()}>Why LEELA</a>
           <a href="#scene-gallery" className="nav-item" onClick={() => playButtonTap()}>Gallery</a>
           <a href="#scene-contact" className="nav-item" onClick={() => playButtonTap()}>Contact</a>
+          <button 
+            type="button" 
+            className="nav-item nav-item-demotest" 
+            onClick={() => handleNavClick(onOpenDemoTest)}
+            title="Kerala RTO Learner's Licence Mock Test Simulation"
+          >
+            <span className="demotest-indicator" aria-hidden="true" />
+            <span>Demo Test</span>
+          </button>
         </div>
 
         {/* Header Action Buttons / Profile Icon */}
@@ -101,6 +110,17 @@ export default function Navbar({ onOpenSignIn, onOpenSignUp, currentUser, onOpen
             <a href="#scene-why-leela" className="nav-item" onClick={() => setMobileOpen(false)}>Why LEELA</a>
             <a href="#scene-gallery" className="nav-item" onClick={() => setMobileOpen(false)}>Gallery</a>
             <a href="#scene-contact" className="nav-item" onClick={() => setMobileOpen(false)}>Contact</a>
+            <button 
+              type="button" 
+              className="nav-item nav-item-demotest mobile" 
+              onClick={() => {
+                setMobileOpen(false);
+                handleNavClick(onOpenDemoTest);
+              }}
+            >
+              <span className="demotest-indicator" aria-hidden="true" />
+              <span>RTO Demo Test</span>
+            </button>
             
             {currentUser ? (
               <div className="mobile-drawer-profile-box">

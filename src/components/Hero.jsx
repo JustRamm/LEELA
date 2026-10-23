@@ -290,7 +290,8 @@ export default function Hero({
   onShowToast, 
   onSelectStage,
   currentUser,
-  onOpenProfile
+  onOpenProfile,
+  onOpenDemoTest
 }) {
   const meta = STAGES.find((s) => s.stage === drivingStage) || STAGES[0];
   const [headlight, setHeadlight] = useState({ x: 50, y: 55, active: false });
@@ -326,6 +327,7 @@ export default function Hero({
         onOpenSignUp={onOpenSignUp} 
         currentUser={currentUser} 
         onOpenProfile={onOpenProfile} 
+        onOpenDemoTest={onOpenDemoTest}
       />
 
       {/* ── Yellow Sky — content lives here, slides change with scroll ── */}
